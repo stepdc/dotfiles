@@ -1,0 +1,3 @@
+[submodule ".dot/zprezto"]
+	path = .dot/zprezto
+	url = https://through7.visualstudio.com/_git/zprezto
