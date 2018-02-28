@@ -1,4 +1,0 @@
-export http_proxy=http://proxyhk.zte.com.cn:80
-export https_proxy=http://proxyhk.zte.com.cn:80
-export all_proxy=http://proxyhk.zte.com.cn:80
-export no_proxy="localhost,.zte.com.cn,.zte.intra,gerrit.zte.com.cn,mirrors.zte.com.cn,127.0.0.1,10.0.0.0/8,zxess-registry,zhihu.com"
