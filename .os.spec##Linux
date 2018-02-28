@@ -1,0 +1,5 @@
+# QT theme
+export QT_STYLE_OVERIDE=GTK+
+
+# nnn under Linux
+alias n=nnn
