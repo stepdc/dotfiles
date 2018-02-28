@@ -1,0 +1,2 @@
+#! /bin/sh
+rofi -lazy-grab -threads 0 -matching fuzzy -combi-modi run,drun -show combi -modi combi

@@ -52,7 +52,7 @@ bindsym Mod4+Shift+q kill
 
 # replace dmenu by rofi
 # bindsym Mod4+d exec rofi -show run
-bindsym Mod4+d exec ~/.local/bin/rofirun
+bindsym Mod4+d exec ~/bin/rofirun
 bindsym Mod4+shift+x exec rofi -show ssh
 # bindsym Mod4+b exec /home/byzte/.local/bin/i3_switch_workspace.sh
 bindsym Mod4+i exec rofi -show window
