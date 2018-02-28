@@ -11,3 +11,5 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
 fi
 
 # Customize to your needs...
+
+[[ $HOME/.dot/shconfig ]] && source $HOME/.dot/shconfig
