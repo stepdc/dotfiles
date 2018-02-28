@@ -1,0 +1,14 @@
+DNS
+
+sudo vim /etc/resolvconf/resolv.conf.d/base
+nameserver 8.8.8.8
+nameserver 8.8.4.4
+sudo resolvconf -u
+
+SUDO
+keep env:
+Defaults        env_keep += "ftp_proxy http_proxy https_proxy no_proxy"
+
+nopasswd
+
+user ALL=(ALL) NOPASSWD: ALL
