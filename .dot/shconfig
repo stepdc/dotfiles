@@ -7,11 +7,8 @@ fi
 
 [[ -s "$HOME/.dot/os.spec" ]] && source $HOME/.dot/os.spec
 
-# lang
-# go
-export GOROOT=$HOME/dev/lang/go
-export PATH=$GOROOT/bin:$PATH
-export PATH=$HOME/code/go/bin:$HOME/go/bin:$PATH
+# dev env
+[[ -s "$HOME/.dot/devenv" ]] && source $HOME/.dot/devenv
 
 
 # fasd
