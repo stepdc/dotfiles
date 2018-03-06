@@ -1,0 +1,18 @@
+#!/bin/bash
+array[0]="(=ﾟωﾟ)ﾉ "
+array[1]="(•̀ᴗ•́)و "
+array[2]="ヽ(•̀ω•́ )ゝ "
+array[3]="(ง •̀_•́)ง "
+array[4]="(￣▽￣\") "
+array[5]="（￣工￣lll）"
+array[6]="(/= _ =)/~┴┴ "
+array[7]="ㄟ( ▔, ▔ )ㄏ "
+array[8]="(=￣ω￣=) "
+array[9]="(/ω・＼) "
+array[10]="(；°○° ) "
+array[11]="( /。 ) "
+
+size=${#array[@]}
+index=$(($RANDOM % $size))
+
+st "$@" -t "${array[$index]}"
