@@ -40,7 +40,8 @@ floating_modifier Mod4
 # bindsym Mod4+Return exec gnome-terminal
 # bindsym Mod4+Return exec st -f "Essential Pragmata Pro:size=12" -t "Suckless Terminal"
 # bindsym Mod4+Return exec st -f "Sarasa Term SC:size=12" -t "(=ﾟωﾟ)ﾉ"
-bindsym Mod4+Return exec st.run -f "Sarasa Term SC:size=12" -t "(=ﾟωﾟ)ﾉ"
+# bindsym Mod4+Return exec st.run -f "Sarasa Term SC:size=12" -t "(=ﾟωﾟ)ﾉ"
+bindsym Mod4+Return exec st.run
 # bindsym Mod4+Return exec /home/bembee/Src/alacritty/target/release/alacritty -e tmux
 # bindsym Mod4+Return exec /home/bembee/Src/alacritty_scroll/target/release/alacritty
 bindsym Mod1+Shift+Return exec i3-sensible-terminal
@@ -54,7 +55,7 @@ bindsym Mod4+Shift+q kill
 
 # replace dmenu by rofi
 # bindsym Mod4+d exec rofi -show run
-bindsym Mod4+d exec ~/bin/rofirun
+bindsym Mod4+d exec ~/bin/rofi.run
 bindsym Mod4+shift+x exec rofi -show ssh
 # bindsym Mod4+b exec /home/byzte/.local/bin/i3_switch_workspace.sh
 bindsym Mod4+i exec rofi -show window
