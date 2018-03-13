@@ -15,4 +15,11 @@ array[11]="( /。 ) "
 size=${#array[@]}
 index=$(($RANDOM % $size))
 
-st "$@" -t "${array[$index]}"
+fonts[0]="Essential Pragmata Pro:size=12"
+fonts[1]="Sarasa Term SC:size=12"
+fsize=${#fonts[@]}
+fidx=$(($RANDOM % $fsize))
+
+echo $fidx
+
+st "$@" -t "${array[$index]}" -f "${fonts[$fidx]}"
