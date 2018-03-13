@@ -21,3 +21,4 @@ if [[ -s "$HOME/.dot/yadm" ]]; then
   compinit
 fi
   
+export TERM=xterm-256color

@@ -38,7 +38,9 @@ floating_modifier Mod4
 # start a terminal
 # bindsym Mod4+Return exec i3-sensible-terminal
 # bindsym Mod4+Return exec gnome-terminal
-bindsym Mod4+Return exec st -f "Essential Pragmata Pro:size=12" -t "Suckless Terminal"
+# bindsym Mod4+Return exec st -f "Essential Pragmata Pro:size=12" -t "Suckless Terminal"
+# bindsym Mod4+Return exec st -f "Sarasa Term SC:size=12" -t "(=ﾟωﾟ)ﾉ"
+bindsym Mod4+Return exec st.run -f "Sarasa Term SC:size=12" -t "(=ﾟωﾟ)ﾉ"
 # bindsym Mod4+Return exec /home/bembee/Src/alacritty/target/release/alacritty -e tmux
 # bindsym Mod4+Return exec /home/bembee/Src/alacritty_scroll/target/release/alacritty
 bindsym Mod1+Shift+Return exec i3-sensible-terminal
