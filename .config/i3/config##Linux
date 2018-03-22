@@ -11,11 +11,6 @@
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-# font pango:monospace 8
-
-# This font is widely installed, provides lots of unicode glyphs, right-to-left
-# text rendering and scalability on retina/hidpi displays (thanks to pango).
-# font pango:DejaVu Sans Mono 8
 font pango:FandolHei Regular 9
 
 # Before i3 v4.8, we used to recommend this one as the default:
@@ -38,20 +33,13 @@ floating_modifier Mod4
 # start a terminal
 # bindsym Mod4+Return exec i3-sensible-terminal
 # bindsym Mod4+Return exec gnome-terminal
-# bindsym Mod4+Return exec st -f "Essential Pragmata Pro:size=12" -t "Suckless Terminal"
-# bindsym Mod4+Return exec st -f "Sarasa Term SC:size=12" -t "(=ﾟωﾟ)ﾉ"
 # bindsym Mod4+Return exec st.run -f "Sarasa Term SC:size=12" -t "(=ﾟωﾟ)ﾉ"
-bindsym Mod4+Return exec st.run
-# bindsym Mod4+Return exec /home/bembee/Src/alacritty/target/release/alacritty -e tmux
-# bindsym Mod4+Return exec /home/bembee/Src/alacritty_scroll/target/release/alacritty
+bindsym Mod4+Return exec gt.run
 bindsym Mod1+Shift+Return exec i3-sensible-terminal
 bindsym Mod4+Shift+F12 exec i3lock --color=333333
 
 # kill focused window
 bindsym Mod4+Shift+q kill
-
-# start dmenu (a program launcher)
-# bindsym Mod4+d exec dmenu_run
 
 # replace dmenu by rofi
 # bindsym Mod4+d exec rofi -show run
@@ -59,13 +47,7 @@ bindsym Mod4+d exec ~/bin/rofi.run
 bindsym Mod4+shift+x exec rofi -show ssh
 # bindsym Mod4+b exec /home/byzte/.local/bin/i3_switch_workspace.sh
 bindsym Mod4+i exec rofi -show window
-
 bindsym Mod4+p exec rofi -modi "clipboard:greenclip print" -show clipboard
-
-# There also is the (new) i3-dmenu-desktop which only displays applications
-# shipping a .desktop file. It is a wrapper around dmenu, so you need that
-# installed.
-# bindsym Mod4+d exec --no-startup-id i3-dmenu-desktop
 
 # change focus
 bindsym Mod4+$left focus left
@@ -110,15 +92,12 @@ bindsym Mod4+Shift+space floating toggle
 bindsym Mod4+Shift+f floating toggle
 
 # change focus between tiling / floating windows
-# bindsym Mod4+space focus mode_toggle
 bindsym Mod4+m focus mode_toggle
 
 # focus the parent container
 bindsym Mod4+a focus parent
-bindsym Mod4+z focus child
-
 # focus the child container
-#bindsym Mod4+d focus child
+bindsym Mod4+z focus child
 
 # move the currently focused window to the scratchpad
 bindsym Mod4+Shift+minus move scratchpad
@@ -126,6 +105,10 @@ bindsym Mod4+Shift+minus move scratchpad
 # Show the next scratchpad window or hide the focused scratchpad window.
 # If there are multiple scratchpad windows, this command cycles through them.
 bindsym Mod4+minus scratchpad show
+
+# set workspace icon
+set $workspace_hidden ""
+set $workspace_remote ""
 
 # switch to workspace
 bindsym Mod4+1 workspace 1
@@ -139,8 +122,8 @@ bindsym Mod4+8 workspace 8
 bindsym Mod4+9 workspace 9
 bindsym Mod4+0 workspace 10
 bindsym Mod4+equal workspace =D
-bindsym Mod4+F1 workspace r248
-bindsym Mod4+F2 workspace vF
+bindsym Mod4+F2 workspace $workspace_hidden
+bindsym Mod4+F1 workspace $workspace_remote
 bindsym Mod4+grave workspace grv
 
 # move focused container to workspace
@@ -155,8 +138,8 @@ bindsym Mod4+Shift+8 move container to workspace 8
 bindsym Mod4+Shift+9 move container to workspace 9
 bindsym Mod4+Shift+0 move container to workspace 10
 bindsym Mod4+Shift+equal move container workspace =D
-bindsym Mod4+Shift+F1 move container workspace r248
-bindsym Mod4+Shift+F2 move container workspace vF
+bindsym Mod4+Shift+F2 move container workspace $workspace_hidden
+bindsym Mod4+Shift+F1 move container workspace $workspace_remote
 bindsym Mod4+Shift+grave move container workspace grv
 
 # reload the configuration file
@@ -192,96 +175,10 @@ mode "resize" {
 
 bindsym Mod4+r mode "resize"
 
-# Start i3bar to display a workspace bar (plus the system information i3status
-# finds out, if available)
-# bar {
-#   status_command i3status
-#     colors {
-#       focused_workspace  #007030 #007030 #ffffff
-#        active_workspace   #555555 #555555 #ffffff
-#        inactive_workspace #000000 #000000 #888888
-#        urgent_workspace   #2f343a #900000 #ffffff
-#        background #232323
-#        statusline #DCDCDC
-#    }
-#}
-
-#######################################################################
-# automatically start i3-config-wizard to offer the user to create a
-# keysym-based config which used their favorite modifier (alt or windows)
-#
-# i3-config-wizard will not launch if there already is a config file
-# in ~/.i3/config.
-#
-# Please remove the following exec line:
-#######################################################################
-# exec i3-config-wizard
-# exec --no-startup-id nitrogen --restore
-# exec --no-startup-id xsetroot -solid "#333333"
-# exec --no-startup-id setxkbmap -option ctrl:swap_lalt_lctl
-exec --no-startup-id feh --bg-tile ~/Pictures/storm.jpg
-# exec --no-startup-id "i3-msg 'workspace 4; append_layout /home/michael/.i3/workspace-4.json'"
-exec --no-startup-id xrdb -load ~/.Xdefaults
-
-# Make the currently focused window a scratchpad
-# bindsym $mod+Shift+minus move scratchpad
-
-# Show the first scratchpad window
-# bindsym $mod+minus scratchpad show
-
-# Show the sup-mail scratchpad window, if any.
-# bindsym mod4+s [title="^Sup ::"] scratchpad show
-#
-
-# client.focused          #007030 #007030 #ffffff #2b2b2b
-# client.focused_inactive #888888 #2b2b2b #ffffff #2b2b2b
-# client.unfocused        #888888 #2b2b2b #ffffff #2b2b2b
-## ~/.i3/config
-# i3 config template
-# Base16 Tomorrow by Chris Kempson (http://chriskempson.com)
-# template by Matt Parnell, @parnmatt
-
-set $base00 #1d1f21
-set $base01 #282a2e
-set $base02 #373b41
-set $base03 #969896
-set $base04 #b4b7b4
-set $base05 #c5c8c6
-set $base06 #e0e0e0
-set $base07 #ffffff
-set $base08 #cc6666
-set $base09 #de935f
-set $base0A #f0c674
-set $base0B #b5bd68
-set $base0C #8abeb7
-set $base0D #81a2be
-set $base0E #b294bb
-set $base0F #a3685a
-
-client.focused $base0D $base0D $base00 $base01
-client.focused_inactive $base02 $base02 $base03 $base01
-client.unfocused $base01 $base01 $base03 $base01
-client.urgent $base02 $base08 $base07 $base08
-
-## remember to add the rest of your configuration
-
 bar {
     ## remember to add your favourite status bar, i.e.,
     status_command i3status
-
-    colors {
-        separator $base03
-        background $base01
-        statusline $base05
-        focused_workspace $base0C $base0D $base00
-        active_workspace $base02 $base02 $base07
-        inactive_workspace $base01 $base01 $base03
-        urgent_workspace $base08 $base08 $base07
-    }
-# font pango: M+ 1m, FontAwesome,  9
 }
-
- client.urgent           #900000 #900000 #ffffff #2b2b2b
 
 # i3 suspend
 set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
@@ -299,9 +196,22 @@ mode "$mode_system" {
 }
 bindsym Shift+End mode "$mode_system"
 
+# After i3 wm init
+
+# exec --no-startup-id nitrogen --restore
+# exec --no-startup-id xsetroot -solid "#333333"
+# exec --no-startup-id setxkbmap -option ctrl:swap_lalt_lctl
+exec --no-startup-id feh --bg-tile ~/Pictures/iceburg.jpg
+# exec --no-startup-id "i3-msg 'workspace 4; append_layout /home/michael/.i3/workspace-4.json'"
+# exec --no-startup-id xrdb -load ~/.Xdefaults
+
+
 # exec --no-startup-id fcitx -r
 # exec --no-startup-id sogou-qumpanel
 exec --no-startup-id compton -b
+# sync gtk settings
+exec gnome-settings-daemon
+
 
 # global paste manage
 exec --no-startup-id greenclip daemon
