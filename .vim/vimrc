@@ -25,28 +25,22 @@ call plug#begin('~/.vim/plugged')
 Plug 'Lokaltog/vim-easymotion'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-airline/vim-airline'
-" Plug 'Raimondi/delimitMate'
 Plug 'jiangmiao/auto-pairs'
 Plug 'SirVer/ultisnips'
 Plug 'Valloric/ListToggle'
 Plug 'Valloric/MatchTagAlways'
-" Plug 'Valloric/Vim-Jinja2-Syntax'
 Plug 'Valloric/python-indent'
-" Plug 'Valloric/vim-operator-highlight'
-" Plug 'Valloric/vim-valloric-colorscheme'
 Plug 'Valloric/xmledit'
 Plug 'vim-scripts/YankRing.vim'
 " Seems more active than tpope/vim-surround
 Plug 'anyakichi/vim-surround'
 Plug 'qpkorr/vim-bufkill'
 Plug 'cespare/vim-toml'
-" Plug 'dart-lang/dart-vim-plugin'
 Plug 'gmarik/vundle'
 Plug 'godlygeek/tabular'
 " For markdown preview; call :Preview to open rendered in browser
 Plug 'greyblake/vim-preview'
 Plug 'groenewege/vim-less'
-" Plug 'hail2u/vim-css3-syntax'
 Plug 'elzr/vim-json'
 Plug 'honza/vim-snippets'
 Plug 'majutsushi/tagbar'
@@ -57,10 +51,7 @@ Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'othree/eregex.vim'
 Plug 'othree/html5.vim'
 Plug 'rust-lang/rust.vim'
-" Plug 'scrooloose/syntastic'
 Plug 'sjl/gundo.vim'
-" Problems with fugitive, re-evalute when upstream fixes the issue
-" Plug 'sjl/splice.vim'
 Plug 'skammer/vim-css-color'
 " Requires extra binaries; see docs
 Plug 'suan/vim-instant-markdown'
@@ -71,7 +62,6 @@ Plug 'tpope/vim-git'
 Plug 'tpope/vim-markdown'
 Plug 'tpope/vim-repeat'
 " requires compilation
-" Plug 'wincent/Command-T'
 Plug 'xolox/vim-misc'
 Plug 'xolox/vim-notes'
 Plug 'xolox/vim-pyref'
@@ -84,18 +74,15 @@ Plug 'fatih/vim-go'
 Plug 'w0rp/ale'
 
 Plug 'lifepillar/vim-solarized8'
-" Plug 'beigebrucewayne/subtle_solo'
-" Plug 'wimstefan/vim-artesanal'
-" Plug 'nightsense/simplifysimplify'
+Plug 'beigebrucewayne/subtle_solo'
+Plug 'wimstefan/vim-artesanal'
+Plug 'nightsense/simplifysimplify'
 Plug 'nightsense/seagrey'
 Plug 'rakr/vim-one'
 
 " fzf
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
-
-" Vimacs
-" Plugin 'andrep/vimacs'
 
 call plug#end()
 
@@ -399,30 +386,6 @@ if has("unix") && strlen($MYVIMRC) < 1
   let $MYVIMRC=$HOME . '/.vimrc'
 endif
 
-" Highlight Class and Function names
-" function! s:HighlightFunctionsAndClasses()
-"   syn match cCustomFunc      "\w\+\s*\((\)\@="
-"   syn match cCustomClass     "\w\+\s*\(::\)\@="
-"
-"   hi def link cCustomFunc      Function
-"   hi def link cCustomClass     Function
-" endfunction
-
-" Highlight Class and Function names, D specific
-" function! s:HighlightDFunctionsAndClasses()
-"   syn match cCustomDFunc     "\w\+\s*\(!.\{-}(\)\@="
-"   syn match cCustomDFuncUFCS ".\w\+\s*\(!.\{-}\)\@="
-"
-"   hi def link cCustomDFunc     Function
-"   hi def link cCustomDFuncUFCS Function
-" endfunction
-"
-" TODO: this should:
-" a) not be called for every filetype
-" b) be in a separate plugin
-" au vimrc Syntax * call s:HighlightFunctionsAndClasses()
-" au vimrc Syntax d call s:HighlightDFunctionsAndClasses()
-"
 
 " TODO: split this into separate plugin
 function! VisualSearch(direction) range
@@ -553,8 +516,8 @@ nnoremap g, g,zz
 " expect them to.
 nnoremap j gj
 nnoremap k gk
-nnoremap J 3gj
-nnoremap K 3gk
+nnoremap J }
+nnoremap K {
 nnoremap H gT
 nnoremap L gt
 
@@ -579,8 +542,8 @@ noremap <m-j> 15gj
 noremap <m-k> 15gk
 
 " on macs the alt key is inconvenient to press, so let's also map to ctrl
-noremap <c-j> 15gj
-noremap <c-k> 15gk
+noremap <c-j> 3gj
+noremap <c-k> 3gk
 
 " Switches to the previous buffer that was shown in the current window, but also
 " closes the current buffer before switching to the previous one
@@ -612,57 +575,6 @@ vnoremap > >gv
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                       ***  HERE BE PLUGINS  ***                         "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                               Command-T                                 "
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-let g:CommandTMaxHeight = 30
-let g:CommandTMatchWindowReverse = 1 " shows results in reverse order
-
-" If we're at_google, then use the ruby finder because that will not traverse
-" directories matched by wildignore. The 'find' scanner will only filter out
-" paths matching wildignore *AFTER* enumerating all the paths, which is when
-" some dirs are mapped to the network.
-
-let g:CommandTFileScanner = 'find'
-
-let g:CommandTTraverseSCM = 'pwd'
-
-set wildignore+=*.o,*.obj,.git,*.pyc,*.so,blaze*,READONLY,llvm,Library*
-set wildignore+=CMakeFiles,packages/*,**/packages/*,**/node_modules/*
-
-" This appears to be necessary; command-t doesn't appear to be falling back to
-" wildignore on its own.
-let g:CommandTWildIgnore=&wildignore
-"
-" MacVim doesn't use tab focus to switch from command-t input field to the file
-" list, so using j and k for next and prev screws everything up. But it does
-" work on linux so let's use it there.
-" if has("gui_gtk2")
-"     let g:CommandTSelectNextMap = [ '<down>' ]
-"     let g:CommandTSelectPrevMap = [ '<up>' ]
-" endif
-
-" nnoremap <leader>t :CommandT<cr>
-" nnoremap <leader>n :CommandTBuffer<cr>
-" nnoremap <leader>' :CommandTFlush<cr>
-
-" Use Vim's cwd
-let g:ctrlp_working_path_mode = 0
-let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:30'
-
-" Faster indexing of files; requires having ag (AKA the_silver_searcher)
-" installed.
-let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden
-      \ --ignore .git
-      \ --ignore .svn
-      \ --ignore .hg
-      \ --ignore .DS_Store
-      \ --ignore "**/*.pyc"
-      \ --ignore BoostParts
-      \ -g ""'
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                  fzf                                    "
@@ -800,40 +712,6 @@ let g:lt_height = 25
 " noremap <left> :BB<cr>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                              fuzzyfinder                                "
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" This turns on the mrufile and mrucmd modes
-let g:fuf_modesDisable    = []
-let g:fuf_mrufile_maxItem = 1000
-let g:fuf_mrucmd_maxItem  = 400
-let g:fuf_file_exclude    = '\v\~$|\.(o|exe|dll|bak|class|meta|lock|orig|jar|swp)$|/test/data\.|(^|[/\\])\.(hg|git|bzr)($|[/\\])'
-
-nnoremap <Leader>fm :FufMruFile<CR>
-nnoremap <Leader>fc :FufMruCmd<CR>
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                                fswitch                                  "
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" A "companion" file is a .cpp file to an .h file and vice versa
-
-" Opens the companion file in the current window
-nnoremap <Leader>sh :FSHere<cr>
-
-" Opens the companion file in the window to the left (window needs to exist)
-" This is actually a duplicate of the :FSLeft command which for some reason
-" doesn't work.
-nnoremap <Leader>sl :call FSwitch('%', 'wincmd l')<cr>
-
-" Same as above, only opens it in window to the right
-nnoremap <Leader>sr :call FSwitch('%', 'wincmd r')<cr>
-
-" Creates a new window on the left and opens the companion file in it
-nnoremap <Leader>sv :FSSplitLeft<cr>
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                vim-git                                  "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -861,14 +739,6 @@ nnoremap <F4> :TagbarToggle<cr><c-w>=
 " https://github.com/rkitover/vimpager
 let vimpager_use_gvim = 1
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                               delimitMate                               "
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" au vimrc FileType html,xhtml,markdown let b:delimitMate_matchpairs = "(:),[:],{:}"
-" let g:delimitMate_expand_cr = 1
-" let g:delimitMate_expand_space = 1
-
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                               auto-pair                                 "
@@ -884,39 +754,10 @@ let g:AutoPairsShortcutBackInsert = '<M-,>'
 let g:cssColorVimDoNotMessMyUpdatetime = 1
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                              zencoding-vim                              "
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-let g:user_zen_leader_key = '<c-b>'
-let g:user_zen_settings = {
-      \  'indentation' : '  '
-      \}
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                vim-notes                                "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 let g:notes_directories = ['~/notes']
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                                syntastic                                "
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" let g:syntastic_error_symbol = '✗'
-" let g:syntastic_warning_symbol = '⚠'
-" let g:syntastic_always_populate_loc_list = 1
-" let g:syntastic_python_checkers = ['flake8']
-" let g:syntastic_python_flake8_args = '--max-line-length=80 ' .
-"       \ '--max-complexity=10 --ignore=E111,E114,E121,E125,E126,E127,E128,E129,' .
-"       \ 'E131,E133,E201,E202,E203,E211,E221,E222,E241,E251,E261,E303,E402,W503'
-"
-" let g:syntastic_go_checkers = ['go']
-"
-" let g:syntastic_mode_map = {
-"        \ "mode": "active",
-"        \ "active_filetypes": ["go"],
-"        \ "passive_filetypes": ["dart", "html"] }
-"
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                              ale(replace syntastic)                     "
@@ -940,6 +781,7 @@ let g:ycm_min_num_identifier_candidate_chars = 4
 let g:ycm_extra_conf_globlist = ['~/repos/*']
 let g:ycm_filetype_specific_completion_to_disable = {'javascript': 1}
 let g:ycm_rust_src_path = $HOME . '/repos/rust/src'
+let g:ycm_key_list_stop_completion = ['<CR>']
 
 nnoremap <leader>y :YcmForceCompileAndDiagnostics<cr>
 nnoremap <leader>g :YcmCompleter GoTo<CR>
@@ -1001,10 +843,6 @@ let g:ophigh_filetypes_to_ignore = { "spansdl": 1 }
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                               vimacs                                    "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" let g:VM_Enabled = 1
-" set insertmode
-" set selectmode
-
 " Mimic Emacs Line Editing in Insert Mode Only
 inoremap <C-A> <Esc>g^i
 inoremap <C-B> <Left>
@@ -1041,6 +879,7 @@ endif
 
 " vim-go config
 let g:go_fmt_command = "goimports"
+let g:go_doc_keywordprg_enabled = 0
 
 " nvim adapter
 if !has('nvim')
