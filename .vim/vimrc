@@ -25,7 +25,8 @@ call plug#begin('~/.vim/plugged')
 Plug 'Lokaltog/vim-easymotion'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-airline/vim-airline'
-Plug 'Raimondi/delimitMate'
+" Plug 'Raimondi/delimitMate'
+Plug 'jiangmiao/auto-pairs'
 Plug 'SirVer/ultisnips'
 Plug 'Valloric/ListToggle'
 Plug 'Valloric/MatchTagAlways'
@@ -342,6 +343,13 @@ autocmd vimrc FileType rust
       \ set softtabstop=2 |
       \ set textwidth=80
 
+" config for go file format
+autocmd vimrc FileType go
+      \ set tabstop=4 |
+      \ set shiftwidth=4 |
+      \ set softtabstop=4 |
+      \ set textwidth=80
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                           More involved tweaks                          "
@@ -545,13 +553,18 @@ nnoremap g, g,zz
 " expect them to.
 nnoremap j gj
 nnoremap k gk
+nnoremap J 3gj
+nnoremap K 3gk
+nnoremap H gT
+nnoremap L gt
+
 
 " Use Q for formatting the current paragraph (or visual selection)
 vnoremap Q gq
 nnoremap Q gqap
 
 " This is quit all
-noremap <Leader>q :qa<cr>
+noremap <Leader>q :q<cr>
 
 " key bindings for quickly moving between windows
 " h left, l right, k up, j down
@@ -735,12 +748,12 @@ let g:snips_author                 = 'Strahinja Val Markovic'
 "                               easymotion                                "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-let g:EasyMotion_leader_key = '<Leader>e'
+" let g:EasyMotion_leader_key = '<Leader>e'
 
 " Provides the equivalent of <Leader>s, which is forwards/backwards search for a
 " character.
 " has to be 'nmap', 'noremap' doesn't work
-nmap s <Plug>(easymotion-s)
+nmap <leader>s <Plug>(easymotion-s)
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                              vim-preview                                "
@@ -852,7 +865,17 @@ let vimpager_use_gvim = 1
 "                               delimitMate                               "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-au vimrc FileType html,xhtml,markdown let b:delimitMate_matchpairs = "(:),[:],{:}"
+" au vimrc FileType html,xhtml,markdown let b:delimitMate_matchpairs = "(:),[:],{:}"
+" let g:delimitMate_expand_cr = 1
+" let g:delimitMate_expand_space = 1
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                               auto-pair                                 "
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+let g:AutoPairsFlyMode = 0
+let g:AutoPairsShortcutBackInsert = '<M-,>'
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                              vim-css-color                              "
@@ -896,7 +919,7 @@ let g:notes_directories = ['~/notes']
 "
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                              ale(replace syntastic)                                        "
+"                              ale(replace syntastic)                     "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 let g:ale_sign_error = '>'
@@ -993,7 +1016,28 @@ inoremap <C-d> <Del>
 inoremap <C-K> <Esc>lDa
 inoremap <C-U> <Esc>d0xi
 inoremap <C-Y> <Esc>Pa
+
+" enter select complete candicate
+inoremap <expr> <CR> pumvisible() ? "\<C-Y>" : "\<CR>"
+
 " inoremap <C-X><C-S> <Esc>:w<CR>
+
+if has('nvim')
+        inoremap <m-f> <Esc>lea
+        inoremap <m-b> <Esc>bi
+        inoremap <m-d> <Esc>ldwi
+        inoremap <m-x> <Esc>:
+else
+        " map alt in vim is different
+        execute "set <m-f>=\ef"
+        inoremap <m-f> <Esc>lea
+        execute "set <m-b>=\eb"
+        inoremap <m-b> <Esc>bi
+        execute "set <m-d>=\ed"
+        inoremap <m-d> <Esc>ldwi
+        execute "set <m-x>=\ex"
+        inoremap <m-x> <Esc>:
+endif
 
 " vim-go config
 let g:go_fmt_command = "goimports"
