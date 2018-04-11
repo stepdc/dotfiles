@@ -853,7 +853,7 @@ inoremap <C-N> <Down>
 inoremap <C-d> <Del>
 inoremap <C-K> <Esc>lDa
 inoremap <C-U> <Esc>d0xi
-inoremap <C-Y> <Esc>Pa
+" inoremap <C-Y> <Esc>Pa
 
 " enter select complete candicate
 inoremap <expr> <CR> pumvisible() ? "\<C-Y>" : "\<CR>"
