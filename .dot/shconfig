@@ -100,3 +100,5 @@ function zz() {
 # history size
 export HISTSIZE=200000
 
+# not to be disturbed by Ctrl-S ctrl-Q in terminals:
+stty -ixon
