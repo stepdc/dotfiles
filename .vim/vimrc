@@ -71,6 +71,7 @@ Plug 'Valloric/YouCompleteMe'
 
 " GO
 Plug 'fatih/vim-go'
+Plug 'AndrewRadev/splitjoin.vim'
 Plug 'w0rp/ale'
 
 Plug 'lifepillar/vim-solarized8'
@@ -335,7 +336,9 @@ autocmd vimrc FileType go
       \ set tabstop=4 |
       \ set shiftwidth=4 |
       \ set softtabstop=4 |
-      \ set textwidth=80
+      \ set textwidth=80 |
+      \ nnoremap <leader>gl <Esc>:GoDecls<cr> |
+      \ nnoremap <leader>gL <Esc>:GoDeclsDir<cr>
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -516,8 +519,8 @@ nnoremap g, g,zz
 " expect them to.
 nnoremap j gj
 nnoremap k gk
-nnoremap J }
-nnoremap K {
+nnoremap J 3gj
+nnoremap K 3gk
 nnoremap H gT
 nnoremap L gt
 
@@ -542,8 +545,8 @@ noremap <m-j> 15gj
 noremap <m-k> 15gk
 
 " on macs the alt key is inconvenient to press, so let's also map to ctrl
-noremap <c-j> 3gj
-noremap <c-k> 3gk
+noremap <c-j> }
+noremap <c-k> {
 
 " Switches to the previous buffer that was shown in the current window, but also
 " closes the current buffer before switching to the previous one
@@ -651,6 +654,7 @@ else
   " Alt conflicts with Xmonad
   let g:UltiSnipsExpandTrigger       = "<c-s>"
 endif
+
 let g:UltiSnipsListSnippets        = "<c-m-s>"
 let g:UltiSnipsJumpForwardTrigger  = "<right>"
 let g:UltiSnipsJumpBackwardTrigger = "<left>"
@@ -763,9 +767,10 @@ let g:notes_directories = ['~/notes']
 "                              ale(replace syntastic)                     "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-let g:ale_sign_error = '>'
-let g:ale_sign_warning = '-'
+let g:ale_sign_error = '>>'
+let g:ale_sign_warning = '--'
 let g:airline#extensions#ale#enabled = 1
+let g:ale_sign_column_always = 1
 
 " error
 nnoremap <leader>0 :ALENext<CR>
@@ -784,7 +789,7 @@ let g:ycm_rust_src_path = $HOME . '/repos/rust/src'
 let g:ycm_key_list_stop_completion = ['<CR>']
 
 nnoremap <leader>y :YcmForceCompileAndDiagnostics<cr>
-nnoremap <leader>g :YcmCompleter GoTo<CR>
+nnoremap <leader>gg :YcmCompleter GoTo<CR>
 nnoremap <leader>pd :YcmCompleter GoToDefinition<CR>
 nnoremap <leader>pc :YcmCompleter GoToDeclaration<CR>
 
@@ -853,10 +858,10 @@ inoremap <C-N> <Down>
 inoremap <C-d> <Del>
 inoremap <C-K> <Esc>lDa
 inoremap <C-U> <Esc>d0xi
-" inoremap <C-Y> <Esc>Pa
+inoremap <C-Y> <Esc>Pa
 
 " enter select complete candicate
-inoremap <expr> <CR> pumvisible() ? "\<C-Y>" : "\<CR>"
+" inoremap <expr> <CR> pumvisible() ? "\<C-Y>" : "\<CR>"
 
 " inoremap <C-X><C-S> <Esc>:w<CR>
 
@@ -880,6 +885,29 @@ endif
 " vim-go config
 let g:go_fmt_command = "goimports"
 let g:go_doc_keywordprg_enabled = 0
+let g:go_highlight_types = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+" let g:go_highlight_operators = 1
+" let g:go_auto_type_info = 1
+" go typeinfo every 800ms, default 800ms
+set updatetime=800
+
+
+autocmd Filetype go command! -bang A call go#alternate#Switch(<bang>0, 'edit')
+autocmd Filetype go command! -bang AV call go#alternate#Switch(<bang>0, 'vsplit')
+autocmd Filetype go command! -bang AS call go#alternate#Switch(<bang>0, 'split')
+autocmd Filetype go command! -bang AT call go#alternate#Switch(<bang>0, 'tabe')
+
+" go releated key binds
+autocmd FileType go nmap <Leader>gi <Plug>(go-info)
+autocmd FileType go nmap <Leader>gt <Plug>(go-test)
+autocmd FileType go nmap <Leader>gr <Plug>(go-run)
+autocmd FileType go nmap <Leader>gb <Plug>(go-build)
+autocmd FileType go nmap <Leader>gc <Plug>(go-coverage-toggle)
+autocmd FileType go nmap <Leader>gn <Plug>(go-rename)
+
+
 
 " nvim adapter
 if !has('nvim')
