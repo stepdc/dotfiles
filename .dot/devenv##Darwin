@@ -3,3 +3,5 @@ export GOPATH=$HOME/go:$HOME/Coding/go
 export GOROOT=/usr/local/opt/go/libexec
 export PATH=$PATH:$GOPATH/bin:$GOROOT/bin
 
+### rust config
+[[ -f $HOME/.cargo/env  ]] && source $HOME/.cargo/env
