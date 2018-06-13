@@ -14,3 +14,11 @@ fi
 
 [[ $HOME/.dot/shconfig ]] && source $HOME/.dot/shconfig
 [[ $HOME/.dot/fzf.zsh ]] && source $HOME/.dot/fzf.zsh
+
+if [[ -s "$HOME/.dot/yadm" ]]; then
+  fpath=($HOME/.dot/yadm $fpath)
+  autoload -U compinit
+  compinit
+fi
+  
+export TERM=xterm-256color
