@@ -592,6 +592,15 @@ nnoremap <leader>t :Files<cr>
 nnoremap <leader>n :Buffers<cr>
 nnoremap <leader>bb :Windows<cr>
 
+command! -bang -nargs=* Rg
+      \ call fzf#vim#grep(
+      \   'rg --column --line-number --no-heading --color=always --ignore-case '.shellescape(<q-args>), 1,
+      \   <bang>0 ? fzf#vim#with_preview('up:60%')
+      \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+      \   <bang>0)
+
+nnoremap <leader>rr :Rg<space>
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                 Gundo                                   "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -906,7 +915,7 @@ autocmd FileType go nmap <Leader>gr <Plug>(go-run)
 autocmd FileType go nmap <Leader>gb <Plug>(go-build)
 autocmd FileType go nmap <Leader>gc <Plug>(go-coverage-toggle)
 autocmd FileType go nmap <Leader>gn <Plug>(go-rename)
-
+autocmd FileType go nmap <Leader>ga <Plug>(go-referrers)
 
 
 " nvim adapter
