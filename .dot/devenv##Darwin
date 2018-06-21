@@ -1,7 +1,7 @@
 ### go config
 export GOPATH=$HOME/go:$HOME/Coding/go
-export GOROOT=/usr/local/opt/go/libexec
-export PATH=$PATH:$GOPATH/bin:$GOROOT/bin
+export GOROOT=/usr/local/go
+export PATH=$PATH:$HOME/go/bin:$GOROOT/bin
 
 ### rust config
 [[ -f $HOME/.cargo/env  ]] && source $HOME/.cargo/env

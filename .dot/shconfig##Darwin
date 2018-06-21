@@ -25,20 +25,6 @@ alias z='fasd_cd -d'     # cd, same functionality as j in autojump
 # alias zz='fasd_cd -d -i' # cd with interactive selection
 alias zz='zz'
 
-# TODO: opensuse only
-alias zup='sudo zypper update'
-alias zref='sudo zypper refresh'
-alias zse='sudo zypper search'
-alias zin='sudo zypper install'
-alias zinfo='sudo zypper info'
-
-# apt alis
-alias aup='sudo apt update'
-alias aupg='sudo apt upgrade'
-alias ase='sudo apt search'
-alias ain='sudo apt install'
-alias ainfo='sudo apt show'
-
 alias e='TERM=screen-16color emacsclient -nw'
 # alias em='TERM=screen-16color emacs -nw'
 alias em='emacs -nw'
@@ -48,9 +34,6 @@ alias vi='vim'
 alias nvi='nvim'
 
 alias za='zathura --fork $@'
-alias psh='export http_proxy=http://proxysh.zte.com.cn:80; all_proxy=http://proxysh.zte.com.cn:80; export https_proxy=http://proxysh.zte.com.cn:80; export no_proxy="localhost,.zte.com.cn,.zte.intra,gerrit.zte.com.cn,mirrors.zte.com.cn,127.0.0.1,10.0.0.0/8,zxess-registry,zhihu.com"'
-
-alias phk='export http_proxy=http://proxyhk.zte.com.cn:80; all_proxy=http://proxyhk.zte.com.cn:80; export https_proxy=http://proxyhk.zte.com.cn:80; export no_proxy="localhost,.zte.com.cn,.zte.intra,gerrit.zte.com.cn,mirrors.zte.com.cn,127.0.0.1,10.0.0.0/8,zxess-registry,zhihu.com"'
 
 # cargo
 [[ -s "~/.cargo/env" ]] && source ~/.cargo/env
