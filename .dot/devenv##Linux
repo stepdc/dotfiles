@@ -1,7 +1,7 @@
 # GO
 export GOROOT=$HOME/dev/lang/go
 export PATH=$GOROOT/bin:$PATH
-export PATH=$HOME/go/bin:$PATH
+export PATH=$HOME/go/bin:$PATH:/opt/vagrant/bin
 
 # GOPATH, project dir
 export GOPATH="$HOME/go"

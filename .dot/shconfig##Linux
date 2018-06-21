@@ -102,3 +102,15 @@ export HISTSIZE=200000
 
 # not to be disturbed by Ctrl-S ctrl-Q in terminals:
 stty -ixon
+
+# load tool
+case $SHELL in
+*/zsh)
+  [ -f $HOME/.dot/tools.zsh ] && source $HOME/.dot/tools.zsh
+  ;;
+*/bash)
+   # assume Bash
+   ;;
+*)
+   # assume something else
+esac
