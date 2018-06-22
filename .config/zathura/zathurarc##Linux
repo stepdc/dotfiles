@@ -1,0 +1,4 @@
+# light status bar
+
+set statusbar-fg                "#303030"
+set statusbar-bg                "#FFFFFF"
