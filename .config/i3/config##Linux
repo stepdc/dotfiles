@@ -32,9 +32,9 @@ floating_modifier Mod4
 
 # start a terminal
 # bindsym Mod4+Return exec i3-sensible-terminal
-# bindsym Mod4+Return exec gnome-terminal
+bindsym Mod4+Return exec gnome-terminal
 # bindsym Mod4+Return exec st.run -f "Sarasa Term SC:size=12" -t "(=ﾟωﾟ)ﾉ"
-bindsym Mod4+Return exec gt.run
+# bindsym Mod4+Return exec gt.run
 bindsym Mod1+Shift+Return exec i3-sensible-terminal
 bindsym Mod4+Shift+F12 exec i3lock --color=333333
 
@@ -211,6 +211,7 @@ exec --no-startup-id feh --bg-tile ~/Pictures/iceburg.jpg
 exec --no-startup-id compton -b
 # sync gtk settings
 exec gnome-settings-daemon
+exec --no-startup-id setxkbmap -option ctrl:swap_lalt_lctl
 
 
 # global paste manage
