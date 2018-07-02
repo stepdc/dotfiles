@@ -1,0 +1,1 @@
+/home/ricd/.profile##Linux
