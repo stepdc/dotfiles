@@ -3,10 +3,26 @@
 if xrandr --query | grep "^DisplayPort-0 connected";
 then
   sed -i '/Xft.dpi/c\Xft.dpi: 96' $HOME/.Xresources
+  sed -i '/rofi.dpi/c\rofi.dpi: 96' $HOME/.Xresources
   # sed -i '/dpi = /c\dpi = 96' $HOME/.config/polybar/config
   # sed -i '/height = /c\height = 27' $HOME/.config/polybar/config
 else
   sed -i '/Xft.dpi/c\Xft.dpi: 185' $HOME/.Xresources
+  sed -i '/rofi.dpi/c\rofi.dpi: 185' $HOME/.Xresources
+
+  # Qt5 config
+  export QT_AUTO_SCREEN_SCALE_FACTOR=1
+
+  # configure gnome's scaling factor (integers only):
+  # gsettings set org.gnome.desktop.interface scaling-factor 2
+
+  # check your gnome text scaling settings:
+  # exec dconf read /org/gnome/desktop/interface/text-scaling-factor
+
+  # adjust text scaling:
+  # exec dconf write /org/gnome/desktop/interface/text-scaling-factor 1.6
+
+
   # sed -i '/dpi = /c\dpi = 196' $HOME/.config/polybar/config
   # sed -i '/height = /c\height = 54' $HOME/.config/polybar/config
 fi
