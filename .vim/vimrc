@@ -340,6 +340,14 @@ autocmd vimrc FileType go
       \ nnoremap <leader>gl <Esc>:GoDecls<cr> |
       \ nnoremap <leader>gL <Esc>:GoDeclsDir<cr>
 
+" config for yaml file format
+autocmd vimrc FileType yaml
+      \ set tabstop=2 |
+      \ set shiftwidth=2 |
+      \ set softtabstop=2 |
+      \ set textwidth=80 |
+      \ set expandtab
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                           More involved tweaks                          "
