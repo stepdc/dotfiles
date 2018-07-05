@@ -6,3 +6,5 @@ export PATH=$HOME/go/bin:$PATH:/opt/vagrant/bin
 # GOPATH, project dir
 export GOPATH="$HOME/go"
 
+#cargo
+[[ -f $HOME/.cargo/env  ]] && source $HOME/.cargo/env
