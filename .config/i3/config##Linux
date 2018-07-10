@@ -197,27 +197,19 @@ mode "$mode_system" {
 bindsym Shift+End mode "$mode_system"
 
 # After i3 wm init
-
-# exec --no-startup-id nitrogen --restore
-# exec --no-startup-id xsetroot -solid "#333333"
-# exec --no-startup-id setxkbmap -option ctrl:swap_lalt_lctl
-exec --no-startup-id feh --bg-scale ~/Pictures/iceburg.jpg
-# exec --no-startup-id "i3-msg 'workspace 4; append_layout /home/michael/.i3/workspace-4.json'"
+# exec --no-startup-id feh --bg-scale ~/Pictures/iceburg.jpg
+exec --no-startup-id feh --bg-fill ~/Pictures/leap15-4k.png
 # exec --no-startup-id xrdb -load ~/.Xdefaults
-
 
 # exec --no-startup-id fcitx -r
 # exec --no-startup-id sogou-qumpanel
 exec --no-startup-id allow_rgb10_configs=false compton -b
-# sync gtk settings
-exec gnome-settings-daemon
-
-# Qt5 hiDPI
-exec --no-startup-id export QT_AUTO_SCREEN_SCALE_FACTOR=1
 
 # swap lalt an lctrl
 exec --no-startup-id setxkbmap -option ctrl:swap_lalt_lctl
 
+# set keyboard repear rate
+exec --no-startup-id xset r rate 256 40
 
 # global paste manage
 exec --no-startup-id greenclip daemon
