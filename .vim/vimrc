@@ -815,7 +815,7 @@ nnoremap <leader>pc :YcmCompleter GoToDeclaration<CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 let g:airline_powerline_fonts = 1
-let g:airline_theme = 'lucius'
+let g:airline_theme = 'solarized'
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                            vim-indent-guides                            "
@@ -883,20 +883,20 @@ inoremap <C-Y> <Esc>Pa
 " inoremap <C-X><C-S> <Esc>:w<CR>
 
 if has('nvim')
-        inoremap <m-f> <Esc>lea
-        inoremap <m-b> <Esc>bi
-        inoremap <m-d> <Esc>ldwi
-        inoremap <m-x> <Esc>:
+    inoremap <m-f> <Esc>lea
+    inoremap <m-b> <Esc>bi
+    inoremap <m-d> <Esc>ldwi
+    inoremap <m-x> <Esc>:
 else
-        " map alt in vim is different
-        execute "set <m-f>=\ef"
-        inoremap <m-f> <Esc>lea
-        execute "set <m-b>=\eb"
-        inoremap <m-b> <Esc>bi
-        execute "set <m-d>=\ed"
-        inoremap <m-d> <Esc>ldwi
-        execute "set <m-x>=\ex"
-        inoremap <m-x> <Esc>:
+    " map alt in vim is different
+    execute "set <m-f>=\ef"
+    inoremap <m-f> <Esc>lea
+    execute "set <m-b>=\eb"
+    inoremap <m-b> <Esc>bi
+    execute "set <m-d>=\ed"
+    inoremap <m-d> <Esc>ldwi
+    execute "set <m-x>=\ex"
+    inoremap <m-x> <Esc>:
 endif
 
 " vim-go config
@@ -928,10 +928,10 @@ autocmd FileType go nmap <Leader>ga <Plug>(go-referrers)
 
 " nvim adapter
 if !has('nvim')
-        set ttymouse=xterm2
+    set ttymouse=xterm2
 endif
 
 if has('nvim')
-        tnoremap <Esc> <C-\><C-n>
+    tnoremap <Esc> <C-\><C-n>
 endif
 
