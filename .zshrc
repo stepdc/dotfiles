@@ -20,12 +20,8 @@ fi
   source $HOME/.autojump/etc/profile.d/autojump.sh
 
 # fpath should copy to /etc/zshrc manually, 0.5s startup time shrink
-# if [[ -s "$HOME/.dot/yadm" ]]; then
-#   fpath=($HOME/.dot/yadm $fpath)
-# fi
-#
-# if [[ -s "$HOME/.cht.sh" ]]; then
-#   fpath=($HOME/.cht.sh $fpath)
+# if [[ -s "$HOME/.dot/zsh_completion.d" ]]; then
+#   fpath=($HOME/.dot/zsh_completion.d $fpath)
 # fi
 
 # autoload -U compinit && compinit -u
