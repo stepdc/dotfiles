@@ -1,6 +1,6 @@
 #compdef cht.sh
 
-__CHTSH_LANGS=($(curl -s cheat.sh/:list))
+__CHTSH_LANGS=($(cat $HOME/.cht.sh/list))
 _arguments -C \
   '--help[show this help message and exit]: :->noargs' \
   '--shell[enter shell repl]: :->noargs' \
