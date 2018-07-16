@@ -49,12 +49,6 @@ alias nvi='nvim'
 
 alias za='zathura --fork $@'
 
-# autojump
-[[ -s $HOME/.autojump/etc/profile.d/autojump.sh ]] && \
-  source $HOME/.autojump/etc/profile.d/autojump.sh
-
-autoload -U compinit && compinit -u
-
 # fzf
 _gen_fzf_default_opts() {
 

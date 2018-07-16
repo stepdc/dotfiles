@@ -15,17 +15,20 @@ fi
 [[ $HOME/.dot/shconfig ]] && source $HOME/.dot/shconfig
 [[ $HOME/.dot/fzf.zsh ]] && source $HOME/.dot/fzf.zsh
 
+# autojump
+[[ -s $HOME/.autojump/etc/profile.d/autojump.sh ]] && \
+  source $HOME/.autojump/etc/profile.d/autojump.sh
+
+# fpath
 if [[ -s "$HOME/.dot/yadm" ]]; then
   fpath=($HOME/.dot/yadm $fpath)
-  autoload -U compinit
-  compinit
 fi
 
 if [[ -s "$HOME/.cht.sh" ]]; then
   fpath=($HOME/.cht.sh $fpath)
-  autoload -U compinit
-  compinit
 fi
+
+autoload -U compinit && compinit -u
 
 export TERM=xterm-256color
 
