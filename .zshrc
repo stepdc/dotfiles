@@ -19,16 +19,16 @@ fi
 [[ -s $HOME/.autojump/etc/profile.d/autojump.sh ]] && \
   source $HOME/.autojump/etc/profile.d/autojump.sh
 
-# fpath
-if [[ -s "$HOME/.dot/yadm" ]]; then
-  fpath=($HOME/.dot/yadm $fpath)
-fi
+# fpath should copy to /etc/zshrc manually, 0.5s startup time shrink
+# if [[ -s "$HOME/.dot/yadm" ]]; then
+#   fpath=($HOME/.dot/yadm $fpath)
+# fi
+#
+# if [[ -s "$HOME/.cht.sh" ]]; then
+#   fpath=($HOME/.cht.sh $fpath)
+# fi
 
-if [[ -s "$HOME/.cht.sh" ]]; then
-  fpath=($HOME/.cht.sh $fpath)
-fi
-
-autoload -U compinit && compinit -u
+# autoload -U compinit && compinit -u
 
 export TERM=xterm-256color
 
