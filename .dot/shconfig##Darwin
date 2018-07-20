@@ -36,12 +36,6 @@ alias nvi='nvim'
 # cargo
 [[ -s "~/.cargo/env" ]] && source ~/.cargo/env
 
-# autojump
-[[ -s $HOME/.autojump/etc/profile.d/autojump.sh ]] && \
-  source $HOME/.autojump/etc/profile.d/autojump.sh
-
-autoload -U compinit && compinit -u
-
 # fzf
 _gen_fzf_default_opts() {
 

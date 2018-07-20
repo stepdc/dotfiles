@@ -13,30 +13,18 @@ set nocompatible
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                            plug configuration                           "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                          Vundle configuration                           "
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" These need to come before the configuration options for the plugins since
-" vundle will add the plugin folders to the runtimepath only after it has seen
-" the plugin's Plugin command.
 call plug#begin('~/.vim/plugged')
 
-" Plug 'Lokaltog/vim-easymotion'
+Plug 'Lokaltog/vim-easymotion'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-airline/vim-airline'
 Plug 'jiangmiao/auto-pairs'
 Plug 'SirVer/ultisnips'
-" Plug 'Valloric/ListToggle'
-" Plug 'Valloric/MatchTagAlways'
-" Plug 'Valloric/python-indent'
-" Plug 'Valloric/xmledit'
 Plug 'vim-scripts/YankRing.vim'
 " Seems more active than tpope/vim-surround
 Plug 'anyakichi/vim-surround'
 Plug 'qpkorr/vim-bufkill'
 Plug 'cespare/vim-toml'
-" Plug 'gmarik/vundle'
 Plug 'godlygeek/tabular'
 " For markdown preview; call :Preview to open rendered in browser
 Plug 'greyblake/vim-preview'
@@ -44,28 +32,19 @@ Plug 'groenewege/vim-less'
 Plug 'elzr/vim-json'
 Plug 'honza/vim-snippets'
 Plug 'majutsushi/tagbar'
-" Plug 'mattn/emmet-vim'
 " Plug 'michaeljsmith/vim-indent-object'
-" Plug 'mileszs/ack.vim'
-" Plug 'octol/vim-cpp-enhanced-highlight'
+Plug 'mileszs/ack.vim'
 Plug 'othree/eregex.vim'
-" Plug 'othree/html5.vim'
 Plug 'rust-lang/rust.vim'
 Plug 'sjl/gundo.vim'
 Plug 'skammer/vim-css-color'
 " Requires extra binaries; see docs
-" Plug 'suan/vim-instant-markdown'
 Plug 'tomtom/tcomment_vim'
 Plug 'tomtom/tlib_vim'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-git'
-" Plug 'tpope/vim-markdown'
 Plug 'tpope/vim-repeat'
 " requires compilation
-Plug 'xolox/vim-misc'
-Plug 'xolox/vim-notes'
-Plug 'xolox/vim-pyref'
-Plug 'xolox/vim-session'
 " YCM
 Plug 'Valloric/YouCompleteMe'
 
@@ -90,9 +69,6 @@ call plug#end()
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                           pre-filetype tweaks                           "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" these are for the xmledit plugin
-" let xml_use_xhtml = 1
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                           reset vimrc augroup                           "
@@ -686,7 +662,7 @@ let g:snips_author                 = 'Strahinja Val Markovic'
 " Provides the equivalent of <Leader>s, which is forwards/backwards search for a
 " character.
 " has to be 'nmap', 'noremap' doesn't work
-" nmap <leader>s <Plug>(easymotion-s)
+nmap <leader>s <Plug>(easymotion-s)
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                              vim-preview                                "
@@ -713,14 +689,6 @@ elseif executable('ack-grep')
 elseif executable('ack')
   let g:ackprg = "ack --nocolor --nogroup --column"
 endif
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                               ListToggle                                "
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" let g:lt_location_list_toggle_map = '<leader>i'
-" let g:lt_quickfix_list_toggle_map = '<leader>u'
-" let g:lt_height = 25
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                bufkill                                  "
@@ -774,11 +742,6 @@ let g:AutoPairsShortcutBackInsert = '<M-,>'
 
 let g:cssColorVimDoNotMessMyUpdatetime = 1
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                                vim-notes                                "
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-let g:notes_directories = ['~/notes']
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                              ale(replace syntastic)                     "
@@ -825,12 +788,6 @@ let g:indent_guides_enable_on_vim_startup = 1
 let g:indent_guides_color_change_percent = 7
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                             MatchTagAlways                              "
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" let g:mta_use_matchparen_group = 0
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                 eregex                                  "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -838,13 +795,6 @@ let g:eregex_default_enable = 0
 
 " Toggles '/' to mean eregex search or normal Vim search
 nnoremap <leader>/ :call eregex#toggle()<CR>
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                          vim-instant-markdown                           "
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-let g:instant_markdown_autostart = 0
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
