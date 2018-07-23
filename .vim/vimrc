@@ -147,7 +147,11 @@ set cino=b1,g0,N-s,t0,(0,W4  " see :h cinoptions-values
 set smarttab            " smart tab handling for indenting
 set magic               " change the way backslashes are used in search patterns
 set bs=indent,eol,start " Allow backspacing over everything in insert mode
-set nobackup            " no backup~ files.
+" set nobackup            " no backup~ files.
+" backup fold config
+set backupdir=~/.vim/tmp,.
+set directory=~/.vim/tmp,.
+set undodir=~/.vim/tmp,.
 
 set tabstop=8           " number of spaces a tab counts for
 set shiftwidth=8        " spaces for autoindents
@@ -197,10 +201,6 @@ let g:is_posix = 1
 " if it still doesn't help with certain commands, add a second <cr>
 " at the end of the map command
 set shortmess=a
-
-" this solves the "unable to open swap file" errors on Win7
-set dir=/var/tmp,/tmp,$TEMP
-set undodir=/var/tmp,/tmp,$TEMP
 
 " Look for tag def in a "tags" file in the dir of the current file, then for
 " that same file in every folder above the folder of the current file, until the
@@ -597,7 +597,7 @@ let g:gundo_width=80
 "                                yankring                                 "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-let g:yankring_history_dir = '$HOME/tmp/vim'
+let g:yankring_history_dir = '/tmp/vim'
 " this is so that single char deletes don't end up in the yankring
 let g:yankring_min_element_length = 2
 let g:yankring_window_height = 14
@@ -619,7 +619,7 @@ endfunction
 let g:session_autoload        = 'no'
 let g:session_autosave        = 'yes'
 let g:session_default_to_last = 'yes'
-let g:session_directory       = '~/tmp/vim/sessions'
+let g:session_directory       = '/tmp/vim/sessions'
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                tabular                                  "
