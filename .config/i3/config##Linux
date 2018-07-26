@@ -33,6 +33,7 @@ floating_modifier Mod4
 # start a terminal
 # bindsym Mod4+Return exec i3-sensible-terminal
 bindsym Mod4+Return exec gnome-terminal
+# bindsym Mod4+Return exec alacritty.run
 # bindsym Mod4+Return exec st.run -f "Sarasa Term SC:size=12" -t "(=ﾟωﾟ)ﾉ"
 # bindsym Mod4+Return exec gt.run
 bindsym Mod1+Shift+Return exec i3-sensible-terminal
@@ -175,11 +176,6 @@ mode "resize" {
 
 bindsym Mod4+r mode "resize"
 
-bar {
-    ## remember to add your favourite status bar, i.e.,
-    status_command i3status
-}
-
 # i3 suspend
 set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
 mode "$mode_system" {
@@ -213,3 +209,35 @@ exec --no-startup-id xset r rate 256 40
 
 # global paste manage
 exec --no-startup-id greenclip daemon
+
+# class                 border  backgr. text    indicator child_border
+client.focused          #2B83A6 #2B83A6 #FFFFFF #DDDDDD   #2B83A6
+client.focused_inactive #212121 #212121 #86888C #292D2E   #5A5A5A
+client.unfocused        #212121 #212121 #86888C #292D2E   #5A5A5A
+client.urgent           #D64E4E #D64E4E #FFFFFF #D64E4E   #D64E4E
+client.placeholder      #212121 #0C0C0C #FFFFFF #212121   #262626
+client.background       #212121
+
+bar {
+    ## remember to add your favourite status bar, i.e.,
+    status_command i3status
+    position                bottom
+    tray_output             primary
+    separator_symbol        "·"
+    workspace_buttons       yes
+    strip_workspace_numbers yes
+    font pango:Essential PragmataPro Regular, FontAwesome 8
+#font pango:Sarasa Term SC Regular, FontAwesome 8
+
+    colors {
+        background  #212121
+        statusline  #DDDDDD
+        separator   #666666
+        # class             border  backgr. text
+        focused_workspace   #2B83A6 #2B83A6 #FFFFFF
+        active_workspace    #212121 #212121 #FFFFFF
+        inactive_workspace  #212121 #212121 #86888C
+        urgent_workspace    #D64E4E #D64E4E #FFFFFF
+    }
+}
+
