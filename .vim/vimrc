@@ -16,8 +16,9 @@ set nocompatible
 call plug#begin('~/.vim/plugged')
 
 Plug 'Lokaltog/vim-easymotion'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'vim-airline/vim-airline'
+" Plug 'vim-airline/vim-airline-themes'
+" Plug 'vim-airline/vim-airline'
+Plug 'itchyny/lightline.vim'
 Plug 'jiangmiao/auto-pairs'
 Plug 'SirVer/ultisnips'
 Plug 'vim-scripts/YankRing.vim'
@@ -52,13 +53,21 @@ Plug 'Valloric/YouCompleteMe'
 Plug 'fatih/vim-go'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'w0rp/ale'
+Plug 'godoctor/godoctor.vim'
+" Plug 'dominikduda/vim_current_word'
 
+" themes
 Plug 'lifepillar/vim-solarized8'
 Plug 'beigebrucewayne/subtle_solo'
 Plug 'wimstefan/vim-artesanal'
 Plug 'nightsense/simplifysimplify'
 Plug 'nightsense/seagrey'
 Plug 'rakr/vim-one'
+Plug 'morhetz/gruvbox'
+" let g:gruvbox_contrast='light'
+" Plug 'ayu-theme/ayu-vim'
+" let ayucolor="light"
+Plug 'NLKNguyen/papercolor-theme'
 
 " fzf
 Plug 'junegunn/fzf'
@@ -107,7 +116,7 @@ set rtp+=$HOME/vim_test,$HOME/vim_test/after,$HOME/repos/YouCompleteMe
 
 " DISPLAY SETTINGS
 " colorscheme simplifysimplify-light " sets the colorscheme
-colorscheme solarized8  " sets the colorscheme
+colorscheme PaperColor " sets the colorscheme
 " set background=light  " enable for dark terminals
 set scrolloff=2         " 2 lines above/below cursor when scrolling
 set showmatch           " show matching bracket (briefly jump)
@@ -359,7 +368,10 @@ endif
 
 " Sets a font for the GUI
 if has("gui_gtk2")
-  set guifont=Pragmata\ Pro\ 10.7
+  " set guifont=Pragmata\ Pro\ 10.7
+  set guifont=Menlo 10
+elseif has("gui_gtk3")
+  " set guifont=Menlo 10
 elseif has("gui_macvim")
   " My Mac has a fairly high DPI so the font needs to be bigger
   set guifont=Consolas\ For\ Powerline:h14
@@ -367,6 +379,12 @@ elseif has("gui_win32")
   set guifont=Consolas\ For\ Powerline:h11
 end
 
+if has("gui_running")
+  map  <silent>  <S-Insert>  "*p
+  imap <silent>  <S-Insert>  <Esc>"*pa
+  set guifont=Menlo 10
+  "set nopaste
+endif
 " Sometimes, $MYVIMRC does not get set even though the vimrc is sourced
 " properly. So far, I've only seen this on Linux machines on rare occasions.
 if has("unix") && strlen($MYVIMRC) < 1
@@ -749,7 +767,7 @@ let g:cssColorVimDoNotMessMyUpdatetime = 1
 
 let g:ale_sign_error = '>>'
 let g:ale_sign_warning = '--'
-let g:airline#extensions#ale#enabled = 1
+" let g:airline#extensions#ale#enabled = 1
 let g:ale_sign_column_always = 1
 
 " error
@@ -778,7 +796,12 @@ nnoremap <leader>pc :YcmCompleter GoToDeclaration<CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 let g:airline_powerline_fonts = 1
-let g:airline_theme = 'solarized'
+let g:airline_theme = 'papercolor'
+
+" light line
+let g:lightline = {
+      \ 'colorscheme': 'PaperColor',
+      \ }
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                            vim-indent-guides                            "
