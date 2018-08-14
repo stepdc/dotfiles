@@ -45,6 +45,8 @@ Plug 'tomtom/tlib_vim'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-git'
 Plug 'tpope/vim-repeat'
+Plug 'terryma/vim-multiple-cursors'
+
 " requires compilation
 " YCM
 Plug 'Valloric/YouCompleteMe'
@@ -233,7 +235,7 @@ set cmdheight=2
 
 " allow backspace and cursor keys to cross line boundaries
 set whichwrap+=<,>,h,l
-set nohlsearch          " do not highlight searched-for phrases
+" set nohlsearch          " do not highlight searched-for phrases
 set incsearch           " ...but do highlight-as-I-type the search string
 set gdefault            " this makes search/replace global by default
 
@@ -523,8 +525,8 @@ nnoremap j gj
 nnoremap k gk
 nnoremap J 3gj
 nnoremap K 3gk
-nnoremap H gT
-nnoremap L gt
+nnoremap <c-s-h> gT
+nnoremap <c-s-l> gt
 
 
 " Use Q for formatting the current paragraph (or visual selection)
@@ -719,9 +721,14 @@ endif
 " Use the arrows for something useful
 " :BB switches to the previous buffer shown in the current window, :BF switches
 " to the next one; it's like a buffer history for every window
-" noremap <right> :BF<cr>
-" noremap <left> :BB<cr>
+noremap <right> :BF<cr>
+noremap <left> :BB<cr>
 
+noremap <F6> :BF<cr>
+noremap <F5> :BB<cr>
+
+noremap L :BF<cr>
+noremap H :BB<cr>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                vim-git                                  "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -833,11 +840,31 @@ let g:ophigh_filetypes_to_ignore = { "spansdl": 1 }
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                              multi-select                               "
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+let g:multi_cursor_use_default_mapping=0
+
+" Default mapping
+let g:multi_cursor_start_word_key      = '<A-d>'
+let g:multi_cursor_select_all_word_key = '<A-S-d>'
+let g:multi_cursor_start_key           = 'g<A-d>'
+let g:multi_cursor_select_all_key      = 'g<A-S-d>'
+let g:multi_cursor_next_key            = '<A-d>'
+let g:multi_cursor_prev_key            = '<A-f>'
+let g:multi_cursor_skip_key            = '<A-g>'
+let g:multi_cursor_quit_key            = '<Esc>'
+
+" Default highlighting (see help :highlight and help :highlight-link)
+highlight multiple_cursors_cursor term=reverse cterm=reverse gui=reverse
+highlight link multiple_cursors_visual Visual
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                              VIMRC OVERRIDE                             "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-
-
+set hlsearch
+nnoremap <silent> <C-l> :<C-u>nohlsearch<CR><C-l>
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
