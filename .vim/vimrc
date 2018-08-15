@@ -615,6 +615,10 @@ command! -bang -nargs=* Rg
 nnoremap <leader>rr :Rg<space>
 nnoremap <leader>ra :Ag<space>
 
+" Likewise, Files command with preview window
+command! -bang -nargs=? -complete=dir Files
+  \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
+
 " Customize fzf colors to match your color scheme
 let g:fzf_colors =
 \ { 'fg':      ['fg', 'Normal'],
