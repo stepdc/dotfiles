@@ -78,6 +78,9 @@ Plug 'junegunn/fzf.vim'
 " command line more emacs like
 Plug 'houtsnip/vim-emacscommandline'
 
+" emacs smex(helm) plugin
+" Plug 'Shougo/denite.nvim'
+
 call plug#end()
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -610,6 +613,23 @@ command! -bang -nargs=* Rg
       \   <bang>0)
 
 nnoremap <leader>rr :Rg<space>
+nnoremap <leader>ra :Ag<space>
+
+" Customize fzf colors to match your color scheme
+let g:fzf_colors =
+\ { 'fg':      ['fg', 'Normal'],
+  \ 'bg':      ['bg', 'Normal'],
+  \ 'hl':      ['fg', 'Comment'],
+  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+  \ 'hl+':     ['fg', 'Statement'],
+  \ 'info':    ['fg', 'PreProc'],
+  \ 'border':  ['fg', 'Ignore'],
+  \ 'prompt':  ['fg', 'Conditional'],
+  \ 'pointer': ['fg', 'Exception'],
+  \ 'marker':  ['fg', 'Keyword'],
+  \ 'spinner': ['fg', 'Label'],
+  \ 'header':  ['fg', 'Comment'] }
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                 Gundo                                   "
@@ -726,9 +746,6 @@ endif
 " to the next one; it's like a buffer history for every window
 noremap <right> :BF<cr>
 noremap <left> :BB<cr>
-
-noremap <F6> :BF<cr>
-noremap <F5> :BB<cr>
 
 noremap L :BF<cr>
 noremap H :BB<cr>
