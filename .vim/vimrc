@@ -75,6 +75,9 @@ Plug 'NLKNguyen/papercolor-theme'
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 
+" command line more emacs like
+Plug 'houtsnip/vim-emacscommandline'
+
 call plug#end()
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
