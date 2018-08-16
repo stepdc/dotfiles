@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if xrandr --query | grep "^DisplayPort-0 connected";
+if ! xrandr --query | grep "^DisplayPort-0 connected";
 then
   sed -i '/Xft.dpi/c\Xft.dpi: 96' $HOME/.Xresources
   sed -i '/rofi.dpi/c\rofi.dpi: 96' $HOME/.Xresources
