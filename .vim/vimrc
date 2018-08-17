@@ -390,7 +390,8 @@ end
 if has("gui_running")
   map  <silent>  <S-Insert>  "*p
   imap <silent>  <S-Insert>  <Esc>"*pa
-  set guifont=Menlo 10
+  " set guifont=Menlo 10
+  set guifont=SF Mono 11
   "set nopaste
 endif
 " Sometimes, $MYVIMRC does not get set even though the vimrc is sourced
@@ -601,10 +602,14 @@ let g:fzf_buffers_jump = 1
 " [Tags] Command to generate tags file
 let g:fzf_tags_command = 'ctags -R'
 
-nnoremap <leader>t :Files<cr>
-nnoremap <leader>n :Buffers<cr>
-nnoremap <leader>bb :Windows<cr>
+" Command for git grep
+" - fzf#vim#grep(command, with_column, [options], [fullscreen])
+command! -bang -nargs=* GGrep
+  \ call fzf#vim#grep(
+  \   'git grep --line-number '.shellescape(<q-args>), 0,
+  \   { 'dir': systemlist('git rev-parse --show-toplevel')[0] }, <bang>0)
 
+" Rg
 command! -bang -nargs=* Rg
       \ call fzf#vim#grep(
       \   'rg --column --line-number --no-heading --color=always --ignore-case '.shellescape(<q-args>), 1,
@@ -612,12 +617,18 @@ command! -bang -nargs=* Rg
       \           : fzf#vim#with_preview('right:50%:hidden', '?'),
       \   <bang>0)
 
-nnoremap <leader>rr :Rg<space>
-nnoremap <leader>ra :Ag<space>
-
 " Likewise, Files command with preview window
 command! -bang -nargs=? -complete=dir Files
   \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
+
+" shortuts
+nnoremap <leader>t :Files<cr>
+nnoremap <leader>n :Buffers<cr>
+nnoremap <leader>bb :Windows<cr>
+
+nnoremap <leader>rg :GGrep<space>
+nnoremap <leader>rr :Rg<space>
+nnoremap <leader>ra :Ag<space>
 
 " Customize fzf colors to match your color scheme
 let g:fzf_colors =
@@ -914,7 +925,8 @@ inoremap <expr> <C-B> getline('.')=~'^\s*$'&&col('.')>strlen(getline('.'))?"0\<L
 inoremap <expr> <C-D> col('.')>strlen(getline('.'))?"\<Lt>C-D>":"\<Lt>Del>"
 " cnoremap <expr> <C-D> getcmdpos()>strlen(getcmdline())?"\<Lt>C-D>":"\<Lt>Del>"
 
-inoremap <expr> <C-E> col('.')>strlen(getline('.'))<bar><bar>pumvisible()?"\<Lt>C-E>":"\<Lt>End>"
+" inoremap <expr> <C-E> col('.')>strlen(getline('.'))<bar><bar>pumvisible()?"\<Lt>C-E>":"\<Lt>End>"
+inoremap <C-E> <END>
 
 inoremap <expr> <C-F> col('.')>strlen(getline('.'))?"\<Lt>C-F>":"\<Lt>Right>"
 
