@@ -71,6 +71,8 @@ Plug 'morhetz/gruvbox'
 " let ayucolor="light"
 Plug 'NLKNguyen/papercolor-theme'
 
+Plug 'junegunn/vim-slash'
+
 " fzf
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
@@ -402,29 +404,29 @@ endif
 
 
 " TODO: split this into separate plugin
-function! VisualSearch(direction) range
-    let l:saved_reg = @"
-    execute "normal! vgvy"
-
-    let l:pattern = escape(@", '\\/.*$^~[]')
-    let l:pattern = substitute(l:pattern, "\n$", "", "")
-
-    if a:direction == 'b'
-        execute "normal ?" . l:pattern . "^M"
-    elseif a:direction == 'gv'
-        execute "Ack " . l:pattern . ' %'
-    elseif a:direction == 'f'
-        execute "normal /" . l:pattern . "^M"
-    endif
-
-    let @/ = l:pattern
-    let @" = l:saved_reg
-endfunction
+" function! VisualSearch(direction) range
+"     let l:saved_reg = @"
+"     execute "normal! vgvy"
+"
+"     let l:pattern = escape(@", '\\/.*$^~[]')
+"     let l:pattern = substitute(l:pattern, "\n$", "", "")
+"
+"     if a:direction == 'b'
+"         execute "normal ?" . l:pattern . "^M"
+"     elseif a:direction == 'gv'
+"         execute "Ack " . l:pattern . ' %'
+"     elseif a:direction == 'f'
+"         execute "normal /" . l:pattern . "^M"
+"     endif
+"
+"     let @/ = l:pattern
+"     let @" = l:saved_reg
+" endfunction
 
 "Basically you press * or # to search for the current selection
-vnoremap <silent> * :call VisualSearch('f')<CR>
-vnoremap <silent> # :call VisualSearch('b')<CR>
-vnoremap <silent> gv :call VisualSearch('gv')<CR>
+" vnoremap <silent> * :call VisualSearch('f')<CR>
+" vnoremap <silent> # :call VisualSearch('b')<CR>
+" vnoremap <silent> gv :call VisualSearch('gv')<CR>
 
 " cindent is a bit too smart for its own good and triggers in text files when
 " you're typing inside parens and then hit enter; it aligns the text with the
@@ -528,8 +530,8 @@ nnoremap g, g,zz
 " This makes j and k work on "screen lines" instead of on "file lines"; now, when
 " we have a long line that wraps to multiple screen lines, j and k behave as we
 " expect them to.
-nnoremap j gj
-nnoremap k gk
+nnoremap <silent> j gj
+nnoremap <silent> k gk
 nnoremap J 3gj
 nnoremap K 3gk
 nnoremap <c-s-h> gT
@@ -621,6 +623,20 @@ command! -bang -nargs=* Rg
 command! -bang -nargs=? -complete=dir Files
   \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
 
+function! s:fzf_neighbouring_files()
+  let current_file =expand("%")
+  let cwd = fnamemodify(current_file, ':p:h')
+  let command = 'ag -g "" -f ' . cwd . ' --depth 0'
+
+  call fzf#run({
+        \ 'source': command,
+        \ 'sink':   'e',
+        \ 'options': '-m -x +s',
+        \ 'window':  'enew' })
+endfunction
+
+command! FZFNeigh call s:fzf_neighbouring_files()
+
 " shortuts
 nnoremap <leader>t :Files<cr>
 nnoremap <leader>n :Buffers<cr>
@@ -629,6 +645,8 @@ nnoremap <leader>bb :Windows<cr>
 nnoremap <leader>rg :GGrep<space>
 nnoremap <leader>rr :Rg<space>
 nnoremap <leader>ra :Ag<space>
+nnoremap <leader>rt :FZFNeigh<cr>
+nnoremap <leader>rf :History<cr>
 
 " Customize fzf colors to match your color scheme
 let g:fzf_colors =
@@ -645,6 +663,9 @@ let g:fzf_colors =
   \ 'marker':  ['fg', 'Keyword'],
   \ 'spinner': ['fg', 'Label'],
   \ 'header':  ['fg', 'Comment'] }
+
+" slash search
+noremap <plug>(slash-after) zz
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                 Gundo                                   "
@@ -826,6 +847,7 @@ nnoremap <leader>9 :ALEPrevious<CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 let g:ycm_autoclose_preview_window_after_completion = 1
+let g:ycm_auto_trigger = 1
 let g:ycm_min_num_identifier_candidate_chars = 4
 let g:ycm_extra_conf_globlist = ['~/repos/*']
 let g:ycm_filetype_specific_completion_to_disable = {'javascript': 1}
@@ -895,6 +917,25 @@ highlight multiple_cursors_cursor term=reverse cterm=reverse gui=reverse
 highlight link multiple_cursors_visual Visual
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                       deoplete                                          "
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" inoremap <silent><expr> <TAB>
+"     \ pumvisible() ? "\<C-n>" :
+"     \ <SID>check_back_space() ? "\<TAB>" :
+"     \ deoplete#mappings#manual_complete()
+"
+" inoremap <silent><expr> <S-TAB>
+"     \ pumvisible() ? "\<C-p>" :
+"     \ <SID>check_back_space() ? "\<S-TAB>" :
+"     \ deoplete#mappings#manual_complete()
+"
+" function! s:check_back_space() abort "{{{
+"     let col = col('.') - 1
+"     return !col || getline('.')[col - 1]  =~ '\s'
+" endfunction"}}}
+"
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                              VIMRC OVERRIDE                             "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -906,10 +947,17 @@ nnoremap <silent> <C-l> :<C-u>nohlsearch<CR><C-l>
 "                               vimacs                                    "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Mimic Emacs Line Editing
+" inoremap <C-P> <C-O>gk
+" inoremap <C-N> <C-O>gj
 
 inoremap <C-P> <Up>
 inoremap <C-N> <Down>
 
+" function! s:move_up()
+"         call youcompleteme#DisableCursorMovedAutocommands()
+"         insert! <Up>
+"         call youcompleteme#EnableCursorMovedAutocommands()
+" endfunction
 
 set ttimeout
 if &ttimeoutlen == -1
