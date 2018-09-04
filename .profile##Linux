@@ -2,8 +2,9 @@
 
 if ! xrandr --query | grep "^DisplayPort-0 connected";
 then
-  sed -i '/Xft.dpi/c\Xft.dpi: 96' $HOME/.Xresources
-  sed -i '/rofi.dpi/c\rofi.dpi: 96' $HOME/.Xresources
+        echo
+  # sed -i '/Xft.dpi/c\Xft.dpi: 96' $HOME/.Xresources
+  # sed -i '/rofi.dpi/c\rofi.dpi: 96' $HOME/.Xresources
 else
   sed -i '/Xft.dpi/c\Xft.dpi: 185' $HOME/.Xresources
   sed -i '/rofi.dpi/c\rofi.dpi: 185' $HOME/.Xresources
@@ -46,3 +47,12 @@ if [ "$0" = "/usr/sbin/lightdm-session" -a "$DESKTOP_SESSION" = "i3" ]; then
 fi
 
 export PATH=$PATH:$HOME/bin
+
+# add whoseport
+whoseport () {
+ lsof -i ":$1" | grep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn} LISTEN
+}
+
+export FZF_DEFAULT_COMMAND='fd --type f'
+
+export PATH="$HOME/.cargo/bin:$PATH"

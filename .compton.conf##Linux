@@ -6,7 +6,7 @@ glx-no-stencil = true;
 # copy, exchange, undefined(default slowest)
 glx-swap-methopd = "copy";
 glx-no-rebind-pixmap = true;
-# vsync = "opengl-swc";
+vsync = "opengl";
 
 # These are important. The first one enables the opengl backend. The last one
 # is the vsync method. Depending on the driver you might need to use a

@@ -31,6 +31,7 @@ Plug 'godlygeek/tabular'
 Plug 'greyblake/vim-preview'
 Plug 'groenewege/vim-less'
 Plug 'elzr/vim-json'
+Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'majutsushi/tagbar'
 " Plug 'michaeljsmith/vim-indent-object'
@@ -49,7 +50,7 @@ Plug 'terryma/vim-multiple-cursors'
 
 " requires compilation
 " YCM
-Plug 'Valloric/YouCompleteMe'
+" Plug 'Valloric/YouCompleteMe'
 
 " GO
 Plug 'fatih/vim-go'
@@ -60,7 +61,6 @@ Plug 'godoctor/godoctor.vim'
 
 " themes
 Plug 'lifepillar/vim-solarized8'
-Plug 'beigebrucewayne/subtle_solo'
 Plug 'wimstefan/vim-artesanal'
 Plug 'nightsense/simplifysimplify'
 Plug 'nightsense/seagrey'
@@ -70,6 +70,7 @@ Plug 'morhetz/gruvbox'
 " Plug 'ayu-theme/ayu-vim'
 " let ayucolor="light"
 Plug 'NLKNguyen/papercolor-theme'
+Plug 'kadekillary/subtle_solo'
 
 Plug 'junegunn/vim-slash'
 
@@ -82,6 +83,24 @@ Plug 'houtsnip/vim-emacscommandline'
 
 " emacs smex(helm) plugin
 " Plug 'Shougo/denite.nvim'
+
+
+" Plug ncm, replacement for youcompleteme
+" assuming your using vim-plug: https://github.com/junegunn/vim-plug
+Plug 'ncm2/ncm2'
+Plug 'roxma/nvim-yarp'
+Plug 'ncm2/ncm2-ultisnips'
+
+" NOTE: you need to install completion sources to get completions. Check
+" our wiki page for a list of sources: https://github.com/ncm2/ncm2/wiki
+Plug 'ncm2/ncm2-bufword'
+Plug 'ncm2/ncm2-tmux'
+Plug 'ncm2/ncm2-path'
+" Plug 'ncm2/ncm2-go'
+Plug 'autozimu/LanguageClient-neovim', {
+    \ 'branch': 'next',
+    \ 'do': 'bash install.sh',
+    \ }
 
 call plug#end()
 
@@ -126,7 +145,7 @@ set rtp+=$HOME/vim_test,$HOME/vim_test/after,$HOME/repos/YouCompleteMe
 
 " DISPLAY SETTINGS
 " colorscheme simplifysimplify-light " sets the colorscheme
-colorscheme PaperColor " sets the colorscheme
+colorscheme subtle_light" sets the colorscheme
 " set background=light  " enable for dark terminals
 set scrolloff=2         " 2 lines above/below cursor when scrolling
 set showmatch           " show matching bracket (briefly jump)
@@ -820,6 +839,7 @@ let vimpager_use_gvim = 1
 
 let g:AutoPairsFlyMode = 0
 let g:AutoPairsShortcutBackInsert = '<M-,>'
+let g:AutoPairsMapCR = 0
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                              vim-css-color                              "
@@ -846,20 +866,20 @@ nnoremap <leader>9 :ALEPrevious<CR>
 "                              YouCompleteMe                              "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-let g:ycm_autoclose_preview_window_after_completion = 1
-let g:ycm_auto_trigger = 1
-let g:ycm_min_num_identifier_candidate_chars = 4
-let g:ycm_extra_conf_globlist = ['~/repos/*']
-let g:ycm_filetype_specific_completion_to_disable = {'javascript': 1}
-let g:ycm_rust_src_path = $HOME . '/repos/rust/src'
-let g:ycm_key_list_stop_completion = ['<CR>']
-let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
-
-nnoremap <leader>y :YcmForceCompileAndDiagnostics<cr>
-nnoremap <leader>gg :YcmCompleter GoTo<CR>
-nnoremap <leader>pd :YcmCompleter GoToDefinition<CR>
-nnoremap <leader>pc :YcmCompleter GoToDeclaration<CR>
-
+" let g:ycm_autoclose_preview_window_after_completion = 1
+" let g:ycm_auto_trigger = 1
+" let g:ycm_min_num_identifier_candidate_chars = 4
+" let g:ycm_extra_conf_globlist = ['~/repos/*']
+" let g:ycm_filetype_specific_completion_to_disable = {'javascript': 1}
+" let g:ycm_rust_src_path = $HOME . '/repos/rust/src'
+" let g:ycm_key_list_stop_completion = ['<CR>']
+" let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
+"
+" nnoremap <leader>y :YcmForceCompileAndDiagnostics<cr>
+" nnoremap <leader>gg :YcmCompleter GoTo<CR>
+" nnoremap <leader>pd :YcmCompleter GoToDefinition<CR>
+" nnoremap <leader>pc :YcmCompleter GoToDeclaration<CR>
+"
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                Airline                                  "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -869,7 +889,7 @@ let g:airline_theme = 'papercolor'
 
 " light line
 let g:lightline = {
-      \ 'colorscheme': 'PaperColor',
+      \ 'colorscheme': 'solarized',
       \ }
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -1059,3 +1079,22 @@ if has('nvim')
     tnoremap <Esc> <C-\><C-n>
 endif
 
+
+" ncm2
+autocmd BufEnter * call ncm2#enable_for_buffer()
+set completeopt=noinsert,menuone,noselect
+" au User Ncm2PopupOpen set completeopt=noinsert,menuone,noselect
+" au User Ncm2PopupClose set completeopt=menuone
+" set shortmess+=c
+
+" language client
+let g:LanguageClient_serverCommands = {
+            \ 'go' : ['go-langserver', '-gocodecompletion'],
+            \ }
+
+let g:LanguageClient_loggingFile = '/tmp/lc.log'
+let g:LanguageClient_loggingLevel = 'DEBUG'
+
+inoremap <silent> <expr> <CR> ncm2_ultisnips#expand_or("\<CR>", 'n')
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"

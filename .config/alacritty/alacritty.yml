@@ -11,7 +11,7 @@ env:
   # Note that some xterm terminfo databases don't declare support for italics.
   # You can verify this by checking for the presence of `smso` and `sitm` in
   # `infocmp xterm-256color`.
-  TERM: xterm-256color
+  TERM: tmux-256color
 
 window:
   # Window dimensions in character columns and lines
@@ -31,6 +31,29 @@ window:
   # Setting this to false will result in window without borders and title bar.
   decorations: true
 
+scrolling:
+  # How many lines of scrollback to keep,
+  # '0' will disable scrolling.
+  history: 10000
+
+  # Number of lines the viewport will move for every line
+  # scrolled when scrollback is enabled (history > 0).
+  multiplier: 3
+
+  # Faux Scrolling
+  #
+  # The `faux_multiplier` setting controls the number
+  # of lines the terminal should scroll when the alternate
+  # screen buffer is active. This is used to allow mouse
+  # scrolling for applications like `man`.
+  #
+  # To disable this completely, set `faux_multiplier` to 0.
+  faux_multiplier: 3
+
+  # Automatically scroll to the bottom when new text is written
+  # to the terminal.
+  auto_scroll: false
+
 # Display tabs using this many cells (changes require restart)
 tabspaces: 8
 
@@ -41,27 +64,26 @@ draw_bold_text_with_bright_colors: true
 font:
   # The normal (roman) font face to use.
   normal:
-    family: sarasa term sc
-    # family: Menlo
+    family: SF Mono
     # Style can be specified to pick a specific face.
     # style: Regular
 
   # The bold font face
   bold:
-    family: sarasa term sc
-    # family: Menlo
+    # family: sarasa term sc
+    family: SF Mono
     # Style can be specified to pick a specific face.
     # style: Bold
 
   # The italic font face
   italic:
-    family: sarasa term sc
-    # family: Menlo
+    # family: sarasa term sc
+    family: SF Mono
     # Style can be specified to pick a specific face.
     # style: Italic
 
   # Point size of the font
-  size: 12.0
+  size: 11.0
 
   # Offset is the extra space around each character. offset.y can be thought of
   # as modifying the linespacing, and offset.x as modifying the letter spacing.
@@ -118,7 +140,35 @@ colors:
     magenta: '0x6c71c4'
     cyan:    '0x93a1a1'
     white:   '0xfdf6e3'
-
+# Colors (Seoul256)
+# colors:
+#   # Default colors
+#   primary:
+#     background: '0x3a3a3a'
+#     foreground: '0xd0d0d0'
+#
+#   # Normal colors
+#   normal:
+#     black:   '0x4e4e4e'
+#     red:     '0xd68787'
+#     green:   '0x5f865f'
+#     yellow:  '0xd8af5f'
+#     blue:    '0x85add4'
+#     magenta: '0xd7afaf'
+#     cyan:    '0x87afaf'
+#     white:   '0xd0d0d0'
+#
+#   # Bright colors
+#   bright:
+#     black:   '0x626262'
+#     red:     '0xd75f87'
+#     green:   '0x87af87'
+#     yellow:  '0xffd787'
+#     blue:    '0xadd4fb'
+#     magenta: '0xffafaf'
+#     cyan:    '0x87d7d7'
+#     white:   '0xe4e4e4'
+#
 # Visual Bell
 #
 # Any time the BEL code is received, Alacritty "rings" the visual bell. Once
@@ -263,10 +313,12 @@ key_bindings:
   - { key: Home,                    chars: "\x1b[H",   mode: ~AppCursor  }
   - { key: End,                     chars: "\x1bOF",   mode: AppCursor   }
   - { key: End,                     chars: "\x1b[F",   mode: ~AppCursor  }
-  - { key: PageUp,   mods: Shift,   chars: "\x1b[5;2~"                   }
+  # - { key: PageUp,   mods: Shift,   chars: "\x1b[5;2~"                   }
+  - { key: PageUp,   mods: Shift,   action: ScrollPageUp                 }
   - { key: PageUp,   mods: Control, chars: "\x1b[5;5~"                   }
   - { key: PageUp,                  chars: "\x1b[5~"                     }
-  - { key: PageDown, mods: Shift,   chars: "\x1b[6;2~"                   }
+  # - { key: PageDown, mods: Shift,   chars: "\x1b[6;2~"                   }
+  - { key: PageDown, mods: Shift,   action: ScrollPageDown               }
   - { key: PageDown, mods: Control, chars: "\x1b[6;5~"                   }
   - { key: PageDown,                chars: "\x1b[6~"                     }
   - { key: Tab,      mods: Shift,   chars: "\x1b[Z"                      }

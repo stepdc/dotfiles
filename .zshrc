@@ -45,6 +45,12 @@ setopt HIST_REDUCE_BLANKS        # Remove superfluous blanks before recording en
 setopt HIST_VERIFY               # Don't execute immediately upon history expansion.
 setopt HIST_BEEP                 # Beep when accessing nonexistent history.
 
+# alias & func
 whoseport () {
  lsof -i ":$1" | grep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn} LISTEN
 }
+
+alias nview='nvim -R'
+
+alias cs1='ssh -A -t zhangbo@10.0.0.1 ssh -A -t zhangbo01@10.20.34.27 -A -t qssh root@cs1'
+alias jjh='ssh -A -t zhangbo@10.0.0.1 ssh -A -t zhangbo01@10.20.34.27'
