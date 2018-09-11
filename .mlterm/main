@@ -1,0 +1,15 @@
+fontsize = 24
+use_extended_scroll_shortcut = true
+regard_uri_as_word = true
+scrollbar_mode = none
+vertical_mode = none
+only_use_unicode_font = false
+not_use_unicode_font = false
+box_drawing_font = noconv
+type_engine = cairo
+cursor_fg_color = 
+cursor_bg_color = 
+fg_color = #65657b7a8383
+use_transbg = false
+wall_picture = 
+bg_color = #fdfdf6f6e3e3
