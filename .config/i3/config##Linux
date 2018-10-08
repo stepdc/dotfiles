@@ -33,7 +33,8 @@ floating_modifier Mod4
 
 # start a terminal
 # bindsym Mod4+Return exec i3-sensible-terminal
-bindsym Mod4+Return exec gnome-terminal
+# bindsym Mod4+Return exec gnome-terminal
+bindsym Mod4+Return exec mlterm
 # bindsym Mod4+Return exec alacritty.run
 # bindsym Mod4+Return exec st.run -f "Sarasa Term SC:size=12" -t "(=ﾟωﾟ)ﾉ"
 # bindsym Mod4+Return exec gt.run
@@ -200,7 +201,7 @@ exec --no-startup-id feh --bg-scale /usr/share/wallpapers/openSUSEdefault/conten
 
 # exec --no-startup-id fcitx -r
 # exec --no-startup-id sogou-qumpanel
-exec --no-startup-id allow_rgb10_configs=false compton -b
+# exec --no-startup-id allow_rgb10_configs=false compton -b
 
 # swap lalt an lctrl
 exec --no-startup-id setxkbmap -option ctrl:swap_lalt_lctl

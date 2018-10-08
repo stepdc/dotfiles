@@ -44,7 +44,7 @@ alias e='TERM=screen-16color emacsclient -nw'
 alias em='emacs -nw'
 alias ec='emacsclient -c'
 
-alias vi='vim'
+alias vi='nvim'
 alias nvi='nvim'
 
 alias za='zathura --fork $@'
@@ -106,3 +106,10 @@ case $SHELL in
 esac
 
 [ -s $HOME/.cht.sh ] && alias c='cht.sh'
+
+
+if [ -f /usr/bin/src-hilite-lesspipe.sh ]; then
+    export LESSOPEN="| /usr/bin/src-hilite-lesspipe.sh %s"
+    export LESS=" -R "
+    export LESS_TERMCAP_so=$'\E[43;30m'
+fi
