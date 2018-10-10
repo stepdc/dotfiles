@@ -16,3 +16,4 @@ bg_color = #ffffffffe8e8
 termtype=mlterm
 word_separators = " :\x3b/@"
 blink_cursor = false
+logsize = 4096
