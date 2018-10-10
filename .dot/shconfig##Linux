@@ -113,3 +113,8 @@ if [ -f /usr/bin/src-hilite-lesspipe.sh ]; then
     export LESS=" -R "
     export LESS_TERMCAP_so=$'\E[43;30m'
 fi
+
+# plan9 dircolor
+if [ -f $HOME/.dot/PLAN9_DIR_COLOR ]; then
+     eval $( dircolors -b $HOME/.dot/PLAN9_DIR_COLOR)
+fi
