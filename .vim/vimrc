@@ -682,7 +682,7 @@ let g:gundo_width=80
 "                                yankring                                 "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-let g:yankring_history_dir = '/tmp/vim'
+let g:yankring_history_dir = '~/.vim/tmp'
 " this is so that single char deletes don't end up in the yankring
 let g:yankring_min_element_length = 2
 let g:yankring_window_height = 14
