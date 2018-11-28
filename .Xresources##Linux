@@ -1,5 +1,5 @@
 #if __has_include(".extend.Xresources")
-#include ".extend.Xresources"
+#include ".Xresources.uxterm"
 #endif
 
 ! ^ The above lines are no comments!

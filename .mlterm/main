@@ -1,4 +1,4 @@
-fontsize = 26
+fontsize = 28
 use_extended_scroll_shortcut = true
 regard_uri_as_word = true
 scrollbar_mode = none
@@ -18,3 +18,5 @@ word_separators = " :\x3b/@"
 blink_cursor = false
 logsize = 4096
 mod_meta_mode = esc
+input_method = fcitx
+static_backscroll_mode = true
