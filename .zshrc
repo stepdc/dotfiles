@@ -44,6 +44,7 @@ setopt HIST_FIND_NO_DUPS         # Do not display a line previously found.
 setopt HIST_REDUCE_BLANKS        # Remove superfluous blanks before recording entry.
 setopt HIST_VERIFY               # Don't execute immediately upon history expansion.
 setopt HIST_BEEP                 # Beep when accessing nonexistent history.
+setopt PROMPT_SUBST              # Enable function call in prompt
 
 # alias & func
 whoseport () {
@@ -55,3 +56,4 @@ alias nview='nvim -R'
 alias cs1='ssh -A -t zhangbo@10.0.0.1 ssh -A -t zhangbo01@10.20.34.27 -A -t qssh root@cs1'
 alias jjh='ssh -A -t zhangbo@10.0.0.1 ssh -A -t zhangbo01@10.20.34.27'
 alias ag="ag --color-path '1;34' --color-line-number '0;37' --color-match '0;32' --color --break --group --heading"
+
