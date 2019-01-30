@@ -120,4 +120,4 @@ if [ -f $HOME/.dot/PLAN9_DIR_COLOR ]; then
 fi
 
 # prompt
-[ -s $HOME/.dot/prompt/init.sh ] && source $HOME/.dot/prompt/init.sh
+[ -n "$ZSH_VERSION" ] && [ -s $HOME/.dot/prompt/setup.zsh ] && source $HOME/.dot/prompt/setup.zsh

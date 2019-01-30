@@ -77,5 +77,26 @@ prompt_cmd_exec_time() {
     local stop=$EPOCHSECONDS
     local start=${cmd_timestamp:-$stop}
     integer elapsed=$stop-$start
-    (($elapsed > ${PROMPT_LEAN_CMD_MAX_EXEC_TIME:=5})) && prompt_lean_human_time $elapsed
+    (($elapsed > ${PROMPT_CMD_MAX_EXEC_TIME:=1})) && prompt_human_time $elapsed
 }
+
+prompt_preexec() {
+    cmd_timestamp=$EPOCHSECONDS
+}
+
+
+
+prompt_precmd() {
+    export RPROMPT="%F{"244"}`prompt_cmd_exec_time`"
+    unset cmd_timestamp # reset value since `preexec` isn't always triggered
+}
+
+prompt_setup() {
+    zmodload zsh/datetime
+    autoload -Uz add-zsh-hook
+
+    add-zsh-hook precmd prompt_precmd
+    add-zsh-hook preexec prompt_preexec
+}
+
+prompt_setup
