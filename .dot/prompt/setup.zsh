@@ -25,19 +25,19 @@ function git-dir {
     fi
 }
 
-if [ -n "$BASH_VERSION" ]; then
-    if [ "$UID" -eq 0 ]; then
-        export PS1='\u@\h \[\e[31m\]$(_short_prompt_pwd)\[\e[0m\]# '
-    else
-        export PS1='\u@\h \[\e[32m\]$(_short_prompt_pwd)\[\e[0m\]> '
-    fi
-else
-    if [ $UID -eq 0 ]; then
-        export PROMPT='%f%n@%m %F{1}$(_short_prompt_pwd)%f# '
-    else
-        export PROMPT='%f%n@%m %F{2}$(_short_prompt_pwd)%f> '
-    fi
-fi
+# if [ -n "$BASH_VERSION" ]; then
+#     if [ "$UID" -eq 0 ]; then
+#         export PS1='\u@\h \[\e[31m\]$(_short_prompt_pwd)\[\e[0m\]# '
+#     else
+#         export PS1='\u@\h \[\e[32m\]$(_short_prompt_pwd)\[\e[0m\]> '
+#     fi
+# else
+#     if [ $UID -eq 0 ]; then
+#         export PROMPT='%f%n@%m %F{1}$(_short_prompt_pwd)%f# '
+#     else
+#         export PROMPT='%f%n@%m %F{2}$(_short_prompt_pwd)%f> '
+#     fi
+# fi
 
 _stepdc_branch_status() {
     cd -q $1
@@ -132,7 +132,6 @@ function prompt_stepdc_async_callback {
 		    _prompt_stepdc_git_branch=''
 		fi
 	    fi
-	    # _prompt_stepdc_git_branch+="`prompt_stepdc_cmd_exec_time`"
 	    zle && zle reset-prompt
 	    ;;
     esac
@@ -190,9 +189,9 @@ function prompt_stepdc_precmd {
 
     prompt_stepdc_async_tasks
 
-    RPROMPT="%F{"167"}${_prompt_stepdc_git_branch}"
+    RPROMPT="%F{"167"}`prompt_stepdc_cmd_exec_time`${_prompt_stepdc_git_branch}"
 
-    # unset cmd_timestamp # reset value since `preexec` isn't always triggered
+    unset cmd_timestamp # reset value since `preexec` isn't always triggered
 }
 
 function prompt_stepdc_preexec {
@@ -209,7 +208,7 @@ function prompt_stepdc_setup {
     autoload -Uz vcs_info
 
     add-zsh-hook precmd prompt_stepdc_precmd
-    # add-zsh-hook preexec prompt_stepdc_preexec
+    add-zsh-hook preexec prompt_stepdc_preexec
 
     # setup return value later
 
