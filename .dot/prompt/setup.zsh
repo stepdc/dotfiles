@@ -41,7 +41,7 @@ fi
 
 _stepdc_branch_status() {
     cd -q $1
-    
+
     local ref branch
     ref=$(command git symbolic-ref --quiet HEAD 2> /dev/null)
     case $? in        # See what the exit code is.
@@ -111,7 +111,7 @@ prompt_stepdc_cmd_exec_time() {
     local stop=$EPOCHSECONDS
     local start=${cmd_timestamp:-$stop}
     integer elapsed=$stop-$start
-    (($elapsed > ${PROMPT_CMD_MAX_EXEC_TIME:=1})) && prompt_human_time $elapsed
+    (($elapsed > ${PROMPT_CMD_MAX_EXEC_TIME:=1})) && prompt_stepdc_human_time $elapsed
 }
 
 if [[ ! -a ~/.zsh-async ]]; then
@@ -132,8 +132,8 @@ function prompt_stepdc_async_callback {
 		    _prompt_stepdc_git_branch=''
 		fi
 	    fi
+	    # _prompt_stepdc_git_branch+="`prompt_stepdc_cmd_exec_time`"
 	    zle && zle reset-prompt
-
 	    ;;
     esac
 }
@@ -183,14 +183,20 @@ function prompt_stepdc_precmd {
 	fi
     fi
 
-    setopt localoptions noshwordsplit
-    zstyle ':vcs_info:*' enable git
-    zstyle ':vcs_info:git*' formats ' %b'
-    zstyle ':vcs_info:git*' actionformats ' %b|%a'
+    # setopt localoptions noshwordsplit
+    # zstyle ':vcs_info:*' enable git
+    # zstyle ':vcs_info:git*' formats ' %b'
+    # zstyle ':vcs_info:git*' actionformats ' %b|%a'
 
     prompt_stepdc_async_tasks
 
     RPROMPT="%F{"167"}${_prompt_stepdc_git_branch}"
+
+    # unset cmd_timestamp # reset value since `preexec` isn't always triggered
+}
+
+function prompt_stepdc_preexec {
+    cmd_timestamp=$EPOCHSECONDS
 }
 
 function prompt_stepdc_setup {
@@ -203,12 +209,13 @@ function prompt_stepdc_setup {
     autoload -Uz vcs_info
 
     add-zsh-hook precmd prompt_stepdc_precmd
+    # add-zsh-hook preexec prompt_stepdc_preexec
 
     # setup return value later
 
     # setup async worker
     _stepdc_cur_git_root=''
-    
+
     _prompt_stepdc_pwd=''
     _prompt_stepdc_git_branch=''
 
