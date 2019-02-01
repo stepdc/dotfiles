@@ -148,7 +148,7 @@ function prompt_stepdc_preprompt_render() {
     # Initialize the preprompt array.
     local -a rprompt_parts
 
-    [[ -n $prompt_stepdc_cmd_exec_time ]] && preprompt_parts+=('%F{yellow}${prompt_stepdc_cmd_exec_time}%f')
+    [[ -n $prompt_stepdc_cmd_exec_time ]] && rprompt_parts+=('%F{yellow}${prompt_stepdc_cmd_exec_time}%f')
 
 
     # Add git branch and dirty status info.
