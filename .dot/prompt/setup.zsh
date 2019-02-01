@@ -13,105 +13,66 @@ function _short_prompt_pwd {
     print "$ret_directory"
 }
 
-function git-dir {
-    local git_dir="${$(command git rev-parse --git-dir):A}"
 
-    if [[ -n "$git_dir" ]]; then
-	print "$git_dir"
-	return 0
-    else
-	print "$0: not a repository: $PWD" >&2
-	return 1
-    fi
+prompt_stepdc_async_vcs_info() {
+	setopt localoptions noshwordsplit
+
+	# configure vcs_info inside async task, this frees up vcs_info
+	# to be used or configured as the user pleases.
+	zstyle ':vcs_info:*' enable git
+	zstyle ':vcs_info:*' use-simple true
+	# only export two msg variables from vcs_info
+	zstyle ':vcs_info:*' max-exports 2
+	# export branch (%b) and git toplevel (%R)
+	zstyle ':vcs_info:git*' formats '%b' '%R'
+	zstyle ':vcs_info:git*' actionformats '%b|%a' '%R'
+
+	vcs_info
+
+	local -A info
+	info[pwd]=$PWD
+	info[top]=$vcs_info_msg_1_
+	info[branch]=$vcs_info_msg_0_
+
+	print -r - ${(@kvq)info}
 }
 
-# if [ -n "$BASH_VERSION" ]; then
-#     if [ "$UID" -eq 0 ]; then
-#         export PS1='\u@\h \[\e[31m\]$(_short_prompt_pwd)\[\e[0m\]# '
-#     else
-#         export PS1='\u@\h \[\e[32m\]$(_short_prompt_pwd)\[\e[0m\]> '
-#     fi
-# else
-#     if [ $UID -eq 0 ]; then
-#         export PROMPT='%f%n@%m %F{1}$(_short_prompt_pwd)%f# '
-#     else
-#         export PROMPT='%f%n@%m %F{2}$(_short_prompt_pwd)%f> '
-#     fi
-# fi
+# fastest possible way to check if repo is dirty
+prompt_stepdc_async_git_dirty() {
+	setopt localoptions noshwordsplit
+	local untracked_dirty=$1
 
-_stepdc_branch_status() {
-    cd -q $1
+	if [[ $untracked_dirty = 0 ]]; then
+		command git diff --no-ext-diff --quiet --exit-code
+	else
+		test -z "$(command git status --porcelain --ignore-submodules -unormal)"
+	fi
 
-    local ref branch
-    ref=$(command git symbolic-ref --quiet HEAD 2> /dev/null)
-    case $? in        # See what the exit code is.
-	0) ;;           # $ref contains the name of a checked-out branch.
-	128) return ;;  # No Git repository here.
-	# Otherwise, see if HEAD is in detached state.
-	*) ref=$(command git rev-parse --short HEAD 2> /dev/null) || return ;;
-    esac
-    branch=${ref#refs/heads/}
-
-    if [[ -n $branch ]]; then
-	local git_status symbols k
-	git_status="$(LC_ALL=C command git status 2>&1)"
-
-	typeset -A messages
-	messages=(
-	    '&*'  'diverged'
-	    '&'   'behind'
-	    '*'   'Your branch is ahead of'
-	    '+'   'new file:'
-	    'x'   'deleted'
-	    '!'   'modified:'
-	    '>'   'renamed:'
-	    '?'   'Untracked files'
-	)
-
-	for k in '&*' '&' '*' '+' 'x' '!' '>' '?'; do
-	    case $git_status in
-		*${messages[$k]}*) symbols+="$k" ;;
-	    esac
-	done
-
-	[[ -n $symbols ]] && symbols=" ${symbols}"
-
-	printf ' (%s%s)' "$branch" "$symbols"
-    fi
+	return $?
 }
 
-prompt_stepdc_git_dirty() {
-    cd -q "$1"
+prompt_stepdc_human_time_to_var() {
+    local human total_seconds=$1 var=$2
+    local days=$(( total_seconds / 60 / 60 / 24 ))
+    local hours=$(( total_seconds / 60 / 60 % 24 ))
+    local minutes=$(( total_seconds / 60 % 60 ))
+    local seconds=$(( total_seconds % 60 ))
+    (( days > 0 )) && human+="${days}d "
+    (( hours > 0 )) && human+="${hours}h "
+    (( minutes > 0 )) && human+="${minutes}m "
+    human+="${seconds}s"
 
-    # check if we're in a git repo
-    command git rev-parse --is-inside-work-tree &>/dev/null || return
-    # check if it's dirty
-    local umode="-uno" #|| local umode="-unormal"
-    command test -n "$(git status --porcelain --ignore-submodules ${umode} 2>/dev/null | head -100)"
-
-    return $?
+    # store human readable time in variable as specified by caller
+    typeset -g "${var}"="${human}"
 }
 
-
-# turns seconds into human readable time, 165392 => 1d 21h 56m 32s
-prompt_stepdc_human_time() {
-    local tmp=$1
-    local days=$(( tmp / 60 / 60 / 24 ))
-    local hours=$(( tmp / 60 / 60 % 24 ))
-    local minutes=$(( tmp / 60 % 60 ))
-    local seconds=$(( tmp % 60 ))
-    (( $days > 0 )) && echo -n "${days}d "
-    (( $hours > 0 )) && echo -n "${hours}h "
-    (( $minutes > 0 )) && echo -n "${minutes}m "
-    echo "${seconds}s "
-}
-
-
-prompt_stepdc_cmd_exec_time() {
-    local stop=$EPOCHSECONDS
-    local start=${cmd_timestamp:-$stop}
-    integer elapsed=$stop-$start
-    (($elapsed > ${PROMPT_CMD_MAX_EXEC_TIME:=1})) && prompt_stepdc_human_time $elapsed
+prompt_stepdc_check_cmd_exec_time() {
+    integer elapsed
+    (( elapsed = EPOCHSECONDS - ${prompt_stepdc_cmd_timestamp:-$EPOCHSECONDS} ))
+    typeset -g prompt_stepdc_cmd_exec_time=
+    (( elapsed > ${STEPDC_CMD_MAX_EXEC_TIME:-2} )) && {
+            prompt_stepdc_human_time_to_var $elapsed "prompt_stepdc_cmd_exec_time"
+    }
 }
 
 if [[ ! -a ~/.zsh-async ]]; then
@@ -122,80 +83,183 @@ source ~/.zsh-async/async.zsh
 # Initialize zsh-async
 async_init
 
-function prompt_stepdc_async_callback {
-    case $1 in
-        prompt_stepdc_async_git)
-	    if (( $2 == 0 )); then
-		_prompt_stepdc_git_branch=$3
-	    else
-		if [[ -n "$_prompt_stepdc_git_branch" ]]; then
-		    _prompt_stepdc_git_branch=''
-		fi
-	    fi
-	    zle && zle reset-prompt
-	    ;;
-    esac
-}
-
-function prompt_stepdc_async_git {
-    # git_pwd="$1"
-    # cd -q "$git_pwd"
-
-    # local dirty_mark=''
-    # prompt_stepdc_git_dirty "$git_pwd"
-    # if (( $? == 0 )); then
-    # 	dirty_mark=' +'
-    # fi
-
-    # vcs_info
-    # print "$vcs_info_msg_0_$dirty_mark"
-    print "`_stepdc_branch_status $1`"
-}
-
 function prompt_stepdc_async_tasks {
+    setopt localoptions noshwordsplit
+
     if (( !${prompt_stepdc_async_init:-0} )); then
 	async_start_worker prompt_stepdc -n
 	async_register_callback prompt_stepdc prompt_stepdc_async_callback
 	typeset -g prompt_stepdc_async_init=1
     fi
 
-    # Kill the old process of slow commands if it is still running.
-    async_flush_jobs prompt_stepdc
+    # Update the current working directory of the async worker.
+    async_worker_eval "prompt_stepdc" builtin cd -q $PWD
 
-    # Compute slow commands in the background.
-    async_job prompt_stepdc prompt_stepdc_async_git "$PWD"
+    typeset -gA prompt_stepdc_vcs_info
+
+    local -H MATCH MBEGIN MEND
+    if [[ $PWD != ${prompt_stepdc_vcs_info[pwd]}* ]]; then
+            # stop any running async jobs
+            async_flush_jobs "prompt_stepdc"
+
+            # reset git preprompt variables, switching working tree
+            unset prompt_stepdc_git_dirty
+            unset prompt_stepdc_git_last_dirty_check_timestamp
+            prompt_stepdc_vcs_info[branch]=
+            prompt_stepdc_vcs_info[top]=
+    fi
+    unset MATCH MBEGIN MEND
+
+    async_job "prompt_stepdc" prompt_stepdc_async_vcs_info
+
+    # only perform tasks inside git working tree
+    [[ -n $prompt_stepdc_vcs_info[top] ]] || return
+
+    prompt_stepdc_async_refresh
 }
 
-function prompt_stepdc_precmd {
-    setopt LOCAL_OPTIONS
-    unsetopt XTRACE KSH_ARRAYS
+prompt_stepdc_async_refresh() {
+    setopt localoptions noshwordsplit
 
-    _prompt_stepdc_pwd=`_short_prompt_pwd`
-
-    # Handle updating git data. We also clear the git prompt data if we're in a
-    # different git root now.
-    if (( $+functions[git-dir] )); then
-	local new_git_root="$(git-dir 2> /dev/null)"
-	if [[ $new_git_root != $_stepdc_cur_git_root ]]; then
-	    _prompt_stepdc_git_branch=''
-	    _stepdc_cur_git_root=$new_git_root
-	fi
+    # if dirty checking is sufficiently fast, tell worker to check it again, or wait for timeout
+    integer time_since_last_dirty_check=$(( EPOCHSECONDS - ${prompt_stepdc_git_last_dirty_check_timestamp:-0} ))
+    if (( time_since_last_dirty_check > ${STEPDC_GIT_DELAY_DIRTY_CHECK:-1800} )); then
+            unset prompt_stepdc_git_last_dirty_check_timestamp
+            # check check if there is anything to pull
+            async_job "prompt_stepdc" prompt_stepdc_async_git_dirty ${STEPDC_GIT_UNTRACKED_DIRTY:-1}
     fi
-
-    # setopt localoptions noshwordsplit
-    # zstyle ':vcs_info:*' enable git
-    # zstyle ':vcs_info:git*' formats ' %b'
-    # zstyle ':vcs_info:git*' actionformats ' %b|%a'
-
-    prompt_stepdc_async_tasks
-
-    RPROMPT="%F{"167"}`prompt_stepdc_cmd_exec_time`${_prompt_stepdc_git_branch}"
-
-    unset cmd_timestamp # reset value since `preexec` isn't always triggered
 }
 
 function prompt_stepdc_preexec {
-    cmd_timestamp=$EPOCHSECONDS
+    typeset -g prompt_stepdc_cmd_timestamp=$EPOCHSECONDS
+}
+
+
+function prompt_stepdc_preprompt_render() {
+    setopt localoptions noshwordsplit
+
+    _prompt_stepdc_pwd=`_short_prompt_pwd`
+
+    # Set color for git branch/dirty status, change color if dirty checking has
+    # been delayed.
+    local git_color=242
+    [[ -n ${prompt_stepdc_git_last_dirty_check_timestamp+x} ]] && git_color=red
+
+    # Initialize the preprompt array.
+    local -a rprompt_parts
+
+    [[ -n $prompt_stepdc_cmd_exec_time ]] && preprompt_parts+=('%F{yellow}${prompt_stepdc_cmd_exec_time}%f')
+
+
+    # Add git branch and dirty status info.
+    typeset -gA prompt_stepdc_vcs_info
+    if [[ -n $prompt_stepdc_vcs_info[branch] ]]; then
+        rprompt_parts+=("%F{$git_color}"'${prompt_stepdc_vcs_info[branch]}${prompt_stepdc_git_dirty}')
+    fi
+
+    PROMPT='%F{2}${_prompt_stepdc_pwd}%f » '
+    RPROMPT="${(j. .)rprompt_parts}"
+
+    local -ah ps1
+    ps1=(
+        $PROMPT
+        $RPROMPT
+    )
+    TOTALPROMPT="${(j..)ps1}"
+
+    local expanded_prompt
+    expanded_prompt="${(S%%)TOTALPROMPT}"
+
+    if [[ $1 == precmd ]]; then
+        ;
+    elif [[ $prompt_stepdc_last_prompt != $expanded_prompt ]]; then
+        zle && zle .reset-prompt
+    fi
+
+    typeset -g prompt_stepdc_last_prompt=$expanded_prompt
+}
+
+function prompt_stepdc_precmd {
+    # check exec time and store it in a variable
+    prompt_stepdc_check_cmd_exec_time
+    unset prompt_stepdc_cmd_timestamp
+
+    prompt_stepdc_async_tasks
+
+    prompt_stepdc_preprompt_render "precmd"
+}
+
+function prompt_stepdc_async_callback {
+    setopt localoptions noshwordsplit
+    local job=$1 code=$2 output=$3 exec_time=$4 next_pending=$6
+    local do_render=0
+
+    case $job in
+            \[async])
+		# code is 1 for corrupted worker output and 2 for dead worker
+		if [[ $code -eq 2 ]]; then
+		    # our worker died unexpectedly
+		    typeset -g prompt_stepdc_async_init=0
+                fi
+                ;;
+        prompt_stepdc_async_vcs_info)
+                local -A info
+                typeset -gA prompt_stepdc_vcs_info
+
+                # parse output (z) and unquote as array (Q@)
+		info=("${(Q@)${(z)output}}")
+		local -H MATCH MBEGIN MEND
+                if [[ $info[pwd] != $PWD ]]; then
+                    # The path has changed since the check started, abort.
+                    return
+                fi
+		# check if git toplevel has changed
+                if [[ $info[top] = $prompt_stepdc_vcs_info[top] ]]; then
+                    # if stored pwd is part of $PWD, $PWD is shorter and likelier
+                    # to be toplevel, so we update pwd
+                    if [[ $prompt_stepdc_vcs_info[pwd] = ${PWD}* ]]; then
+                       prompt_stepdc_vcs_info[pwd]=$PWD
+                    fi
+                else
+		    # store $PWD to detect if we (maybe) left the git path
+                            prompt_stepdc_vcs_info[pwd]=$PWD
+                fi
+                unset MATCH MBEGIN MEND
+
+		# update has a git toplevel set which means we just entered a new
+		# git directory, run the async refresh tasks
+		[[ -n $info[top] ]] && [[ -z $prompt_stepdc_vcs_info[top] ]] && prompt_stepdc_async_refresh
+
+		# always update branch and toplevel
+		prompt_stepdc_vcs_info[branch]=$info[branch]
+		prompt_stepdc_vcs_info[top]=$info[top]
+
+		do_render=1
+                ;;
+        prompt_stepdc_async_git_dirty)
+                local prev_dirty=$prompt_stepdc_git_dirty
+                if (( code == 0 )); then
+                    unset prompt_stepdc_git_dirty
+                else
+                    typeset -g prompt_stepdc_git_dirty="+"
+                fi
+
+                [[ $prev_dirty != $prompt_stepdc_git_dirty ]] && do_render=1
+
+		# When prompt_pure_git_last_dirty_check_timestamp is set, the git info is displayed in a different color.
+		# To distinguish between a "fresh" and a "cached" result, the preprompt is rendered before setting this
+		# variable. Thus, only upon next rendering of the preprompt will the result appear in a different color.
+		(( $exec_time > 5 )) && prompt_stepdc_git_last_dirty_check_timestamp=$EPOCHSECONDS
+                ;;
+    esac
+
+    if (( next_pending )); then
+        (( do_render )) && typeset -g prompt_stepdc_async_render_requested=1
+        return
+    fi
+
+    [[ ${prompt_stepdc_async_render_requested:-$do_render} = 1 ]] && prompt_stepdc_preprompt_render
+    unset prompt_stepdc_async_render_requested
 }
 
 function prompt_stepdc_setup {
@@ -203,12 +267,27 @@ function prompt_stepdc_setup {
     unsetopt XTRACE KSH_ARRAYS
     prompt_opts=(cr percent sp subst)
 
+    # borrowed from promptinit, sets the prompt options in case pure was no
+    # initialized via promptinit.
+    setopt noprompt{bang,cr,percent,subst} "prompt${^prompt_opts[@]}"
+
+    if [[ -z $prompt_newline ]]; then
+	# This variable needs to be set, usually set by promptinit.
+	typeset -g prompt_newline=$'\n%{\r%}'
+    fi
+
+    zmodload zsh/datetime
+    zmodload zsh/zle
+    zmodload zsh/parameter
+
     autoload -Uz add-zsh-hook
     autoload -Uz async && async
     autoload -Uz vcs_info
 
     add-zsh-hook precmd prompt_stepdc_precmd
     add-zsh-hook preexec prompt_stepdc_preexec
+
+    # prompt_stepdc_state_setup, ssh related, do it later...
 
     # setup return value later
 
@@ -218,7 +297,9 @@ function prompt_stepdc_setup {
     _prompt_stepdc_pwd=''
     _prompt_stepdc_git_branch=''
 
-    PROMPT='%f%n@%m %F{2}${_prompt_stepdc_pwd}%f> '
+    # PROMPT='%f%n@%m %F{2}${_prompt_stepdc_pwd}%f> '
+    PROMPT='%F{2}${_prompt_stepdc_pwd}%f » '
+    # RPROMPT="%F{"167"}`prompt_stepdc_cmd_exec_time`${_prompt_stepdc_git_branch}"
 }
 
 prompt_stepdc_setup
