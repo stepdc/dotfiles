@@ -171,7 +171,7 @@ function prompt_stepdc_preprompt_render() {
     expanded_prompt="${(S%%)TOTALPROMPT}"
 
     if [[ $1 == precmd ]]; then
-        ;
+            ;
     elif [[ $prompt_stepdc_last_prompt != $expanded_prompt ]]; then
         zle && zle .reset-prompt
     fi
@@ -241,7 +241,7 @@ function prompt_stepdc_async_callback {
                 if (( code == 0 )); then
                     unset prompt_stepdc_git_dirty
                 else
-                    typeset -g prompt_stepdc_git_dirty="+"
+                    typeset -g prompt_stepdc_git_dirty="*"
                 fi
 
                 [[ $prev_dirty != $prompt_stepdc_git_dirty ]] && do_render=1
