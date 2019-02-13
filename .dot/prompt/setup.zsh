@@ -1,3 +1,5 @@
+# see https://github.com/sindresorhus/pure/blob/master/pure.zsh
+
 function _short_prompt_pwd {
     setopt localoptions extendedglob
     local current_pwd="${PWD/#$HOME/~}"
