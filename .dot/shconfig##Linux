@@ -12,18 +12,18 @@ fi
 
 
 # fasd
-eval "$(fasd --init auto)"
+# eval "$(fasd --init auto)"
 
 # alias
-alias a='fasd -a'        # any
-alias s='fasd -si'       # show / search / select
-alias d='fasd -d'        # directory
-alias f='fasd -f'        # file
-alias sd='fasd -sid'     # interactive directory selection
-alias sf='fasd -sif'     # interactive file selection
-alias z='fasd_cd -d'     # cd, same functionality as j in autojump
+# alias a='fasd -a'        # any
+# alias s='fasd -si'       # show / search / select
+# alias d='fasd -d'        # directory
+# alias f='fasd -f'        # file
+# alias sd='fasd -sid'     # interactive directory selection
+# alias sf='fasd -sif'     # interactive file selection
+# alias z='fasd_cd -d'     # cd, same functionality as j in autojump
 # alias zz='fasd_cd -d -i' # cd with interactive selection
-alias zz='zz'
+# alias zz='zz'
 
 # TODO: opensuse only
 alias zup='sudo zypper update'
@@ -111,7 +111,6 @@ esac
 
 [ -s $HOME/.cht.sh ] && alias c='cht.sh'
 
-
 if [ -f /usr/bin/src-hilite-lesspipe.sh ]; then
     export LESSOPEN="| /usr/bin/src-hilite-lesspipe.sh %s"
     export LESS=" -R "
@@ -123,5 +122,19 @@ if [ -f $HOME/.dot/PLAN9_DIR_COLOR ]; then
      eval $( dircolors -b $HOME/.dot/PLAN9_DIR_COLOR)
 fi
 
-# prompt
+# repos
+
+# z.lua
+if [[ ! -a $HOME/.dot/repos/z.lua ]]; then
+  git clone -b 'v1.5.8' git@github.com:skywind3000/z.lua.git $HOME/.dot/repos/z.lua
+fi
+[[ -s $HOME/.dot/repos/z.lua/z.lua.plugin.zsh ]] && source $HOME/.dot/repos/z.lua/z.lua.plugin.zsh
+
+# zsh-async
+if [[ ! -a $HOME/.dot/repos/zsh-async ]]; then
+  git clone -b 'v1.7.1' git@github.com:mafredri/zsh-async $HOME/.dot/repos/zsh-async
+fi
+[ -n "$ZSH_VERSION" ] && source $HOME/.dot/repos/zsh-async/async.zsh && async_init
+
+# async prompt
 [ -n "$ZSH_VERSION" ] && [ -s $HOME/.dot/prompt/setup.zsh ] && source $HOME/.dot/prompt/setup.zsh

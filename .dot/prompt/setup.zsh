@@ -77,13 +77,8 @@ prompt_stepdc_check_cmd_exec_time() {
     }
 }
 
-if [[ ! -a ~/.zsh-async ]]; then
-  git clone -b 'v1.7.1' git@github.com:mafredri/zsh-async ~/.zsh-async
-fi
-source ~/.zsh-async/async.zsh
-
 # Initialize zsh-async
-async_init
+# async_init
 
 function prompt_stepdc_async_tasks {
     setopt localoptions noshwordsplit
