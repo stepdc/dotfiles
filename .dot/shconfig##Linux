@@ -31,6 +31,8 @@ alias zref='sudo zypper refresh'
 alias zse='sudo zypper search'
 alias zin='sudo zypper install'
 alias zinfo='sudo zypper info'
+alias zsi='sudo zypper source-install'
+alias zrm='sudo zypper remove'
 
 # apt alis
 alias aup='sudo apt update'
@@ -38,6 +40,7 @@ alias aupg='sudo apt upgrade'
 alias ase='sudo apt search'
 alias ain='sudo apt install'
 alias ainfo='sudo apt show'
+alias asi='sudo apt build-dep'
 
 alias e='TERM=screen-16color emacsclient -nw'
 # alias em='TERM=screen-16color emacs -nw'
@@ -138,3 +141,18 @@ fi
 
 # async prompt
 [ -n "$ZSH_VERSION" ] && [ -s $HOME/.dot/prompt/setup.zsh ] && source $HOME/.dot/prompt/setup.zsh
+
+# LESS
+export LESS_TERMCAP_mb=$'\E[1m\E[32m'
+export LESS_TERMCAP_mh=$'\E[2m'
+export LESS_TERMCAP_mr=$'\E[7m'
+export LESS_TERMCAP_md=$'\E[1m\E[36m'
+export LESS_TERMCAP_ZW=""
+export LESS_TERMCAP_us=$'\E[4m\E[1m\E[37m'
+export LESS_TERMCAP_me=$'\E(B\E[m'
+export LESS_TERMCAP_ue=$'\E[24m\E(B\E[m'
+export LESS_TERMCAP_ZO=""
+export LESS_TERMCAP_ZN=""
+export LESS_TERMCAP_se=$'\E[27m\E(B\E[m'
+export LESS_TERMCAP_ZV=""
+export LESS_TERMCAP_so=$'\E[1m\E[33m\E[44m'

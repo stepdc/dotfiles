@@ -17,9 +17,8 @@ index=$(($RANDOM % $size))
 
 fonts[0]="Essential Pragmata Pro 28"
 fonts[1]="Sarasa Mono SC 28"
+fonts[2]="Inconsolata-g 26"
 fsize=${#fonts[@]}
 fidx=$(($RANDOM % $fsize))
-
-echo $fidx
 
 mlterm "$@" -T="${array[$index]}" --deffont="${fonts[$fidx]}"

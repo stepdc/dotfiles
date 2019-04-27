@@ -19,4 +19,4 @@ Xft.lcdfilter: lcddefault
 rofi.dpi: 185
 
 ! Cursor theme
-Xcursor.theme: DMZ-White
+Xcursor.theme: Adwaita
