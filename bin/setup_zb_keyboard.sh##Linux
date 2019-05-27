@@ -1,0 +1,3 @@
+#! /bin/bash
+setxkbmap -option ctrl:swap_lalt_lctl
+xset r rate 256 40
