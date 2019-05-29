@@ -1,5 +1,6 @@
 # GO
 export GOROOT=$HOME/dev/lang/go
+export GOPROXY=http://45.62.116.145:3000
 export PATH=$GOROOT/bin:$PATH
 export PATH=$HOME/go/bin:$PATH:/opt/vagrant/bin
 
