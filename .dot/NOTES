@@ -14,3 +14,6 @@ user ALL=(ALL) NOPASSWD: ALL
 
 group permmision
 chmod -R g+ws
+
+# swap ctrl & alt, setup key repeat rate
+setxkbmap -option ctrl:swap_lalt_lctl && xset r rate 256 40
