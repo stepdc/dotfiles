@@ -7,6 +7,8 @@
 ! config can be added there or also here below.
 ! For comments use "!"
 
+! 13.3 165
+! 24   184
 Xft.dpi: 165
 Xft.antialias: true
 Xft.hinting: true
@@ -19,4 +21,4 @@ Xft.lcdfilter: lcddefault
 rofi.dpi: 165
 
 ! Cursor theme
-Xcursor.theme: Adwaita
+! Xcursor.theme: Adwaita

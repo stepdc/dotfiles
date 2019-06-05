@@ -40,7 +40,7 @@ function proxy_zb_on(){
 }
 
 # Enable proxy settings immediately
-proxy_on
+# proxy_zb_on
 
 # Disable proxy settings
 function proxy_zb_off(){

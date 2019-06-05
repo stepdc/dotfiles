@@ -5,6 +5,8 @@ if [ -f $HOME/.dot/proxy.default ]; then
     . $HOME/.dot/proxy.default
 fi
 
+[[ -s "$HOME/.dot/proxy" ]] && source $HOME/.dot/proxy
+
 [[ -s "$HOME/.dot/os.spec" ]] && source $HOME/.dot/os.spec
 
 # dev env

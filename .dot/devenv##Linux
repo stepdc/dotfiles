@@ -1,11 +1,16 @@
 # GO
 export GOROOT=$HOME/dev/lang/go
-export GOPROXY=http://45.62.116.145:3000
+export GOPROXY=http://168.63.134.191:43579
 export PATH=$GOROOT/bin:$PATH
 export PATH=$HOME/go/bin:$PATH:/opt/vagrant/bin
 
 # GOPATH, project dir
 export GOPATH="$HOME/go"
 
-#cargo
+# Rust
 [[ -f $HOME/.cargo/env  ]] && source $HOME/.cargo/env
+
+# Java
+export JAVA_HOME=$HOME/dev/lang/jdk1.8.0_212
+export PATH=$JAVA_HOME/bin:$PATH
+export CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar
