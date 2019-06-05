@@ -15,9 +15,9 @@ array[11]="( /。 ) "
 size=${#array[@]}
 index=$(($RANDOM % $size))
 
-fonts[0]="Essential Pragmata Pro 28"
-fonts[1]="Sarasa Mono SC 28"
-fonts[2]="Inconsolata-g 26"
+fonts[0]="Essential Pragmata Pro 30"
+fonts[1]="Sarasa Mono SC 30"
+fonts[2]="Inconsolata-g 28"
 fsize=${#fonts[@]}
 fidx=$(($RANDOM % $fsize))
 
