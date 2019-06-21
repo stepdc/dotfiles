@@ -35,7 +35,9 @@ zstyle ':prezto:load' pmodule \
   'spectrum' \
   'utility' \
   'completion' \
-  'git'
+  'syntax-highlighting'\
+  'autosuggestions'
+#  'git'
 #  'prompt'
 #  'contrib-prompt' \
 
@@ -208,7 +210,7 @@ zstyle ':prezto:module:terminal:multiplexer-title' format '%s'
 # zstyle ':prezto:module:tmux:auto-start' local 'yes'
 
 # Auto start a session when Zsh is launched in a SSH connection.
-# zstyle ':prezto:module:tmux:auto-start' remote 'yes'
+zstyle ':prezto:module:tmux:auto-start' remote 'yes'
 
 # Integrate with iTerm2.
 # zstyle ':prezto:module:tmux:iterm' integrate 'yes'

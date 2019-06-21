@@ -20,4 +20,6 @@ rofi.dpi: 185
 
 ! Cursor theme
 ! Xcursor.theme: Adwaita
-Xcursor.theme: moblin
+! Xcursor.theme: DMZ-White
+Xcursor.theme: Hackneyed-Dark-48px
+
