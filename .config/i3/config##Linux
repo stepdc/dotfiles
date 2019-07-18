@@ -34,7 +34,8 @@ floating_modifier Mod4
 # start a terminal
 # bindsym Mod4+Return exec i3-sensible-terminal
 # bindsym Mod4+Return exec gnome-terminal
-bindsym Mod4+Return exec mlterm
+bindsym Mod4+Return exec mlterm.run
+# bindsym Mod4+Return exec uxterm.run
 # bindsym Mod4+Return exec alacritty.run
 # bindsym Mod4+Return exec st.run -f "Sarasa Term SC:size=12" -t "(=ﾟωﾟ)ﾉ"
 # bindsym Mod4+Return exec gt.run
@@ -195,7 +196,8 @@ mode "$mode_system" {
 bindsym Shift+End mode "$mode_system"
 
 # After i3 wm init
-exec --no-startup-id feh --bg-fill /usr/share/wallpapers/openSUSEdefault/contents/images/3840x2400.jpg
+# exec --no-startup-id feh --bg-fill /usr/share/wallpapers/openSUSEdefault/contents/images/3840x2400.jpg
+exec --no-startup-id feh --bg-fill /usr/share/backgrounds/f29/default/standard/f29.png
 # exec --no-startup-id feh --bg-fill ~/Pictures/leap15-4k.png
 # exec --no-startup-id xrdb -load ~/.Xdefaults
 
@@ -212,6 +214,9 @@ exec --no-startup-id xset r rate 256 40
 # global paste manage
 exec --no-startup-id greenclip daemon
 
+# simple notify
+exec --no-startup-id dunst
+
 # class                 border  backgr. text    indicator child_border
 client.focused          #2B83A6 #2B83A6 #FFFFFF #DDDDDD   #2B83A6
 client.focused_inactive #212121 #212121 #86888C #292D2E   #5A5A5A
@@ -223,6 +228,7 @@ client.background       #212121
 bar {
     ## remember to add your favourite status bar, i.e.,
     status_command i3status
+    # status_command i3status-rs ~/Downloads/example_config.toml.txt
     position                bottom
     tray_output             DP-0
     separator_symbol        "·"

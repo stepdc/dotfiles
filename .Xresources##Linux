@@ -1,6 +1,10 @@
 #if __has_include(".extend.Xresources")
-#include ".Xresources.uxterm"
+#include ".extend.Xresources"
 #endif
+
+!#if __has_include(".Xresources.d/uxterm")
+#include ".Xresources.d/uxterm"
+!#endif
 
 ! ^ The above lines are no comments!
 ! Leave them as they are if a file ~/.extend.Xresources is being used on your system.
@@ -22,4 +26,5 @@ rofi.dpi: 185
 ! Xcursor.theme: Adwaita
 ! Xcursor.theme: DMZ-White
 Xcursor.theme: Hackneyed-Dark-48px
+! Xcursor.theme: Hackneyed
 

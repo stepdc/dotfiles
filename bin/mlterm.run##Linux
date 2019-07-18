@@ -18,7 +18,8 @@ index=$(($RANDOM % $size))
 fonts[0]="Essential Pragmata Pro 30"
 fonts[1]="Sarasa Mono SC 30"
 fonts[2]="Inconsolata-g 28"
+fonts[3]="IBM Plex Mono 28"
 fsize=${#fonts[@]}
 fidx=$(($RANDOM % $fsize))
 
-mlterm "$@" -T="${array[$index]}" --deffont="${fonts[$fidx]}"
+XCURSOR_THEME=Hackneyed-Dark-48px mlterm "$@" -T="${array[$index]}" --deffont="${fonts[$fidx]}"

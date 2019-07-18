@@ -48,13 +48,14 @@ alias e='TERM=screen-16color emacsclient -nw'
 # alias em='TERM=screen-16color emacs -nw'
 alias em='emacs -nw'
 alias ec='emacsclient -c'
+alias eb='emacs &'
 
 alias vi='nvim'
+# alias vi='vim'
 alias nvi='nvim'
-
 alias za='zathura --fork $@'
-
 alias lg='lazygit'
+alias pg='ps aux | grep'
 
 # fzf
 _gen_fzf_default_opts() {

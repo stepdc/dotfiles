@@ -1,0 +1,41 @@
+XTerm.vt100.scrollBar: false
+UXTerm*renderFont: true
+UXTerm.vt100.scrollBar: false
+UXTerm*cursorBlink: false
+
+! special
+*.foreground:   #424242
+*.background:   #ffffe8
+*.cursorColor:  #424242
+
+! black
+*.color0:       #424242
+*.color8:       #ccccb7
+
+! red
+*.color1:       #b85c57
+*.color9:       #f2acaa
+
+! green
+*.color2:       #40883f
+*.color10:      #e8fce8
+
+! yellow
+*.color3:       #989848
+*.color11:      #f8fce8
+
+! blue
+*.color4:       #0287c8
+*.color12:      #c1e7f8
+
+! magenta
+*.color5:       #8888c8
+*.color13:      #e7fcf7
+
+! cyan
+*.color6:       #4fa8a8
+*.color14:      #98ece8
+
+! white
+*.color7:       #ffffe8
+*.color15:      #e5e5d0

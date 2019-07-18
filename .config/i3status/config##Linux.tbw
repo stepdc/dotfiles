@@ -15,8 +15,8 @@ order += "cpu_temperature 0"
 # order += "cpu_temperature 3"
 order += "disk /"
 order += "disk /home"
-order += "ethernet enp3s0"
-# order += "wireless wlp2s0"
+order += "ethernet eno1"
+order += "wireless wlp3s0"
 order += "tztime local"
 #order += "ipv6"
 #order += "run_watch DHCP"
@@ -73,12 +73,12 @@ disk "/home" {
 	format = " ¨ %avail:h "
 }
 
-wireless wlp2s0 {
+wireless wlp3s0 {
 	format_up = " W: (%quality at %essid) %ip "
 	format_down = " ☡ WiFi "
 }
 
-ethernet enp3s0 {
+ethernet eno1 {
 	# if you use %speed, i3status requires root privileges
 #	format_up =  " Ω: %ip  "
 #	format_down = " ∅ eth0  "
