@@ -3,9 +3,9 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 if has("termguicolors")     " set true colors
-    set termguicolors
-    let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-    let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+        let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+        let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+        set termguicolors
 endif
 
 set nocompatible
@@ -47,6 +47,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-git'
 Plug 'tpope/vim-repeat'
 Plug 'terryma/vim-multiple-cursors'
+Plug 'olivertaylor/vacme'
 
 " requires compilation
 " YCM
@@ -128,9 +129,9 @@ set rtp+=$HOME/vim_test,$HOME/vim_test/after,$HOME/repos/YouCompleteMe
 " TODO: transfer all our custom mapping to our vim_shortcuts file
 
 " DISPLAY SETTINGS
-" colorscheme simplifysimplify-light " sets the colorscheme
-colorscheme solarized8" sets the colorscheme
-" set background=light  " enable for dark terminals
+" colorscheme default " sets the colorscheme
+colorscheme solarized8  " sets the colorscheme
+set background=light    " enable for dark terminals
 set scrolloff=2         " 2 lines above/below cursor when scrolling
 set showmatch           " show matching bracket (briefly jump)
 set matchtime=2         " reduces matching paren blink time from the 5[00]ms def

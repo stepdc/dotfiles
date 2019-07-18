@@ -46,17 +46,4 @@ if [ "$0" = "/usr/sbin/lightdm-session" -a "$DESKTOP_SESSION" = "i3" ]; then
     export $(gnome-keyring-daemon --start --components=ssh)
 fi
 
-# set PATH so it includes user's private bin if it exists
-# set PATH so it includes user's private bin if it exists
-if [ -d "$HOME/bin" ] ; then
-    PATH="$HOME/bin:$PATH"
-fi
-
-# add whoseport
-whoseport () {
- lsof -i ":$1" | grep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn} LISTEN
-}
-
 export FZF_DEFAULT_COMMAND='fd --type f'
-
-# export PATH="$HOME/.cargo/bin:$PATH"

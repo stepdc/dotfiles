@@ -34,8 +34,8 @@ floating_modifier Mod4
 # start a terminal
 # bindsym Mod4+Return exec i3-sensible-terminal
 # bindsym Mod4+Return exec gnome-terminal
-bindsym Mod4+Return exec mlterm.run
-# bindsym Mod4+Return exec uxterm.run
+# bindsym Mod4+Return exec mlterm.run
+bindsym Mod4+Return exec uxterm.run
 # bindsym Mod4+Return exec alacritty.run
 # bindsym Mod4+Return exec st.run -f "Sarasa Term SC:size=12" -t "(=ﾟωﾟ)ﾉ"
 # bindsym Mod4+Return exec gt.run
