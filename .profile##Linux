@@ -47,3 +47,4 @@ if [ "$0" = "/usr/sbin/lightdm-session" -a "$DESKTOP_SESSION" = "i3" ]; then
 fi
 
 export FZF_DEFAULT_COMMAND='fd --type f'
+export QT_QPA_PLATFORMTHEME="qt5ct"

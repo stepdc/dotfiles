@@ -1,7 +1,7 @@
 XTerm.vt100.scrollBar: false
 UXTerm*renderFont: true
 UXTerm.vt100.scrollBar: false
-UXTerm*cursorBlink: false
+UXTerm*cursorBlink:false
 
 ! special
 *.foreground:   #424242
@@ -13,12 +13,12 @@ UXTerm*cursorBlink: false
 *.color8:       #ccccb7
 
 ! red
-*.color1:       #b85c57
-*.color9:       #f2acaa
+*.color1:       #cd4c4e
+*.color9:       #b94342
 
 ! green
 *.color2:       #40883f
-*.color10:      #e8fce8
+*.color10:      #7ecc6e
 
 ! yellow
 *.color3:       #989848
@@ -26,15 +26,15 @@ UXTerm*cursorBlink: false
 
 ! blue
 *.color4:       #0287c8
-*.color12:      #c1e7f8
+*.color12:      #0082c3
 
 ! magenta
 *.color5:       #8888c8
-*.color13:      #e7fcf7
+*.color13:      #7a7ac5
 
 ! cyan
 *.color6:       #4fa8a8
-*.color14:      #98ece8
+*.color14:      #7ed2d2
 
 ! white
 *.color7:       #ffffe8
