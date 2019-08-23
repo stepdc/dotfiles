@@ -104,6 +104,7 @@ case $(ps -p $$) in
   ;;
 *bash)
    # assume Bash
+  [ -f $HOME/.dot/tools.bash ] && source $HOME/.dot/tools.bash
    ;;
 *)
    # assume something else
