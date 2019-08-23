@@ -10,3 +10,5 @@ export XMODIFIERS=@im=fcitx
 export QT_IM_MODULE=fcitx
 export QT4_IM_MODULE=fcitx
 
+[[ -s "$HOME/.terminfo/x" ]] && export TERM=xterm-24bit
+

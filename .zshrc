@@ -25,8 +25,6 @@ fi
 
 # autoload -U compinit && compinit -u
 
-export TERM=xterm-256color
-
 # history
 # HISTFILE="$HOME/.zsh_history"
 HISTSIZE=10000000
