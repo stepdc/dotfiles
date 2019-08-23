@@ -1,3 +1,28 @@
+# repos
+# z.lua
+if [[ ! -a $HOME/.dot/repos/z.lua ]]; then
+  git clone -b 'v1.5.8' git@github.com:skywind3000/z.lua.git $HOME/.dot/repos/z.lua
+fi
+[[ -s $HOME/.dot/repos/z.lua/z.lua.plugin.zsh ]] && source $HOME/.dot/repos/z.lua/z.lua.plugin.zsh
+
+# zsh-async
+if [[ ! -a $HOME/.dot/repos/zsh-async ]]; then
+  git clone -b 'v1.7.1' git@github.com:mafredri/zsh-async $HOME/.dot/repos/zsh-async
+fi
+[ -n "$ZSH_VERSION" ] && source $HOME/.dot/repos/zsh-async/async.zsh && async_init
+
+# async prompt
+[ -n "$ZSH_VERSION" ] && [ -s $HOME/.dot/prompt/setup.zsh ] && source $HOME/.dot/prompt/setup.zsh
+
+# fzf
+[ -f $HOME/.fzf.zsh ] && source $HOME/.fzf.zsh
+function zz() {
+        local dir
+        dir="$(fasd -Rdl "$1" | fzf -1 -0 --no-sort +m)" && cd "$dir" || return 1
+}
+
+
+
 # alias
 alias k=kubectl
 alias ks='kubectl -n kube-system'
