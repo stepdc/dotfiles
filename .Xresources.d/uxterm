@@ -18,7 +18,7 @@ UXTerm*cursorBlink:false
 
 ! green
 *.color2:       #40883f
-*.color10:      #e8fce8
+*.color10:      #7ecc6e
 
 ! yellow
 *.color3:       #989848
@@ -26,16 +26,16 @@ UXTerm*cursorBlink:false
 
 ! blue
 *.color4:       #0287c8
-*.color12:      #c1c7f8
+*.color12:      #0082c3
 
 ! magenta
 *.color5:       #8888c8
-*.color13:      #e7fcf7
+*.color13:      #7a7ac5
 
 ! cyan
 *.color6:       #4fa8a8
-*.color14:      #98ece8
+*.color14:      #7ed2d2
 
 ! white
 *.color7:       #ffffe8
-*.color15:      #e5e5d0
+*.color15:      #a4a45b
