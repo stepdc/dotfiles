@@ -28,3 +28,11 @@ rofi.dpi: 185
 Xcursor.theme: Hackneyed-Dark-48px
 ! Xcursor.theme: Hackneyed
 
+UXTerm*metaSendsEscape: true
+UXTerm*ttyModes: erase ^?
+UXTerm*backarrowKeyIsErase: true
+UXTerm*VT100.Translations: \
+        #override <Key>BackSpace: string(0x7f) \n\
+    <Key>Delete:    string(0x1b) string("[3~") \n\
+    <Key>Home:      string("\033[1~") \n\
+    <Key>End:       string("\033[4~")
