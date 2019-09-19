@@ -155,6 +155,9 @@ function prompt_stepdc_preprompt_render() {
     fi
 
     PROMPT='${SSH_TTY:+"%F{9}%n%f%F{7}@%f%F{3}%m%f "}%F{2}${_prompt_stepdc_pwd}%f » '
+    if [ ! -z "$STEPDC_PLAIN_PROMPT" ]; then
+        PROMPT='${SSH_TTY:+"%F{9}%n%f%F{7}@%f%F{3}%m%f "}%F{2}${_prompt_stepdc_pwd}%f $ '
+    fi
     RPROMPT="${(j. .)rprompt_parts}"
 
     local -ah ps1
@@ -296,6 +299,9 @@ function prompt_stepdc_setup {
 
     # PROMPT='%f%n@%m %F{2}${_prompt_stepdc_pwd}%f> '
     PROMPT='${SSH_TTY:+"%F{9}%n%f%F{7}@%f%F{3}%m%f "}%F{2}${_prompt_stepdc_pwd}%f » '
+    if [ ! -z "$STEPDC_PLAIN_PROMPT" ]; then
+        PROMPT='${SSH_TTY:+"%F{9}%n%f%F{7}@%f%F{3}%m%f "}%F{2}${_prompt_stepdc_pwd}%f $ '
+    fi
     # RPROMPT="%F{"167"}`prompt_stepdc_cmd_exec_time`${_prompt_stepdc_git_branch}"
 }
 
