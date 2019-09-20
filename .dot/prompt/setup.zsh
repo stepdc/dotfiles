@@ -1,5 +1,18 @@
 # see https://github.com/sindresorhus/pure/blob/master/pure.zsh
 
+function _stepdc_random_smiley {
+        _stepdc_ascii_smiley=("^^" "•ᴗ•)" "•_•)" "( •_•)" "(='_' )" "(=^x^=)" "ヾ(-_- )ゞ")
+        local size=${#_stepdc_ascii_smiley[@]}
+        local index=$(($RANDOM%$size))
+        print ${_stepdc_ascii_smiley[$index+1]}
+}
+
+function _update_stepdc_smiley {
+        if [ $(($RANDOM%1000)) -lt 88 ]; then
+                STEPDC_PLAIN_PROMPT=`_stepdc_random_smiley`
+        fi
+}
+
 function _short_prompt_pwd {
     setopt localoptions extendedglob
     local current_pwd="${PWD/#$HOME/~}"
@@ -156,7 +169,8 @@ function prompt_stepdc_preprompt_render() {
 
     PROMPT='${SSH_TTY:+"%F{9}%n%f%F{7}@%f%F{3}%m%f "}%F{2}${_prompt_stepdc_pwd}%f » '
     if [ ! -z "$STEPDC_PLAIN_PROMPT" ]; then
-        PROMPT='${SSH_TTY:+"%F{9}%n%f%F{7}@%f%F{3}%m%f "}%F{2}${_prompt_stepdc_pwd}%f $ '
+            _update_stepdc_smiley
+            PROMPT='${SSH_TTY:+"%F{9}%n%f%F{7}@%f%F{3}%m%f "}%F{2}${_prompt_stepdc_pwd}%f ${STEPDC_PLAIN_PROMPT} '
     fi
     RPROMPT="${(j. .)rprompt_parts}"
 
@@ -295,12 +309,13 @@ function prompt_stepdc_setup {
     _stepdc_cur_git_root=''
 
     _prompt_stepdc_pwd=''
+    _prompt_stepdc_smiley=''
     _prompt_stepdc_git_branch=''
 
     # PROMPT='%f%n@%m %F{2}${_prompt_stepdc_pwd}%f> '
     PROMPT='${SSH_TTY:+"%F{9}%n%f%F{7}@%f%F{3}%m%f "}%F{2}${_prompt_stepdc_pwd}%f » '
     if [ ! -z "$STEPDC_PLAIN_PROMPT" ]; then
-        PROMPT='${SSH_TTY:+"%F{9}%n%f%F{7}@%f%F{3}%m%f "}%F{2}${_prompt_stepdc_pwd}%f $ '
+            PROMPT='${SSH_TTY:+"%F{9}%n%f%F{7}@%f%F{3}%m%f "}%F{2}${_prompt_stepdc_pwd}%f $ '
     fi
     # RPROMPT="%F{"167"}`prompt_stepdc_cmd_exec_time`${_prompt_stepdc_git_branch}"
 }
