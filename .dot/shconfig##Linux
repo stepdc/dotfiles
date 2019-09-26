@@ -55,7 +55,7 @@ alias vi='vim'
 alias nvi='nvim'
 alias za='zathura --fork $@'
 alias lg='lazygit'
-alias pg='ps aux | grep'
+alias pg='ps aux | grep -i'
 
 # fzf
 _gen_fzf_default_opts() {

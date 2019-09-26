@@ -62,7 +62,22 @@ if (( $#commands[(i)lesspipe(|.sh)] )); then
   export LESSOPEN="| /usr/bin/env $commands[(i)lesspipe(|.sh)] %s 2>&-"
 fi
 
-# $HOME/bin
-if [[ ! "$PATH" == *$HOME/bin ]]; then
-    export PATH="$PATH:$HOME/bin"
+if [ -d "$HOME/bin"  ]; then
+            export PATH="$HOME/bin:$PATH"
 fi
+# clean duplicate path
+if [ -n "$PATH" ]; then
+    old_PATH=$PATH:; PATH=
+    while [ -n "$old_PATH" ]; do
+        x=${old_PATH%%:*}
+        case $PATH: in
+           *:"$x":*) ;;
+           *) PATH=$PATH:$x;;
+        esac
+        old_PATH=${old_PATH#*:}
+    done
+    PATH=${PATH#:}
+    unset old_PATH x
+fi
+
+export PATH

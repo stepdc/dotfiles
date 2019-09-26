@@ -5,12 +5,6 @@ if [[ ! -a $HOME/.dot/repos/z.lua ]]; then
 fi
 [[ -s $HOME/.dot/repos/z.lua/z.lua.plugin.zsh ]] && source $HOME/.dot/repos/z.lua/z.lua.plugin.zsh
 
-# zsh-async
-if [[ ! -a $HOME/.dot/repos/zsh-async ]]; then
-  git clone -b 'v1.7.1' git@github.com:mafredri/zsh-async $HOME/.dot/repos/zsh-async
-fi
-[ -n "$ZSH_VERSION" ] && source $HOME/.dot/repos/zsh-async/async.zsh && async_init
-
 # async prompt
 [ -n "$ZSH_VERSION" ] && [ -s $HOME/.dot/prompt/setup.zsh ] && source $HOME/.dot/prompt/setup.zsh
 
@@ -20,8 +14,6 @@ function zz() {
         local dir
         dir="$(fasd -Rdl "$1" | fzf -1 -0 --no-sort +m)" && cd "$dir" || return 1
 }
-
-
 
 # alias
 alias k=kubectl
@@ -45,3 +37,22 @@ alias nview='nvim -R'
 alias ag="ag --color-path '1;34' --color-line-number '0;37' --color-match '0;32' --color --break --group --heading"
 
 alias mocp="mocp -T green_theme"
+alias ssh='TERM=xterm-256color ssh'
+
+# fkill - kill processes - list only the ones you can kill. Modified the earlier script.
+fkill() {
+    local pid
+    if [ "$UID" != "0" ]; then
+        pid=$(ps -f -u $UID | sed 1d | fzf -m | awk '{print $2}')
+    else
+        pid=$(ps -ef | sed 1d | fzf -m | awk '{print $2}')
+    fi
+
+    if [ "x$pid" != "x" ]
+    then
+        echo $pid | xargs kill -${1:-9}
+    fi
+}
+
+alias fk='fkill'
+

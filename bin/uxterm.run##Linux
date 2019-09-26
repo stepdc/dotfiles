@@ -1,0 +1,46 @@
+#!/bin/bash
+array[0]="(=ﾟωﾟ)ﾉ "
+array[1]="(•̀ᴗ•́)و "
+array[2]="ヽ(•̀ω•́ )ゝ "
+array[3]="(ง •̀_•́)ง "
+array[4]="(￣▽￣\") "
+array[5]="（￣工￣lll）"
+array[6]="(/= _ =)/~┴┴ "
+array[7]="ㄟ( ▔, ▔ )ㄏ "
+array[8]="(=￣ω￣=) "
+array[9]="(/ω・＼) "
+array[10]="(；°○° ) "
+array[11]="( /。 ) "
+
+size=${#array[@]}
+index=$(($RANDOM % $size))
+
+fonts[0]="Essential Pragmata Pro"
+fonts[1]="Sarasa Mono SC"
+# fonts[2]="Inconsolata-g"
+fonts[2]="Droid Sans Mono"
+fonts[3]="SF Mono"
+fonts[4]="Courier Prime"
+fonts[5]="Droid Sans Mono"
+fonts[6]="Cascadia Code"
+# fonts[3]="IBM Plex Mono"
+
+
+farrsize=${#fonts[@]}
+fidx=$(($RANDOM % $farrsize))
+
+if [ "$fidx" -eq 6 ]; then
+    export STEPDC_PLAIN_PROMPT="^o^"
+fi
+
+szs[0]=11
+szs[1]=10.5
+szs[2]=10.5
+szs[3]=10
+szs[4]=10.5
+szs[5]=10.5
+szs[6]=10.5
+
+XCURSOR_THEME=Hackneyed-Dark-48px uxterm "$@" -title "${array[$index]}" \
+              -fa "${fonts[$fidx]}" -fs "${szs[$fidx]}" -fi "" -s
+# XCURSOR_THEME=Hackneyed-Dark-48px uxterm "$@" -fa "${fonts[$fidx]}" -fs 11 -s
