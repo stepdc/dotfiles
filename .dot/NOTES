@@ -1,15 +1,14 @@
-DNS
+#DNS
 sudo vim /etc/resolvconf/resolv.conf.d/base
 nameserver 8.8.8.8
 nameserver 8.8.4.4
 sudo resolvconf -u
 
-SUDO
+#SUDO
 keep env:
 Defaults        env_keep += "ftp_proxy http_proxy https_proxy no_proxy"
 
-nopasswd
-
+#nopasswd
 user ALL=(ALL) NOPASSWD: ALL
 
 group permmision
@@ -17,3 +16,10 @@ chmod -R g+ws
 
 # swap ctrl & alt, setup key repeat rate
 setxkbmap -option ctrl:swap_lalt_lctl && xset r rate 256 40
+
+# bash tab completion
+# make tab cycle through commands after listing
+bind '"\t":menu-complete'
+bind "set show-all-if-ambiguous on"
+bind "set completion-ignore-case on"
+bind "set menu-complete-display-prefix on"
