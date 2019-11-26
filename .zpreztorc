@@ -37,8 +37,9 @@ zstyle ':prezto:load' pmodule \
   'completion' \
   'syntax-highlighting' \
   'prompt' \
+  'git' \
   'pacman'
-#  'autosuggestions'
+  # 'autosuggestions'
 #  'git'
 #  'contrib-prompt' \
 

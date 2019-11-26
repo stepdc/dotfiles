@@ -27,6 +27,7 @@ fi
 
 # history
 # HISTFILE="$HOME/.zsh_history"
+HISTFILE="$HOME/.zhistory"
 HISTSIZE=10000000
 SAVEHIST=10000000
 setopt BANG_HIST                 # Treat the '!' character specially during expansion.
@@ -43,4 +44,3 @@ setopt HIST_REDUCE_BLANKS        # Remove superfluous blanks before recording en
 setopt HIST_VERIFY               # Don't execute immediately upon history expansion.
 setopt HIST_BEEP                 # Beep when accessing nonexistent history.
 setopt PROMPT_SUBST              # Enable function call in prompt
-
