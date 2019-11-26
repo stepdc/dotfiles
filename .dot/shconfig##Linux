@@ -57,6 +57,10 @@ alias za='zathura --fork $@'
 alias lg='lazygit'
 alias pg='ps aux | grep -i'
 
+# alias bat
+alias bat='bat --theme "Monokai Extended Light"'
+alias less=bat
+
 # fzf
 _gen_fzf_default_opts() {
 

@@ -1,6 +1,7 @@
 # GO
 export GOROOT=$HOME/dev/lang/go
-export GOPROXY=http://168.63.134.191:43579
+# export GOPROXY=http://168.63.134.191:43579
+export GOPROXY=https://goproxy.io
 export PATH=$GOROOT/bin:$PATH
 export PATH=$HOME/go/bin:$PATH:/opt/vagrant/bin
 
@@ -11,6 +12,13 @@ export GOPATH="$HOME/go"
 [[ -f $HOME/.cargo/env  ]] && source $HOME/.cargo/env
 
 # Java
-export JAVA_HOME=$HOME/dev/lang/jdk1.8.0_212
+export JAVA_HOME=$HOME/dev/lang/jdk1.8.0_211
 export PATH=$JAVA_HOME/bin:$PATH
 export CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar
+
+# npm
+export PATH="$HOME/.npm-global/bin:$PATH"  # ← put this line in .bashrc
+
+# dotnet
+export DOTNET_ROOT=$HOME/dev/lang/dotnet
+export PATH=$PATH:$HOME/dev/lang/dotnet

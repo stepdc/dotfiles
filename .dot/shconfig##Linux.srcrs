@@ -1,5 +1,4 @@
 # shell configures, both zsh & bash
-[[ ":$PATH:" != *":$HOME/bin:"* ]] && PATH="$HOME/bin:${PATH}"
 
 # proxy
 if [ -f $HOME/.dot/proxy.default ]; then
@@ -12,7 +11,6 @@ fi
 
 # dev env
 [[ -s "$HOME/.dot/devenv" ]] && source $HOME/.dot/devenv
-
 
 # fasd
 # eval "$(fasd --init auto)"
@@ -47,15 +45,21 @@ alias asi='sudo apt build-dep'
 
 alias e='TERM=screen-16color emacsclient -nw'
 # alias em='TERM=screen-16color emacs -nw'
-alias em='emacs -nw'
+alias em='TERM=xterm-24bit emacs -nw'
+alias emc='emacs -nw'
 alias ec='emacsclient -c'
+alias eb='emacs &'
 
-alias vi='nvim'
+# alias vi='nvim'
+alias vi='vim'
 alias nvi='nvim'
-
 alias za='zathura --fork $@'
-
 alias lg='lazygit'
+alias pg='ps aux | grep -i'
+
+# alias bat
+alias bat='bat --theme "Monokai Extended Light"'
+alias less=bat
 
 # fzf
 _gen_fzf_default_opts() {
@@ -91,12 +95,6 @@ export FZF_DEFAULT_OPTS='
   --color info:33,prompt:33,pointer:166,marker:166,spinner:33
 '
 
-[ -f $HOME/.fzf.zsh ] && source $HOME/.fzf.zsh
-function zz() {
-        local dir
-        dir="$(fasd -Rdl "$1" | fzf -1 -0 --no-sort +m)" && cd "$dir" || return 1
-}
-
 # history size
 export HISTSIZE=200000
 
@@ -104,12 +102,13 @@ export HISTSIZE=200000
 stty -ixon
 
 # load tool
-case $SHELL in
-*/zsh)
+case $(ps -p $$) in
+*zsh)
   [ -f $HOME/.dot/tools.zsh ] && source $HOME/.dot/tools.zsh
   ;;
-*/bash)
+*bash)
    # assume Bash
+  [ -f $HOME/.dot/tools.bash ] && source $HOME/.dot/tools.bash
    ;;
 *)
    # assume something else
@@ -125,25 +124,8 @@ fi
 
 # plan9 dircolor
 if [ -f $HOME/.dot/PLAN9_DIR_COLOR ]; then
-     eval $( dircolors -b $HOME/.dot/PLAN9_DIR_COLOR)
+     eval $(dircolors -b $HOME/.dot/PLAN9_DIR_COLOR)
 fi
-
-# repos
-
-# z.lua
-if [[ ! -a $HOME/.dot/repos/z.lua ]]; then
-  git clone -b 'v1.5.8' git@github.com:skywind3000/z.lua.git $HOME/.dot/repos/z.lua
-fi
-[[ -s $HOME/.dot/repos/z.lua/z.lua.plugin.zsh ]] && source $HOME/.dot/repos/z.lua/z.lua.plugin.zsh
-
-# zsh-async
-if [[ ! -a $HOME/.dot/repos/zsh-async ]]; then
-  git clone -b 'v1.7.1' git@github.com:mafredri/zsh-async $HOME/.dot/repos/zsh-async
-fi
-[ -n "$ZSH_VERSION" ] && source $HOME/.dot/repos/zsh-async/async.zsh && async_init
-
-# async prompt
-[ -n "$ZSH_VERSION" ] && [ -s $HOME/.dot/prompt/setup.zsh ] && source $HOME/.dot/prompt/setup.zsh
 
 # LESS
 export LESS_TERMCAP_mb=$'\E[1m\E[32m'
