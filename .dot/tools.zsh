@@ -1,7 +1,7 @@
 # repos
 # z.lua
 if [[ ! -a $HOME/.dot/repos/z.lua ]]; then
-  git clone -b 'v1.5.8' git@github.com:skywind3000/z.lua.git $HOME/.dot/repos/z.lua
+  git clone -b 'v1.7.3' https://github.com/skywind3000/z.lua.git $HOME/.dot/repos/z.lua
 fi
 [[ -s $HOME/.dot/repos/z.lua/z.lua.plugin.zsh ]] && source $HOME/.dot/repos/z.lua/z.lua.plugin.zsh
 

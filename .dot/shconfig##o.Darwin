@@ -26,23 +26,6 @@ fi
 # alias zz='fasd_cd -d -i' # cd with interactive selection
 # alias zz='zz'
 
-# TODO: opensuse only
-alias zup='sudo zypper update'
-alias zref='sudo zypper refresh'
-alias zse='sudo zypper search'
-alias zin='sudo zypper install'
-alias zinfo='sudo zypper info'
-alias zsi='sudo zypper source-install'
-alias zrm='sudo zypper remove'
-
-# apt alis
-alias aup='sudo apt update'
-alias aupg='sudo apt upgrade'
-alias ase='sudo apt search'
-alias ain='sudo apt install'
-alias ainfo='sudo apt show'
-alias asi='sudo apt build-dep'
-
 alias e='TERM=screen-16color emacsclient -nw'
 # alias em='TERM=screen-16color emacs -nw'
 alias em='TERM=xterm-24bit emacs -nw'
