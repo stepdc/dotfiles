@@ -28,7 +28,7 @@ fi
 
 alias e='TERM=screen-16color emacsclient -nw'
 # alias em='TERM=screen-16color emacs -nw'
-alias em='TERM=xterm-24bit emacs -nw'
+alias em='emacs -nw'
 alias emc='emacs -nw'
 alias ec='emacsclient -c'
 alias eb='emacs &'

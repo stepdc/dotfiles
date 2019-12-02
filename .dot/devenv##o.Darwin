@@ -2,9 +2,7 @@
 export GOROOT=/usr/local/go
 export GOPROXY=https://goproxy.io
 export GOPATH=$HOME/go
-export PATH=$PATH:$HOME/go/bin:$GOROOT/bin
-export PATH=$GOROOT/bin:$PATH
-export PATH=$HOME/go/bin
+export PATH=$PATH:$HOME/go/bin:$GOROOT/bin:$HOME/go/bin
 
 # Rust
 export RUSTUP_DIST_SERVER=https://mirrors.tuna.tsinghua.edu.cn/rustup
