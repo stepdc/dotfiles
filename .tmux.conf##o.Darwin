@@ -4,10 +4,9 @@
 #
 
 #-- base settings --#
-set -g default-terminal "tmux-256color-italic"
-set -as terminal-overrides ',xterm*:Tc:sitm=\E[3m'
-# set-option -ga terminal-overrides ",*256col*:Tc"
-# set-option -ga terminal-overrides ",tmux-256color-italic:Tc"
+set -g default-terminal "screen-256color"
+# tell Tmux that outside terminal supports true color
+set -ga terminal-overrides ",xterm-256color*:Tc"
 
 set -sg escape-time 0
 set -g display-time 3000
@@ -95,7 +94,7 @@ setw -g automatic-rename on
 #-- colorscheme --#
 # statusbar
 set -g status-justify left
-set -g status-right "#[fg=colour174]#(cut -d ' ' -f 1-3 /proc/loadavg)"
+set -g status-right "#[fg=colour174]#(uptime | cut -d":" -f3- | sed s/,//g)"
 set -g status-left ""
 # set -g status-right ""
 # set -g status-style "fg=#504945,bg=#ebdbb2"
