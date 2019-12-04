@@ -1,4 +1,5 @@
 # GO
+
 export GOROOT=/usr/local/go
 export GOPROXY=https://goproxy.io
 export GOPATH=$HOME/go
