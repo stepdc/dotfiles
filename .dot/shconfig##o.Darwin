@@ -38,7 +38,7 @@ alias vi='vim'
 alias nvi='nvim'
 alias za='zathura --fork $@'
 alias lg='lazygit'
-alias pg='ps aux | grep'
+alias pg='ps aux | grep -i'
 
 # fzf
 _gen_fzf_default_opts() {
@@ -106,6 +106,45 @@ if [ -f $HOME/.dot/PLAN9_DIR_COLOR ]; then
      eval $(dircolors -b $HOME/.dot/PLAN9_DIR_COLOR)
 fi
 
+# alias
+alias k=kubectl
+alias ks='kubectl -n kube-system'
+alias mk=minikube
+alias mkl='minikube service list'
+alias mkt='minikube -p tbw'
+alias mktl='minikube -p tbw service list'
+alias h=helm
+alias ll='ls -lh'
+
+# alias & func
+whoseport () {
+   lsof -i ":$1" | grep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn} LISTEN
+}
+alias grep='grep  --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn}'
+alias nview='nvim -R'
+
+alias ag="ag --color-path '1;34' --color-line-number '0;37' --color-match '0;32' --color --break --group --heading"
+
+alias mocp="mocp -T green_theme"
+alias ssh='TERM=xterm-256color ssh'
+
+# fkill - kill processes - list only the ones you can kill. Modified the earlier script.
+fkill() {
+    local pid
+    if [ "$UID" != "0" ]; then
+        pid=$(ps -f -u $UID | sed 1d | fzf -m | awk '{print $2}')
+    else
+        pid=$(ps -ef | sed 1d | fzf -m | awk '{print $2}')
+    fi
+
+    if [ "x$pid" != "x" ]
+    then
+        echo $pid | xargs kill -${1:-9}
+    fi
+}
+
+alias fk='fkill'
+
 # LESS
 export LESS_TERMCAP_mb=$'\E[1m\E[32m'
 export LESS_TERMCAP_mh=$'\E[2m'
@@ -120,3 +159,7 @@ export LESS_TERMCAP_ZN=""
 export LESS_TERMCAP_se=$'\E[27m\E(B\E[m'
 export LESS_TERMCAP_ZV=""
 export LESS_TERMCAP_so=$'\E[1m\E[33m\E[44m'
+
+# brew
+export HOMEBREW_GITHUB_API_TOKEN="fb4fe0319f16af3c48d2c14c1a5f68d41fb3b6e3"
+export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.ustc.edu.cn/homebrew-bottles
