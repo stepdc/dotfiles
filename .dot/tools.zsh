@@ -3,7 +3,8 @@
 if [[ ! -a $HOME/.dot/repos/z.lua ]]; then
   git clone -b 'v1.7.3' https://github.com/skywind3000/z.lua.git $HOME/.dot/repos/z.lua
 fi
-[[ -s $HOME/.dot/repos/z.lua/z.lua.plugin.zsh ]] && source $HOME/.dot/repos/z.lua/z.lua.plugin.zsh
+[[ -s $HOME/.dot/repos/z.lua/z.lua.plugin.zsh ]] && \
+        eval "$(lua $HOME/.dot/repos/z.lua/z.lua --init zsh enhanced once fzf)"
 
 # async prompt
 [ -n "$ZSH_VERSION" ] && [ -s $HOME/.dot/prompt/setup.zsh ] && source $HOME/.dot/prompt/setup.zsh
