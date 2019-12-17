@@ -1,7 +1,7 @@
 # GO
 export GOROOT=$HOME/dev/lang/go
 # export GOPROXY=http://168.63.134.191:43579
-export GOPROXY=https://goproxy.io
+export GOPROXY=https://mirrors.aliyun.com/goproxy/
 export PATH=$GOROOT/bin:$PATH
 export PATH=$HOME/go/bin:$PATH:/opt/vagrant/bin
 
@@ -9,6 +9,9 @@ export PATH=$HOME/go/bin:$PATH:/opt/vagrant/bin
 export GOPATH="$HOME/go"
 
 # Rust
+# mirror
+export RUSTUP_DIST_SERVER=https://mirrors.tuna.tsinghua.edu.cn/rustup
+
 [[ -f $HOME/.cargo/env  ]] && source $HOME/.cargo/env
 
 # Java
