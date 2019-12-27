@@ -20,3 +20,6 @@ export PATH="$HOME/.npm-global/bin:$PATH"  # ← put this line in .bashrc
 # dotnet
 export DOTNET_ROOT=$HOME/dev/lang/dotnet
 export PATH=$PATH:$HOME/dev/lang/dotnet
+
+# docker
+export DOCKER_HOST="ssh://ubuntu@10.0.40.210"
