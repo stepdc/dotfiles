@@ -4,7 +4,7 @@
 #
 
 #-- base settings --#
-set -g default-terminal "screen-256color"
+# set -g default-terminal "screen-256color"
 # tell Tmux that outside terminal supports true color
 set -ga terminal-overrides ",xterm-256color*:Tc"
 
@@ -51,7 +51,8 @@ bind . select-layout even-horizontal
 bind e lastp  # select the last pane (prefix e)
 bind ^e last  # select the last window (prefix Ctrl+e)
 bind q killp  # kill pane (prefix q)
-bind ^q killw # kill window (prefix Ctrl+q)
+# bind ^q killw # kill window (prefix Ctrl+q)
+bind ^x killw # kill window (prefix Ctrl+q)
 
 # copy mode
 setw -g mode-keys vi
@@ -93,7 +94,7 @@ setw -g automatic-rename on
 #-- colorscheme --#
 # statusbar
 set -g status-justify left
-set -g status-right "#[fg=colour174]#(uptime | cut -d":" -f4- | sed s/,//g)"
+set -g status-right "#[fg=colour174]#(uptime | cut -d":" -f5- | sed s/,//g)"
 set -g status-left ""
 # set -g status-right ""
 # set -g status-style "fg=#504945,bg=#ebdbb2"
