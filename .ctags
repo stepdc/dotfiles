@@ -1,0 +1,200 @@
+--c++-kinds=+p
+--fields=+iaS
+--extra=+q
+--exclude=*/.hg/*
+--exclude=.hg/*
+--exclude=*/.cvs/*
+--exclude=.cvs/*
+--exclude=*/.svn/*
+--exclude=.svn/*
+--exclude=*/.git/*
+--exclude=.git/*
+--exclude=*/compiled/*
+--exclude=compiled/*
+--exclude=*/public_html/*
+--exclude=public_html/*
+--exclude=*/.idea/*
+--exclude=.idea/*
+--exclude=*/bower_components/*
+--exclude=bower_components/*
+--exclude=*/images/*
+--exclude=images/*
+--exclude=*/.DS_Store/*
+--exclude=.DS_Store/*
+--exclude=*/log/*
+--exclude=log/*
+--exclude=*/target/*
+--exclude=target/*
+--exclude=*/deployment/*
+--exclude=deployment/*
+--exclude=*/vender/*
+--exclude=vender/*
+--exclude=*/bin-packages/*
+--exclude=bin-packages/*
+--exclude=*/node_modules/*
+--exclude=node_modules/*
+--exclude=*/doc/*
+--exclude=doc/*
+
+--exclude=*.war
+--exclude=*.jar
+--exclude=*.class
+--exclude=*flymake*
+--exclude=*.min.js
+--exclude=*.test.js
+--exclude=*.mock.js
+--exclude=*.min.css
+--exclude=*.bundle.*.js
+--exclude=bundle.*.js
+--exclude=*.pack.js
+--exclude=*.log
+--exclude=*.sql
+--exclude=*.sass
+--exclude=*.ftl
+--exclude=tags
+--exclude=TAGS
+--exclude=GTAGS
+--exclude=GPATH
+--exclude=GRTAGS
+--exclude=.#*
+--tag-relative=yes
+--recurse=yes
+--c-kinds=+defgpstux
+
+--langmap=java:+.aj
+
+--langdef=markdown
+--langmap=markdown:.md
+--regex-markdown=/^(#[^#].*)/\1/c/
+--regex-markdown=/^(##[^#].*)/\1/s/
+--regex-markdown=/^(###[^#].{0,19})/\1/S/
+--regex-markdown=/^(=[^=].*)/\1/c/
+--regex-markdown=/^(==[^=].*)/\1/s/
+--regex-markdown=/^(===[^=].{0,19})/\1/S/
+
+--langdef=Rust
+--langmap=Rust:.rs
+--regex-Rust=/^[ \t]*(#\[[^\]]\][ \t]*)*(pub[ \t]+)?(extern[ \t]+)?("[^"]+"[ \t]+)?(unsafe[ \t]+)?fn[ \t]+([[:alnum:]_]+)/\6/f/
+--regex-Rust=/^[ \t]*(pub[ \t]+)?(type|enum|struct|mod)[ \t]+([[:alnum:]_]+)/\3/v/
+--regex-Rust=/^[ \t]*macro_rules![ \t]+([[:alnum:]_]+)/\1/f/
+--regex-Rust=/^[ \t]*(pub[ \t]+)?(static|const)[ \t]+(mut[ \t]+)?([[:alnum:]_]+)/\4/v/
+--regex-Rust=/^[ \t]*(pub[ \t]+)?(unsafe[ \t]+)?trait[ \t]+([[:alnum:]_]+)/\3/f/
+--regex-Rust=/^[ \t]*(pub[ \t]+)?(unsafe[ \t]+)?impl([ \t\n]*<[^>]*>)?[ \t]+(([[:alnum:]_:]+)[ \t]*(<[^>]*>)?[ \t]+(for)[ \t]+)?([[:alnum:]_]+)/\5 \7 \8/f/
+
+--regex-Lua=/^.*[ \t]*function[ \t]*([:alnum:]+):([:alnum:]+)/\2/f/
+--regex-Lua=/^[ \t]*local[ \t]+([:alnum:]+)/\1/v/
+--regex-Lua=/^.*[ \t]*function[ \t]*([:alnum:]+)\.([:alnum:]+).*$/\2/f/
+--regex-Lua=/^.*[ \t]*function[ \t]*([:alnum:]+)[ \t]*\(/\1/f/
+--regex-Lua=/^[ \t]*([:alnum:]+)[ \t]*=[ \t]*\{/\1/f/
+--regex-Lua=/^[ \t]*module[ \t]+([:alnum:]+)\/\1/f/
+--regex-Lua=/^[ \t]*module[ \t]+[[:alnum:]._]+\.([:alnum:]+)\/\1/f/
+
+--langmap=html:.htm.html.erb.cmp.page.component
+--regex-html=/[ \t]+ng-(controller|click|change|show|if|blur|focus|disabled|repeat)[ \t]*=[ \t]*['"][^[:alnum:]$]*([[:alnum:]$]{4,})/\2/a/
+--regex-html=/[ \t]+<(app-[[:alnum:]$-_]{3,})/\1/a/
+
+--langmap=javascript:.js.ts
+--regex-javascript=/^[ \t]*(var|let|const)[ \t]+([[:alnum:]_$]+)[ \t]*=[ \t]*\[/\2/v/
+--regex-javascript=/^[ \t]*(var|let|const)[ \t]+([:upper:][[:alnum:]_$]+)[ \t]*=[ \t]*function/\2/f/
+--regex-javascript=/^[ \t]*(export)?[ \t]*class[ \t]+([[:alnum:]_$]+)/\2/f/
+
+--regex-javascript=/^[ \t]*export[ \t]+(\{[ \t]*)*([[:alnum:]_\*]*[ \t]as[ \t])([[:alnum:]_]+)/\3/f/
+--regex-javascript=/^[ \t]*export[ \t]+(\{[ \t]*)*([[:alnum:]_\*]*[ \t]as[ \t])*([[:alnum:]_]+),[ \t]*([[:alnum:]_\*]*[ \t]as[ \t])([[:alnum:]_]+)/\5/f/
+--regex-javascript=/^[ \t]*export[ \t]+(\{[ \t]*)*([[:alnum:]_\*]*[ \t]as[ \t])*([[:alnum:]_]+),[ \t]*([[:alnum:]_\*]*[ \t]as[ \t])*([[:alnum:]_]+),[ \t]*([[:alnum:]_\*]*[ \t]as[ \t])([[:alnum:]_]+)/\7/f/
+--regex-javascript=/^[ \t]*export[ \t]+(var|let|const)[ \t]+([[:alnum:]_$]+)/\2/v/
+--regex-javascript=/^[ \t]*export[ \t]+function[ \t]+([[:alnum:]_$]+)/\1/f/
+--regex-javascript=/^[ \t]*export[ \t]+(var|let|const)[ \t]+([[:alnum:]_$]+)[ \t]*[^,]+,[ \t]*([[:alnum:]_$]+)/\3/f/
+--regex-javascript=/^[ \t]*export[ \t]+(var|let|const)[ \t]+([[:alnum:]_$]+)[ \t]*[^,]+,[ \t]*([[:alnum:]_$]+)[ \t]*,[ \t]*([[:alnum:]_$]+)/\4/v/
+
+--regex-javascript=/^[ \t]*export[ \t]+default[ \t]+(\{[ \t]*)*([[:alnum:]_\*]*[ \t]as[ \t])([[:alnum:]_]+)/\3/f/
+--regex-javascript=/^[ \t]*export[ \t]+default[ \t]+(\{[ \t]*)*([[:alnum:]_\*]*[ \t]as[ \t])*([[:alnum:]_]+),[ \t]*([[:alnum:]_\*]*[ \t]as[ \t])([[:alnum:]_]+)/\5/f/
+--regex-javascript=/^[ \t]*export[ \t]+default[ \t]+(\{[ \t]*)*([[:alnum:]_\*]*[ \t]as[ \t])*([[:alnum:]_]+),[ \t]*([[:alnum:]_\*]*[ \t]as[ \t])*([[:alnum:]_]+),[ \t]*([[:alnum:]_\*]*[ \t]as[ \t])([[:alnum:]_]+)/\7/f/
+--regex-javascript=/^[ \t]*export[ \t]+default[ \t]+(var|let|const)[ \t]+([[:alnum:]_$]+)/\2/v/
+--regex-javascript=/^[ \t]*export[ \t]+default[ \t]+function[ \t]+([[:alnum:]_$]+)/\1/f/
+--regex-javascript=/^[ \t]*export[ \t]+default[ \t]+(var|let|const)[ \t]+([[:alnum:]_$]+)[ \t]*[^,]+,[ \t]*([[:alnum:]_$]+)/\3/v/
+--regex-javascript=/^[ \t]*export[ \t]+default[ \t]+(var|let|const)[ \t]+([[:alnum:]_$]+)[ \t]*[^,]+,[ \t]*([[:alnum:]_$]+)[ \t]*,[ \t]*([[:alnum:]_$]+)/\4/v/
+
+--regex-javascript=/^[ \t]*\(?function[ \t]*([[:alnum:]_$]+)[ \t(]/\1/f/
+--regex-javascript=/^[ \t]*\(?async[ \t]function[ \t]*([[:alnum:]_$]+)[ \t(]/\1/f/
+--regex-javascript=/^[ \t]*(var|let|const)[ \t]+([_[:lower:]][[:alnum:]_$]+)[ \t]*=[ \t]*(async[ \t]+)?function[^\*][^\*]/\2/f/
+--regex-javascript=/^[ \t]*(var|let|const)[ \t]+([_[:lower:]][[:alnum:]_$]+)[ \t]*=[ \t]*\([^\)]*$/\2/f/
+--regex-javascript=/^[ \t]*(var|let|const)[ \t]+([_[:lower:]][[:alnum:]_$]+)[ \t]*=[^=]*=>/\2/f/
+
+--regex-javascript=/^[ \t]*function[ \t]*\*[ \t]*([[:alnum:]_$]+)/\1/f/
+--regex-javascript=/^[ \t]*(var|let|const)[ \t]+([_[:lower:]][[:alnum:]_$]+)[ \t]*=[ \t]*function([ \t]*\*)/\2/f/
+--regex-javascript=/^[ \t]*(\*[ \t])([[:alnum:]_$]+)[ \t]*(.*)[ \t]*\{/\2/f/
+--regex-javascript=/^[ \t]*([[:alnum:]_$]+)\.([[:alnum:]_$]+)[ \t]*=[ \t]*function/\2/f/
+--regex-javascript=/^[ \t]*([[:alnum:]_$]+)\.([[:alnum:]_$]+)[ \t]*=[ \t]*\(/\2/f/
+--regex-javascript=/^[ \t]*([[:alnum:]_$]+)\.([[:alnum:]_$]+)\.([[:alnum:]_$]+)[ \t]*=[ \t]*function/\3/f/
+--regex-javascript=/^[ \t]*([[:alnum:]_$]+)\.([[:alnum:]_$]+)\.([[:alnum:]_$]+)[ \t]*=[ \t]*\(/\3/f/
+--regex-javascript=/^[ \t]*([[:alnum:]_$]+)[ \t]*[:=][ \t]*[\(]*function[ \t]*\(/\1/f/
+--regex-javascript=/^[ \t]*([[:alnum:]_$]+)[ \t]*[:=][ \t]\(/\1/f/
+--regex-javascript=/^[ \t]*([[:alnum:]_$]+)[ \t]*[:=][ \t]+async[ \t]\(+/\1/f/
+--regex-javascript=/^[ \t]*(static|async)[ \t]+([[:alnum:]_$]+)[ \t]*\(/\2/f/
+--regex-javascript=/^[ \t]*([[:alnum:]_$]+)(.*)[ \t]*\{/\1/f/
+--regex-javascript=/^[ \t]*get[ \t]+([[:alnum:]_$]+)[ \t]*\(/\1/f/
+--regex-javascript=/^[ \t]*set[ \t]+([[:alnum:]_$]+)[ \t]*\(/\1/f/
+--regex-javascript=/^[ \t]*([[:alnum:]_$]+)\.([[:alnum:]_$]+)[ \t]*=[ \t]*\{/\2/v/
+--regex-javascript=/^[ \t]*([[:alnum:]_$]+)[ \t]*:[ \t]*[{"\/\[]/\1/v/
+--regex-javascript=/^[ \t]*([[:alnum:]_$]+)[ \t]*:[ \t]*([[:alnum:]_$]+)[ \t,]*$/\1/v/
+
+--regex-javascript=/^[ \t]*(var|let|const)[ \t]+([[:alnum:]_$]+)[ \t]*[=,;]/\2/v/
+--regex-javascript=/^[ \t]*(var|let|const)[ \t]+([[:alnum:]_$]+)[ \t]*,[ \t]*([[:alnum:]_$]+)/\3/v/
+--regex-javascript=/^[ \t]*(var|let|const)[ \t]+([[:alnum:]_$]+)[ \t]*,[ \t]*([[:alnum:]_$]+)[ \t]*,[ \t]*([[:alnum:]_$]+)/\4/v/
+
+--regex-javascript=/^[ \t]*keystone\.set([ \t]*['"]\([^'"]+)['"]/v/
+--regex-javascript=/(,|^|\.)[ \t]*(public *|private *|async *)?([[:alpha:]_$][[:alnum:]_$]+)[ \t]*[:=][ \t]*(function\*?[ \t]*\(|\([^\)]*\)[\t ]+=>)/\3/f/
+--regex-javascript=/^[ \t]*(public|async|private|static) ([[:alpha:]_$][[:alnum:]_$]{3,})[ \t]*([^)]*)[ \t]*(: *[[:alpha:]_$]+)?[ \t]*\{?[ \t]*$/\2/f/
+--regex-javascript=/^[ \t]*case[ \t]+'([^']+)/\1/v/
+--regex-javascript=/^[ \t]*(constructor)[ \t]*\(/\1/v/
+--regex-javascript=/^[ \t]*([[:alpha:]_$][[:alnum:]_$]*):[ \t]*storeState\./\1/v/
+
+--regex-c=/[ \t]*DEFUN[ \t]*\([ \t]*"([^"]+)",.*/\1/f/
+
+--langdef=less
+--langmap=less:.less
+--regex-less=/^[ \t]*[\.#]([[:alnum:]_-]+)/\1/v/
+--regex-less=/^[ \t]*\(([[:alnum:]_-]+[ \t,]+)\{/\1/v/
+--regex-less=/^[ \t]*@media[ \t]+([[:alnum:]_-]+)/\1/v/
+
+--langdef=css
+--langmap=css:.css
+--regex-css=/^[ \t]*\.?([[:alnum:]_:\\-]+)[ \t]*\{[ \t]*$/\1/v/
+--regex-css=/^[ \t]*\.?[[:alnum:]_:\\-]+,[ \t]*\.?([[:alnum:]_:\\-]+)\{[ \t]*$/\1/v/
+--regex-css=/^[ \t]*\.?[[:alnum:]_:\\-]+,[ \t]*\.?[[:alnum:]_:\\-]+,[ \t]*\.?([[:alnum:]_:\\-]+)\{[ \t]*$/\1/v/
+--regex-css=/^[ \t]*@define-mixin[ \t]+([^ ]+)/\1/f/
+
+--langdef=scss
+--langmap=scss:.scss.sass
+--regex-scss=/^[ \t]*@mixin ([[:alnum:]_-]+)/\1/f/
+--regex-scss=/^[ \t]*\$([[:alnum:]_-]+)/\1/v/
+--regex-scss=/^[ \t]*\.([[:alnum:]_-]+)/\1/v/
+--regex-scss=/^[ \t]*&\.([[:alnum:]_-]+)/\1/v/
+--regex-scss=/^[ \t]*#([[:alnum:]_-]+)/#\1/v/
+--regex-scss=/^[ \t]*(([[:alnum:]_-]+[ \t\n,]+)+)\{/\1/v/
+--regex-scss=/^[ \t]*@media[ \t]+([[:alnum:]_-]+)/\1/v/
+
+--langmap=ruby:+.rake
+--regex-ruby=/(^|[:;])[ \t]*([:upper:][[:alnum:]_]+) *=/\2/v/
+--regex-ruby=/(^|;)[ \t]*(has_many|belongs_to|has_one|has_and_belongs_to_many)\(? *:([[:alnum:]_]+)/\3/f/
+--regex-ruby=/(^|;)[ \t]*(named_)?scope\(? *:([[:alnum:]_]+)/\3/f/
+--regex-ruby=/(^|;)[ \t]*expose\(? *:([[:alnum:]_]+)/\2/f/
+--regex-ruby=/(^|;)[ \t]*event\(? *:([[:alnum:]_]+)/\2/f/
+--regex-ruby=/(^|;)[ \t]*event\(? *:([[:alnum:]_]+)/\2!/f/
+--regex-ruby=/(^|;)[ \t]*event\(? *:([[:alnum:]_]+)/\2?/f/
+
+--langdef=ini
+--langmap=ini:.ini
+--regex-ini=/^[ \t]*\[(.*)\]/\1/v/
+--regex-ini=/^[ \t]*([^=]+)=(.*)/\1/v/
+
+--langdef=Go
+--langmap=Go:.go
+--regex-Go=/func([ \t]+([^)]+))?[ \t]+([[:alnum:]_]+)/\2/f/
+--regex-Go=/(var|type)[ \t]+([[:alpha:]_][[:alnum:]_]+)/\2/v/
+
+--regex-fortran=/^[ \t]*MODULE[ \t]+(PROCEDURE|SUBROUTINE)[ \t]+([[:alnum:]_]+)/\2/f/
+
+--langdef=orgmode
+--langmap=orgmode:.org
+--regex-orgmode=/<<([^>]+)>>/\1/v/
