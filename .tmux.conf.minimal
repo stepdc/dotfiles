@@ -1,0 +1,63 @@
+set -sg escape-time 0
+set -g display-time 3000
+set -g history-limit 65535
+set -g base-index 1
+set -g pane-base-index 1
+set -g renumber-windows on
+
+#-- bindkeys --#
+# prefix key (Ctrl+q)
+unbind ^b
+set -g prefix 'C-q'
+bind-key 'C-q' send-prefix
+
+# split window
+unbind '"'
+bind - splitw -v # vertical split (prefix -)
+unbind %
+bind | splitw -h # horizontal split (prefix |)
+
+# select pane
+bind k selectp -U # above (prefix k)
+bind j selectp -D # below (prefix j)
+bind h selectp -L # left (prefix h)
+bind l selectp -R # right (prefix l)
+
+# resize pane
+bind -r ^k resizep -U 10 # upward (prefix Ctrl+k)
+bind -r ^j resizep -D 10 # downward (prefix Ctrl+j)
+bind -r ^h resizep -L 10 # to the left (prefix Ctrl+h)
+bind -r ^l resizep -R 10 # to the right (prefix Ctrl+l)
+
+# swap pane
+bind ^u swapp -U # swap with the previous pane (prefix Ctrl+u)
+bind ^d swapp -D # swap with the next pane (prefix Ctrl+d)
+
+# select layout
+bind , select-layout even-vertical
+bind . select-layout even-horizontal
+
+# misc
+bind e lastp  # select the last pane (prefix e)
+bind ^e last  # select the last window (prefix Ctrl+e)
+bind q killp  # kill pane (prefix q)
+bind ^x killw # kill window (prefix Ctrl+q)
+
+# copy mode
+setw -g mode-keys vi
+
+# binds
+bind-key x      kill-pane
+bind-key X      kill-window
+bind-key q      confirm-before kill-session
+bind-key Q      confirm-before kill-server
+
+# enable mouse on copy
+# set-option -g mouse on
+# start copy mode when scrolling up
+bind -n WheelUpPane copy-mode
+
+# reload config (prefix r)
+bind r source ~/.tmux.conf \; display "Configuration reloaded!"
+
+setw -g automatic-rename on
