@@ -13,15 +13,15 @@ UXTerm*cursorBlink:false
 *.color8:       #988d6d
 
 ! red
-*.color1:       #b94342
-*.color9:       #cd4c4e
+*.color9:       #b94342
+*.color1:       #cd4c4e
 
 ! green
 *.color2:       #40883f
 *.color10:      #7ecc6e
 
 ! yellow
-*.color3:       #8f7634
+*.color3:       #989848
 *.color11:      #b7b19c
 
 ! blue
