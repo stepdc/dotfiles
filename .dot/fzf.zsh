@@ -12,3 +12,13 @@ fi
 # ------------
 source "$HOME/.fzf/shell/key-bindings.zsh"
 
+# Customize
+
+__stepdc_fzf_paste_history() {
+        greenclip print | sed '/^$/d' | fzf -e | xargs -r -d'\n' -I '{}' greenclip print '{}'
+}
+
+zle     -N   __stepdc_fzf_paste_history
+bindkey '\ey' __stepdc_fzf_paste_history
+bindkey '\ep' __stepdc_fzf_paste_history
+
