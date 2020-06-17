@@ -4,10 +4,14 @@
 #
 
 #-- base settings --#
-set -g default-terminal "tmux-256color-italic"
-set -as terminal-overrides ',xterm*:Tc:sitm=\E[3m'
+# set -g default-terminal "tmux-256color-italic"
+# set -as terminal-overrides ',xterm*:Tc:sitm=\E[3m'
 # set-option -ga terminal-overrides ",*256col*:Tc"
 # set-option -ga terminal-overrides ",tmux-256color-italic:Tc"
+
+# 24bit, true color
+set -g default-terminal "xterm-24bit"
+set -g terminal-overrides ',xterm-24bit:Tc'
 
 set -sg escape-time 0
 set -g display-time 3000
@@ -17,7 +21,7 @@ set -g pane-base-index 1
 set -g renumber-windows on
 
 #-- bindkeys --#
-# prefix key (Ctrl+o)
+# prefix key (Ctrl+q)
 unbind ^b
 set -g prefix 'C-q'
 bind-key 'C-q' send-prefix
@@ -52,7 +56,7 @@ bind . select-layout even-horizontal
 bind e lastp  # select the last pane (prefix e)
 bind ^e last  # select the last window (prefix Ctrl+e)
 bind q killp  # kill pane (prefix q)
-bind ^q killw # kill window (prefix Ctrl+q)
+bind ^x killw # kill window (prefix Ctrl+q)
 
 # copy mode
 setw -g mode-keys vi
