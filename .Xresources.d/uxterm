@@ -10,11 +10,11 @@ UXTerm*cursorBlink:false
 
 ! black
 *.color0:       #424242
-*.color8:       #ccccb7
+*.color8:       #988d6d
 
 ! red
-*.color1:       #cd4c4e
 *.color9:       #b94342
+*.color1:       #cd4c4e
 
 ! green
 *.color2:       #40883f
@@ -22,20 +22,21 @@ UXTerm*cursorBlink:false
 
 ! yellow
 *.color3:       #989848
-*.color11:      #f8fce8
+*.color11:      #b7b19c
 
 ! blue
 *.color4:       #0287c8
-*.color12:      #0082c3
+*.color12:      #2a8dc5
+!*.color12:      #a6dcf8
 
 ! magenta
-*.color5:       #8888c8
-*.color13:      #7a7ac5
+*.color5:        #7a7ac5
+*.color13:       #8888c8
 
 ! cyan
 *.color6:       #4fa8a8
 *.color14:      #7ed2d2
 
 ! white
-*.color7:       #ffffe8
-*.color15:      #a4a45b
+*.color7:        #a4a45b
+*.color15:       #ffffA7

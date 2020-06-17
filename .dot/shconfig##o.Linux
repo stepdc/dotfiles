@@ -43,6 +43,14 @@ alias ain='sudo apt install'
 alias ainfo='sudo apt show'
 alias asi='sudo apt build-dep'
 
+# dnf alias
+alias dup='sudo dnf update'
+alias dupg='sudo dnf upgrade'
+alias dse='sudo dnf search'
+alias din='sudo dnf install'
+alias dinfo='sudo dnf info'
+alias asi='sudo dnf builddep'
+
 alias e='TERM=screen-16color emacsclient -nw'
 # alias em='TERM=screen-16color emacs -nw'
 alias em='TERM=xterm-24bit emacs -nw'
@@ -81,6 +89,9 @@ fkill() {
 }
 
 alias fk='fkill'
+
+# alias ssh
+alias ssh='TERM=xterm-256color ssh'
 
 # fzf
 _gen_fzf_default_opts() {
@@ -183,3 +194,56 @@ export LESS_TERMCAP_ZN=""
 export LESS_TERMCAP_se=$'\E[27m\E(B\E[m'
 export LESS_TERMCAP_ZV=""
 export LESS_TERMCAP_so=$'\E[1m\E[33m\E[44m'
+
+# 自动解压：判断文件后缀名并调用相应解压命令
+function q-extract() {
+    if [ -f $1 ] ; then
+        case $1 in
+        *.tar.bz2)   tar -xvjf $1    ;;
+        *.tar.gz)    tar -xvzf $1    ;;
+        *.tar.xz)    tar -xvJf $1    ;;
+        *.bz2)       bunzip2 $1     ;;
+        *.rar)       rar x $1       ;;
+        *.gz)        gunzip $1      ;;
+        *.tar)       tar -xvf $1     ;;
+        *.tbz2)      tar -xvjf $1    ;;
+        *.tgz)       tar -xvzf $1    ;;
+        *.zip)       unzip $1       ;;
+        *.Z)         uncompress $1  ;;
+        *.7z)        7z x $1        ;;
+        *)           echo "don't know how to extract '$1'..." ;;
+        esac
+    else
+        echo "'$1' is not a valid file!"
+    fi
+}
+
+# 自动压缩：判断后缀名并调用相应压缩程序
+function q-compress() {
+    if [ -n "$1" ] ; then
+        FILE=$1
+        case $FILE in
+        *.tar) shift && tar -cf $FILE $* ;;
+        *.tar.bz2) shift && tar -cjf $FILE $* ;;
+        *.tar.xz) shift && tar -cJf $FILE $* ;;
+        *.tar.gz) shift && tar -czf $FILE $* ;;
+        *.tgz) shift && tar -czf $FILE $* ;;
+        *.zip) shift && zip $FILE $* ;;
+        *.rar) shift && rar $FILE $* ;;
+        esac
+    else
+        echo "usage: q-compress <foo.tar.gz> ./foo ./bar"
+    fi
+}
+
+# 漂亮的带语法高亮的 color cat ，需要先 pip install pygments
+function ccat() {
+    local style="monokai"
+    if [ $# -eq 0 ]; then
+        pygmentize -P style=$style -P tabsize=4 -f terminal256 -g
+    else
+        for NAME in $@; do
+            pygmentize -P style=$style -P tabsize=4 -f terminal256 -g "$NAME"
+        done
+    fi
+}

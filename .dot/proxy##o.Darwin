@@ -14,7 +14,7 @@ function proxy_zb_on(){
    export FTP_PROXY=$HTTP_PROXY
    export SOCKS_PROXY=$HTTP_PROXY
 
-   export NO_PROXY="localhost,10.0.102.37,$USERDNSDOMAIN"
+   export NO_PROXY="localhost,127.0.0.1,$USERDNSDOMAIN"
 
    # Update git and npm to use the proxy
    git config --global http.proxy $HTTP_PROXY
@@ -58,4 +58,4 @@ function proxy_zb_off(){
    echo -e "\nProxy-related environment variables removed."
 }
 
-alias proxy_prefix='http_proxy=http://10.0.102.37:1089 https_proxy=http://10.0.102.37:1089 '
+alias proxy_prefix='HTTP_PROXY=http://10.0.102.37:1089;HTTPS_PROXY=http://10.0.102.37:1089 '
