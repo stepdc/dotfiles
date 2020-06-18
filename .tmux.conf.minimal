@@ -8,8 +8,8 @@ set -g renumber-windows on
 #-- bindkeys --#
 # prefix key (Ctrl+q)
 unbind ^b
-set -g prefix 'C-q'
-bind-key 'C-q' send-prefix
+set -g prefix 'C-t'
+bind-key 'C-t' send-prefix
 
 # split window
 unbind '"'
