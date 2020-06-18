@@ -52,7 +52,8 @@ bindsym Mod4+d exec ~/bin/rofi.run
 bindsym Mod4+shift+x exec rofi -show ssh
 # bindsym Mod4+b exec /home/byzte/.local/bin/i3_switch_workspace.sh
 bindsym Mod4+i exec rofi -show window
-bindsym Mod4+p exec rofi -modi "clipboard:greenclip print" -show clipboard
+bindsym Mod4+p exec rofi -modi "clipboard:greenclip print" -show clipboard -run-command '{cmd}'
+bindsym Mod4+y exec rofi -modi "clipboard:greenclip print" -show clipboard -run-command '{cmd}'
 
 # change focus
 bindsym Mod4+$left focus left
@@ -213,7 +214,7 @@ exec --no-startup-id setxkbmap -option ctrl:swap_lalt_lctl
 exec --no-startup-id xset r rate 256 60
 
 # global paste manage
-exec --no-startup-id greenclip daemon
+exec --no-startup-id greenclip daemon > /dev/null
 
 # simple notify
 exec --no-startup-id dunst
