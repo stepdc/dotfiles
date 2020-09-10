@@ -67,6 +67,7 @@ unbind -T copy-mode-vi Space
 bind -T copy-mode-vi v send -X begin-selection   # select (v)
 # bind -T copy-mode-vi y send -X copy-pipe "xclip" # copy (y)
 bind -T copy-mode-vi Enter send-keys -X copy-pipe-and-cancel "xsel -i --clipboard"
+bind -T copy-mode-vi y send-keys -X copy-pipe-and-cancel "xsel -i --clipboard"
 
 # unbind -T copy-mode-vi MouseDragEnd1Pane
 # bind -T copy-mode-vi MouseDown1Pane select-pane \;\
