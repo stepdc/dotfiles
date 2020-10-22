@@ -20,6 +20,8 @@ bind 'set completion-ignore-case on'
 bind "TAB:menu-complete"
 bind "set show-all-if-ambiguous on"
 bind "set menu-complete-display-prefix on"
+stty werase undef
+bind '\C-w:unix-filename-rubout'
 
 function _fish_collapsed_pwd() {
     local pwd="$1"
