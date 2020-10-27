@@ -12,6 +12,11 @@ fi
 # dev env
 [[ -s "$HOME/.dot/devenv" ]] && source $HOME/.dot/devenv
 
+alias ls='ls --group-directories-first --color=auto'
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
+
 # fasd
 # eval "$(fasd --init auto)"
 

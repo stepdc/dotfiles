@@ -6,8 +6,22 @@ fi
 [[ -s $HOME/.dot/repos/z.lua/z.lua.plugin.zsh ]] && \
         eval "$(lua $HOME/.dot/repos/z.lua/z.lua --init zsh enhanced once fzf)"
 
+if [[ ! -a $HOME/.dot/repos/zsh-async ]]; then
+  git clone -b 'v1.8.5' https://github.com/mafredri/zsh-async.git $HOME/.dot/repos/zsh-async
+fi
+[[ -s $HOME/.dot/repos/zsh-async ]] && \
+        source $HOME/.dot/repos/zsh-async/async.zsh && async_init
+
 # async prompt
 [ -n "$ZSH_VERSION" ] && [ -s $HOME/.dot/prompt/setup.zsh ] && source $HOME/.dot/prompt/setup.zsh
+
+# title
+
+function precmd () {
+  window_title="\033]0;`_short_prompt_pwd`\007"
+  echo -ne "$window_title"
+}
+
 
 # fzf
 [ -f $HOME/.fzf.zsh ] && source $HOME/.fzf.zsh

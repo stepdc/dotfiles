@@ -1,6 +1,6 @@
-#if __has_include(".extend.Xresources")
-#include ".extend.Xresources"
-#endif
+! #if __has_include(".extend.Xresources")
+! #include ".extend.Xresources"
+! #endif
 
 !#if __has_include(".Xresources.d/uxterm")
 #include ".Xresources.d/uxterm"
@@ -11,7 +11,7 @@
 ! config can be added there or also here below.
 ! For comments use "!"
 
-Xft.dpi: 185
+Xft.dpi: 192
 Xft.antialias: true
 Xft.hinting: true
 Xft.rgba: rgb
@@ -24,10 +24,11 @@ rofi.dpi: 185
 
 ! Cursor theme
 ! Xcursor.theme: Adwaita
-! Xcursor.theme: DMZ-White
-Xcursor.theme: Hackneyed-Dark-48px
+Xcursor.theme: elementary
+! Xcursor.theme: Hackneyed-Dark-48px
 ! Xcursor.theme: Hackneyed
 
+UXTerm*VT100*selectToClipboard: true
 UXTerm*metaSendsEscape: true
 UXTerm*ttyModes: erase ^?
 UXTerm*backarrowKeyIsErase: true

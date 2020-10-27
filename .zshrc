@@ -5,10 +5,36 @@
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
 
+# complete
+autoload -U compinit && compinit -u
+
+# emacs key bindings
+bindkey -e
+# tweak c-w
+WORDCHARS='*?_-.[]~&;!#$%^(){}<>'
+
+# menuselect support shift-tab
+# see https://unix.stackexchange.com/questions/84867/zsh-completion-enabling-shift-tab
+zmodload zsh/complist
+bindkey -M menuselect '^[[Z' reverse-menu-complete
+
+# styles
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+zstyle ':completion:*' menu select
+bindkey -M menuselect 'h' vi-backward-char
+bindkey -M menuselect 'k' vi-up-line-or-history
+bindkey -M menuselect 'l' vi-forward-char
+bindkey -M menuselect 'j' vi-down-line-or-history
+
+bindkey -M menuselect '^b' vi-backward-char
+bindkey -M menuselect '^p' vi-up-line-or-history
+bindkey -M menuselect '^f' vi-forward-char
+bindkey -M menuselect '^n' vi-down-line-or-history
+
 # Source Prezto.
-if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
-  source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
-fi
+# if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
+#   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
+# fi
 
 # Customize to your needs...
 [[ $HOME/.dot/shconfig ]] && source $HOME/.dot/shconfig
@@ -22,8 +48,6 @@ fi
 # if [[ -s "$HOME/.dot/zsh_completion.d" ]]; then
 #   fpath=($HOME/.dot/zsh_completion.d $fpath)
 # fi
-
-# autoload -U compinit && compinit -u
 
 # history
 # HISTFILE="$HOME/.zsh_history"
@@ -44,3 +68,16 @@ setopt HIST_REDUCE_BLANKS        # Remove superfluous blanks before recording en
 setopt HIST_VERIFY               # Don't execute immediately upon history expansion.
 setopt HIST_BEEP                 # Beep when accessing nonexistent history.
 setopt PROMPT_SUBST              # Enable function call in prompt
+
+vterm_printf(){
+    if [ -n "$TMUX" ]; then
+        # Tell tmux to pass the escape sequences through
+        # (Source: http://permalink.gmane.org/gmane.comp.terminal-emulators.tmux.user/1324)
+        printf "\ePtmux;\e\e]%s\007\e\\" "$1"
+    elif [ "${TERM%%-*}" = "screen" ]; then
+        # GNU screen (screen, screen-256color, screen-256color-bce)
+        printf "\eP\e]%s\007\e\\" "$1"
+    else
+        printf "\e]%s\e\\" "$1"
+    fi
+}
