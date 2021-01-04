@@ -64,12 +64,25 @@ alias din='sudo dnf install'
 alias dinfo='sudo dnf info'
 alias asi='sudo dnf builddep'
 
-alias e='TERM=xterm-24bit emacsclient -nw'
+alias e='TERM=xterm-24bit ec'
 # alias em='TERM=screen-16color emacs -nw'
 alias em='TERM=xterm-24bit emacs -nw'
-alias emc='emacsclient -nw'
-alias ec='emacsclient -nc'
+# alias emc='emacsclient -nw'
+# alias enc='emacsclient -nc'
 alias eb='emacs &'
+
+function en {
+        files="$@"
+        files=${files:-"$PWD"}
+        emacsclient -nc $files
+}
+
+function ec {
+        files="$@"
+        files=${files:-"$PWD"}
+        emacsclient -nw $files
+}
+
 
 # alias vi='nvim'
 alias vi='vim'
