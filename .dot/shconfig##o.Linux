@@ -96,8 +96,8 @@ alias ports='netstat -tulanp'
 alias sudo='TERM=xterm-256color sudo'
 
 # alias bat
-alias bat='bat --theme "Monokai Extended Light"'
-alias less=bat
+# alias bat='bat --theme "Monokai Extended Light"'
+# alias less=bat
 
 # cd to project root
 alias rr='cd $(git rev-parse --show-toplevel)'
@@ -279,4 +279,15 @@ function ccat() {
             pygmentize -P style=$style -P tabsize=4 -f terminal256 -g "$NAME"
         done
     fi
+}
+
+# man
+man() {
+    LESS_TERMCAP_md=$'\e[01;31m' \
+    LESS_TERMCAP_me=$'\e[0m' \
+    LESS_TERMCAP_se=$'\e[0m' \
+    LESS_TERMCAP_so=$'\e[01;44;33m' \
+    LESS_TERMCAP_ue=$'\e[0m' \
+    LESS_TERMCAP_us=$'\e[01;32m' \
+    command man "$@"
 }
