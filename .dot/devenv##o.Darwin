@@ -1,7 +1,7 @@
 # GO
 
 export GOROOT=/usr/local/go
-export GOPROXY=https://goproxy.io
+export GOPROXY=https://goproxy.io,direct
 export GOPATH=$HOME/go
 export PATH=$PATH:$HOME/go/bin:$GOROOT/bin:$HOME/go/bin
 
