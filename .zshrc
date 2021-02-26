@@ -31,6 +31,11 @@ bindkey -M menuselect '^p' vi-up-line-or-history
 bindkey -M menuselect '^f' vi-forward-char
 bindkey -M menuselect '^n' vi-down-line-or-history
 
+# fix hotkeys
+bindkey  "^[[1~"   beginning-of-line
+bindkey  "^[[4~"   end-of-line
+bindkey  "^[[3~"   delete-char
+
 # Source Prezto.
 # if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
 #   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"

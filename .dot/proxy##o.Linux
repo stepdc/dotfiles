@@ -9,12 +9,12 @@ function proxy_zb_on(){
 
    # environment variables are UPPERCASE even in git bash
    # export HTTP_PROXY="http://$USERNAME:$PASSWORD@$PROXY_SERVER:$PROXY_PORT"
-   export HTTP_PROXY="http://10.0.102.37:1089"
+   export HTTP_PROXY="http://192.168.90.199:1089"
    export HTTPS_PROXY=$HTTP_PROXY
    export FTP_PROXY=$HTTP_PROXY
    export SOCKS_PROXY=$HTTP_PROXY
 
-   export NO_PROXY="localhost,10.0.102.37,$USERDNSDOMAIN"
+   export NO_PROXY="localhost,192.168.90.199,$USERDNSDOMAIN"
 
    # Update git and npm to use the proxy
    git config --global http.proxy $HTTP_PROXY
@@ -58,4 +58,4 @@ function proxy_zb_off(){
    echo -e "\nProxy-related environment variables removed."
 }
 
-alias proxy_prefix='http_proxy=http://10.0.102.37:1089 https_proxy=http://10.0.102.37:1089 '
+alias proxy_prefix='http_proxy=http://192.168.90.199:1089 https_proxy=http://192.168.90.199:1089 '
