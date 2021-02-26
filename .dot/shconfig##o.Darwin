@@ -44,6 +44,7 @@ alias nvi='nvim'
 alias za='zathura --fork $@'
 alias lg='lazygit'
 alias pg='ps aux | grep -i'
+alias pp='proxy_prefix'
 
 # fzf
 _gen_fzf_default_opts() {
@@ -119,7 +120,10 @@ alias mkl='minikube service list'
 alias mkt='minikube -p tbw'
 alias mktl='minikube -p tbw service list'
 alias h=helm
-alias ll='ls -lh'
+alias ls='ls --group-directories-first --color=auto'
+alias ll='ls -halF'
+alias la='ls -A'
+alias l='ls -CF'
 
 # alias & func
 whoseport () {
@@ -168,3 +172,7 @@ export LESS_TERMCAP_so=$'\E[1m\E[33m\E[44m'
 # brew
 export HOMEBREW_GITHUB_API_TOKEN="fb4fe0319f16af3c48d2c14c1a5f68d41fb3b6e3"
 export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.ustc.edu.cn/homebrew-bottles
+
+# gunbins
+export PATH="/usr/local/opt/binutils/bin:$PATH"
+export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
