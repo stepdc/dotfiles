@@ -254,7 +254,7 @@ set gdefault            " this makes search/replace global by default
 " enforces a specified line-length and auto inserts hard line breaks when we
 " reach the limit; in Normal mode, you can reformat the current paragraph with
 " gqap.
-set textwidth=80
+" set textwidth=80
 
 " this makes the color after the textwidth column highlighted
 set colorcolumn=+1
@@ -383,8 +383,9 @@ endif
 " Sets a font for the GUI
 if has("gui_gtk2")
   " set guifont=Pragmata\ Pro\ 10.7
-  set guifont=Menlo 10
+  set guifont=Inconsolata\ Regular\ 12
 elseif has("gui_gtk3")
+  set guifont=Inconsolata\ Regular\ 12
   " set guifont=Menlo 10
 elseif has("gui_macvim")
   " My Mac has a fairly high DPI so the font needs to be bigger
@@ -397,7 +398,8 @@ if has("gui_running")
   map  <silent>  <S-Insert>  "*p
   imap <silent>  <S-Insert>  <Esc>"*pa
   " set guifont=Menlo 10
-  set guifont=SF Mono 11
+  set guifont=Inconsolata\ Regular\ 12
+  " set guifont=SF Mono 11
   "set nopaste
 endif
 " Sometimes, $MYVIMRC does not get set even though the vimrc is sourced
@@ -939,6 +941,28 @@ highlight link multiple_cursors_visual Visual
 "     return !col || getline('.')[col - 1]  =~ '\s'
 " endfunction"}}}
 "
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                              auto-popmenu                               "
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+Plug 'skywind3000/vim-auto-popmenu'
+
+" enable this plugin for filetypes, '*' for all files.
+let g:apc_enable_ft = {'text':1, 'markdown':1, 'php':1}
+
+" source for dictionary, current or other loaded buffers, see ':help cpt'
+set cpt=.,k,w,b
+
+" don't select the first item.
+set completeopt=menu,menuone,noselect
+
+" suppress annoy messages.
+set shortmess+=c
+
+Plug 'skywind3000/vim-dict'
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                              VIMRC OVERRIDE                             "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
