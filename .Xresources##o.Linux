@@ -1,10 +1,4 @@
-! #if __has_include(".extend.Xresources")
-! #include ".extend.Xresources"
-! #endif
-
-!#if __has_include(".Xresources.d/uxterm")
 #include ".Xresources.d/uxterm"
-!#endif
 
 ! ^ The above lines are no comments!
 ! Leave them as they are if a file ~/.extend.Xresources is being used on your system.
@@ -20,15 +14,15 @@ Xft.hintstyle: hintslight
 Xft.lcdfilter: lcddefault
 
 ! rofi
-rofi.dpi: 185
+!rofi.dpi: 185
 
 ! Cursor theme
-! Xcursor.theme: Adwaita
-Xcursor.theme: elementary
+Xcursor.theme: Adwaita
+!Xcursor.theme: elementary
 ! Xcursor.theme: Hackneyed-Dark-48px
 ! Xcursor.theme: Hackneyed
-
-UXTerm*VT100*selectToClipboard: true
+UXTerm*selectToClipboard: true
+!UXTerm*VT100*selectToClipboard: true
 UXTerm*metaSendsEscape: true
 UXTerm*ttyModes: erase ^?
 UXTerm*backarrowKeyIsErase: true
