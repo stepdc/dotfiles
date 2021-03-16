@@ -14,7 +14,7 @@ Xft.hintstyle: hintslight
 Xft.lcdfilter: lcddefault
 
 ! rofi
-!rofi.dpi: 185
+rofi.dpi: 192
 
 ! Cursor theme
 Xcursor.theme: Adwaita
