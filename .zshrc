@@ -1,12 +1,17 @@
-#
-# Executes commands at the start of an interactive session.
-#
-# Authors:
-#   Sorin Ionescu <sorin.ionescu@gmail.com>
-#
-
 # complete
-autoload -U compinit && compinit -u
+# autoload -U compinit && compinit -u
+
+# optimize from  https://gist.github.com/ctechols/ca1035271ad134841284
+autoload -Uz compinit
+setopt EXTENDEDGLOB
+for dump in $HOME/.zcompdump(#qN.m1); do
+        compinit
+        if [[ -s "$dump" && (! -s "$dump.zwc" || "$dump" -nt "$dump.zwc") ]]; then
+                zcompile "$dump"
+        fi
+done
+unsetopt EXTENDEDGLOB
+compinit -C
 
 # emacs key bindings
 bindkey -e
@@ -55,7 +60,6 @@ bindkey  "^[[3~"   delete-char
 # fi
 
 # history
-# HISTFILE="$HOME/.zsh_history"
 HISTFILE="$HOME/.zhistory"
 HISTSIZE=10000000
 SAVEHIST=10000000
@@ -67,7 +71,7 @@ setopt HIST_EXPIRE_DUPS_FIRST    # Expire duplicate entries first when trimming 
 setopt HIST_IGNORE_DUPS          # Don't record an entry that was just recorded again.
 setopt HIST_IGNORE_ALL_DUPS      # Delete old recorded entry if new entry is a duplicate.
 setopt HIST_FIND_NO_DUPS         # Do not display a line previously found.
-# setopt HIST_IGNORE_SPACE         # Don't record an entry starting with a space.
+setopt HIST_IGNORE_SPACE         # Don't record an entry starting with a space.
 setopt HIST_SAVE_NO_DUPS         # Don't write duplicate entries in the history file.
 setopt HIST_REDUCE_BLANKS        # Remove superfluous blanks before recording entry.
 setopt HIST_VERIFY               # Don't execute immediately upon history expansion.
@@ -90,3 +94,5 @@ vterm_printf(){
         printf "\e]%s\e\\" "$1"
     fi
 }
+
+source $HOME/.zprofile
