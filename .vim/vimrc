@@ -18,7 +18,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'Lokaltog/vim-easymotion'
 " Plug 'vim-airline/vim-airline-themes'
 " Plug 'vim-airline/vim-airline'
-Plug 'itchyny/lightline.vim'
+" Plug 'itchyny/lightline.vim'
 Plug 'jiangmiao/auto-pairs'
 Plug 'SirVer/ultisnips'
 Plug 'vim-scripts/YankRing.vim'
@@ -48,6 +48,8 @@ Plug 'tpope/vim-git'
 Plug 'tpope/vim-repeat'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'olivertaylor/vacme'
+Plug 'arzg/vim-plan9'
+Plug 'robertmeta/nofrils'
 
 " requires compilation
 " YCM
@@ -59,6 +61,9 @@ Plug 'AndrewRadev/splitjoin.vim'
 Plug 'w0rp/ale'
 Plug 'godoctor/godoctor.vim'
 " Plug 'dominikduda/vim_current_word'
+
+" tabnine
+" Plug 'codota/tabnine-vim'
 
 " themes
 Plug 'lifepillar/vim-solarized8'
@@ -73,6 +78,7 @@ Plug 'morhetz/gruvbox'
 Plug 'NLKNguyen/papercolor-theme'
 Plug 'kadekillary/subtle_solo'
 Plug 'KeitaNakamura/neodark.vim'
+Plug 'rakr/vim-two-firewatch'
 
 Plug 'junegunn/vim-slash'
 
@@ -130,7 +136,11 @@ set rtp+=$HOME/vim_test,$HOME/vim_test/after,$HOME/repos/YouCompleteMe
 
 " DISPLAY SETTINGS
 " colorscheme default " sets the colorscheme
-colorscheme solarized8  " sets the colorscheme
+" colorscheme vacme " sets the colorscheme
+" colorscheme solarized8  " sets the colorscheme
+" colorscheme two-firewatch  " sets the colorscheme
+colo nofrils-acme
+
 set background=light    " enable for dark terminals
 set scrolloff=2         " 2 lines above/below cursor when scrolling
 set showmatch           " show matching bracket (briefly jump)
@@ -478,6 +488,9 @@ nnoremap <leader>w :w!<cr>
 " <leader>V reloads it and makes all changes active (file has to be saved first)
 noremap <leader>v :e! $MYVIMRC<CR>
 noremap <silent> <leader>V :source $MYVIMRC<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
+
+" reload file
+noremap <leader>f :e!<CR>
 
 " with this, we can now type ",." to exit out of insert mode
 " if we really wanted to type ",.", then just type one char, wait half a sec,
@@ -871,7 +884,7 @@ nnoremap <leader>pc :YcmCompleter GoToDeclaration<CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 let g:airline_powerline_fonts = 1
-let g:airline_theme = 'papercolor'
+" let g:airline_theme = 'papercolor'
 
 " light line
 let g:lightline = {
