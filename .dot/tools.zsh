@@ -72,7 +72,7 @@ function precmd () {
 #   esac
 #   update_title "$cmd" "%20<...<%~"
 # }
-#
+
 # autoload -Uz add-zsh-hook
 # add-zsh-hook precmd _zsh_title__precmd
 # add-zsh-hook preexec _zsh_title__preexec
@@ -84,6 +84,5 @@ function zz() {
         dir="$(fasd -Rdl "$1" | fzf -1 -0 --no-sort +m)" && cd "$dir" || return 1
 }
 
-[[ -s $HOME/.dot/zsh_completion.d/_minikube ]] && \
-        source $HOME/.dot/zsh_completion.d/_minikube
-
+# [[ -s $HOME/.dot/zsh_completion.d/_minikube ]] && \
+#         source $HOME/.dot/zsh_completion.d/_minikube

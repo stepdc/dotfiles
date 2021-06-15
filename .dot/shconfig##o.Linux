@@ -63,7 +63,7 @@ alias dupg='sudo dnf upgrade'
 alias dse='sudo dnf search'
 alias din='sudo dnf install'
 alias dinfo='sudo dnf info'
-alias asi='sudo dnf builddep'
+alias dsi='sudo dnf builddep'
 
 alias e='TERM=xterm-24bit ec'
 # alias em='TERM=screen-16color emacs -nw'
