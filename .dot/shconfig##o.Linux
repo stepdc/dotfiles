@@ -16,6 +16,7 @@ alias ls='ls --group-directories-first --color=auto'
 alias ll='ls -halF'
 alias la='ls -A'
 alias l='ls -CF'
+alias sl='ls'
 
 # fasd
 # eval "$(fasd --init auto)"
@@ -69,7 +70,7 @@ alias e='TERM=xterm-24bit ec'
 alias em='TERM=xterm-24bit emacs -nw'
 # alias emc='emacsclient -nw'
 # alias enc='emacsclient -nc'
-alias eb='emacs &'
+# alias eb='emacs &'
 
 function en {
         files="$@"
@@ -81,6 +82,12 @@ function ec {
         files="$@"
         files=${files:-"$PWD"}
         emacsclient -nw $files
+}
+
+function eb {
+        files="$@"
+        files=${files:-"$PWD"}
+        emacs $files &
 }
 
 

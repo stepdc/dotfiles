@@ -13,6 +13,10 @@ else
   export QT_AUTO_SCREEN_SCALE_FACTOR=1
 fi
 
+export QT_SCREEN_SCALE_FACTORS=2
+export GDK_SCALE=2
+export GDK_DPI_SCALE=0.5
+
 # Sample .profile for SuSE Linux
 # rewritten by Christian Steinruecken <cstein@suse.de>
 #
@@ -45,6 +49,8 @@ test -z "$PROFILEREAD" && . /etc/profile || true
 if [ "$0" = "/usr/sbin/lightdm-session" -a "$DESKTOP_SESSION" = "i3" ]; then
     export $(gnome-keyring-daemon --start --components=ssh)
 fi
+
+export PATH=$PATH:$HOME/bin
 
 export FZF_DEFAULT_COMMAND='fd --type f'
 export QT_QPA_PLATFORMTHEME="qt5ct"
