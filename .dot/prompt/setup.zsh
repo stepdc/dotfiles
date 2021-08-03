@@ -144,7 +144,6 @@ function prompt_stepdc_preexec {
     typeset -g prompt_stepdc_cmd_timestamp=$EPOCHSECONDS
 }
 
-
 function prompt_stepdc_preprompt_render() {
     setopt localoptions noshwordsplit
 
@@ -160,6 +159,7 @@ function prompt_stepdc_preprompt_render() {
 
     [[ -n $prompt_stepdc_cmd_exec_time ]] && rprompt_parts+=('%F{yellow}${prompt_stepdc_cmd_exec_time}%f')
 
+    #rprompt_parts+=('%(?..%F{red}!%f)')
 
     # Add git branch and dirty status info.
     typeset -gA prompt_stepdc_vcs_info
@@ -167,10 +167,10 @@ function prompt_stepdc_preprompt_render() {
         rprompt_parts+=("%F{$git_color}"'${prompt_stepdc_vcs_info[branch]}${prompt_stepdc_git_dirty}')
     fi
 
-    PROMPT='${SSH_TTY:+"%F{9}%n%f%F{7}@%f%F{3}%m%f "}%F{2}${_prompt_stepdc_pwd}%f » '
+    PROMPT='%(?..%F{red}!%f )${SSH_TTY:+"%F{9}%n%f%F{7}@%f%F{3}%m%f "}%F{2}${_prompt_stepdc_pwd}%f » '
     if [ ! -z "$STEPDC_PLAIN_PROMPT" ]; then
             _update_stepdc_smiley
-            PROMPT='${SSH_TTY:+"%F{9}%n%f%F{7}@%f%F{3}%m%f "}%F{2}${_prompt_stepdc_pwd}%f ${STEPDC_PLAIN_PROMPT} '
+            PROMPT='%(?..%F{red}!%f )${SSH_TTY:+"%F{9}%n%f%F{7}@%f%F{3}%m%f "}%F{2}${_prompt_stepdc_pwd}%f ${STEPDC_PLAIN_PROMPT} '
     fi
     RPROMPT="${(j. .)rprompt_parts}"
 
