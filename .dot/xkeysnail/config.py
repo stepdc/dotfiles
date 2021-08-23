@@ -12,7 +12,7 @@ define_modmap({
     Key.LEFT_CTRL: Key.LEFT_ALT,
     Key.LEFT_ALT: Key.LEFT_CTRL,
     # Key.RIGHT_CTRL: Key.CAPSLOCK,
-    Key.CAPSLOCK: Key.RIGHT_CTRL,
+    Key.CAPSLOCK: Key.RIGHT_META,
     Key.SCROLLLOCK: Key.CAPSLOCK,
 })
 
@@ -35,13 +35,19 @@ define_modmap({
 # )
 
 define_keymap(None, {
-  K("RC-capslock"): K("scrolllock"),
-  K("RC-a"): K("home"),
-  K("RC-e"): K("end"),
-  K("RC-k"): K("up"),
-  K("RC-j"): K("down"),
-  K("RC-h"): K("left"),
-  K("RC-l"): K("right"),
+  K("RWin-capslock"): K("scrolllock"),
+  K("RWin-a"): K("home"),
+  K("RWin-e"): K("end"),
+  K("RWin-i"): K("home"),
+  K("RWin-o"): K("end"),
+  K("RWin-u"): K("page_up"),
+  K("RWin-d"): K("page_down"),
+  K("RWin-k"): K("up"),
+  K("RWin-j"): K("down"),
+  K("RWin-h"): K("left"),
+  K("RWin-l"): K("right"),
+  K("RWin-b"): K("left"),
+  K("RWin-f"): K("right"),
   })
 
 # [Conditional multipurpose modmap] Multipurpose modmap in certain conditions,
